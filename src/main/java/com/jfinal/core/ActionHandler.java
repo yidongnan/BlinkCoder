@@ -18,6 +18,7 @@ package com.jfinal.core;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.blinkcoder.kit.VelocityKit;
 import com.jfinal.config.Constants;
 import com.jfinal.handler.Handler;
 import com.jfinal.log.Logger;
@@ -56,12 +57,10 @@ final class ActionHandler extends Handler {
 		Action action = actionMapping.getAction(target, urlPara);
 		
 		if (action == null) {
-			if (log.isWarnEnabled()) {
-				String qs = request.getQueryString();
-				log.warn("404 Action Not Found: " + (qs == null ? target : target + "?" + qs));
-			}
-			renderFactory.getErrorRender(404).setContext(request, response).render();
-			return ;
+            String[] paths = target.split("/");
+            target = VelocityKit.GetTemplate(paths, paths.length);
+            renderFactory.getRender(target).setContext(request, response).render();
+            return;
 		}
 		
 		try {

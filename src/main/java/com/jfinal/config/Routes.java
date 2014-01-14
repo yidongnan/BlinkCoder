@@ -90,7 +90,7 @@ public abstract class Routes {
 	 * @param controllerClass Controller Class
 	 */
 	public Routes add(String controllerkey, Class<? extends Controller> controllerClass) {
-		return add(controllerkey, controllerClass, controllerkey);
+        return add("/action"+controllerkey, controllerClass, controllerkey);
 	}
 	
 	public Set<Entry<String, Class<? extends Controller>>> getEntrySet() {

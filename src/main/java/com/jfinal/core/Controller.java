@@ -54,8 +54,8 @@ public abstract class Controller {
 	
 	private static final String[] NULL_URL_PARA_ARRAY = new String[0];
 	private static final String URL_PARA_SEPARATOR = Config.getConstants().getUrlParaSeparator();
-	
-	void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
+
+    protected void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
 		this.request = request;
 		this.response = response;
 		this.urlPara = urlPara;
@@ -1081,6 +1081,24 @@ public abstract class Controller {
 	public void renderHtml(String htmlText) {
 		render = renderFactory.getHtmlRender(htmlText);
 	}
+
+    // ----------------
+    // HTTP Header---
+    public String header(String name) {
+        return request.getHeader(name);
+    }
+
+    public void header(String name, String value) {
+        response.setHeader(name, value);
+    }
+
+    public void header(String name, int value) {
+        response.setIntHeader(name, value);
+    }
+
+    public void header(String name, long value) {
+        response.setDateHeader(name, value);
+    }
 }
 
 
