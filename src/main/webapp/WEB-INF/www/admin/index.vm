@@ -1,0 +1,17 @@
+#set($layout = "admin.vm")
+#set($urlPara = $linkKit.urlPara())
+#if($urlPara != "")
+    #*#if($urlPara == "blogList")
+        #invoke("blog/blogList.vm")
+    #elseif($urlPara == "blogPub")
+        #invoke("blog/blogPub.vm")
+    #elseif($urlPara == "linkAdd")
+        #invoke("link/linkAdd.vm")
+    #elseif($urlPara == "linkList")
+        #invoke("link/linkList.vm")
+    #elseif($urlPara=="catalogAdd")
+        #invoke("catalog/catalogAdd.vm")
+    #end*#
+#else
+    #invoke("about.vm")
+#end

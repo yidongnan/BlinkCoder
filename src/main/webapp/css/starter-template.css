@@ -1,0 +1,39 @@
+.head {
+    text-align: left;
+}
+
+.head p {
+    font-size: 15px;
+}
+
+.info {
+    color: #999;
+}
+
+.container {
+    max-width: 980px;
+}
+
+.under_line {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 5px;
+}
+
+.widget .links {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.widget ul .links li a {
+    color: #2a6496;
+    display: block;
+}
+
+.menu {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.footer {
+    text-align: center;
+}

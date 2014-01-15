@@ -1,0 +1,115 @@
+#*
+* 以相对路径方式嵌入动态页面
+*#
+#macro(invoke $__p_page)
+    #if($__p_page.startsWith("/"))
+        #parse($__p_page)
+    #else
+        #set($__uri = $linkKit.this_vm())
+        #set($__path = $__uri.substring(0, $__uri.lastIndexOf("/")))
+        #parse("$__path/$__p_page")
+    #end
+#end
+
+#*
+ * 生成翻页链接
+ *#
+#macro(pager $__uri $__obj)
+    #set($__obj_count = $__obj.getTotalRow())
+    #set($__page_size = $__obj.getPageSize())
+    #set($PAGE_COUNT = $__obj.getTotalPage())
+    #if($__obj_count > $__page_size)
+        #if($__uri.indexOf("?")>=0)
+            #set($param_char='&')
+        #else
+            #set($param_char='?')
+        #end
+        #if(!$__uri.endsWith("?") && !$__uri.endsWith("&"))
+            #set($__p_uri = "${__uri}${param_char}")
+        #else
+            #set($__p_uri = $__uri)
+        #end
+        #set($__p = $linkKit.param("p",1))
+        #if($__p <= $PAGE_COUNT)
+            #set($pre_page = $__p - 1)
+            #set($next_page = $__p + 1)
+            #if($__p > 3)
+                #set($begin_idx = $__p - 3)
+            #else
+                #set($begin_idx = 1)
+            #end
+            #set($end_idx = $begin_idx + 9)
+            #if($end_idx > $PAGE_COUNT)#set($end_idx = $PAGE_COUNT)#end
+        <ul class="pagination">
+            #if($__p > 1)
+                <li><a href="${__p_uri}p=$pre_page">上一页</a></li>
+            #else
+                <li class="disabled"><a href="javascript:void(0)">上一页</a></li>
+            #end
+            #if($begin_idx > 1)
+                <li><a href="${__p_uri}">1</a></li>
+            #end
+
+            #foreach($idx in [$begin_idx..$end_idx])
+                #if($idx != $__p)
+                    <li><a href="${__p_uri}p=$idx">$idx</a></li>
+                #else
+                    <li class="active"><a href="${__p_uri}p=$idx">$idx</a></li>
+                #end
+            #end
+            #if($end_idx < $PAGE_COUNT)
+                <li><a href="${__p_uri}p=$PAGE_COUNT">$PAGE_COUNT</a></li>
+            #end
+            #if($__p < $PAGE_COUNT)
+                <li><a href="${__p_uri}p=$next_page">下一页</a></li>
+            #else
+                <li class="disabled"><a href="javascript:void(0)">下一页</a></li>
+            #end
+        </ul>
+        #end
+    #end
+#end
+
+#*
+ * 生成翻页链接
+ *#
+#macro(pager2 $__uri $__obj_count $__page_size $anchor)
+    #pager3($__uri,$__obj_count,$__page_size,"p",$anchor)
+#end
+#*
+ * 生成翻页链接
+ *#
+#macro(pager3 $__uri $__obj_count $__page_size $__pn $anchor)
+    #if($__obj_count > $__page_size)
+        #if($__uri.indexOf("?")>=0)#set($param_char='&')#else#set($param_char='?')#end
+        #if(!$__uri.endsWith("?") && !$__uri.endsWith("&"))
+            #set($__p_uri = "${__uri}${param_char}")
+        #else
+            #set($__p_uri = $__uri)
+        #end
+        #set($PAGE_COUNT = $GTool.page_count($__obj_count, $__page_size))
+        #set($__p = $link.param($__pn,1))
+        #if($__p <= $PAGE_COUNT)
+            #set($pre_page = $__p - 1)
+            #set($next_page = $__p + 1)
+            #if($__p > 3)
+                #set($begin_idx = $__p - 3)
+            #else
+                #set($begin_idx = 1)
+            #end
+            #set($end_idx = $begin_idx + 9)
+            #if($end_idx > $PAGE_COUNT)#set($end_idx = $PAGE_COUNT)#end
+        <ul class="pager">
+            #if($__p > 1)
+                <li class='page prev'><a href="${__p_uri}${__pn}=$pre_page#$anchor">&lt;</a></li>#end#if($begin_idx > 1)
+            <li class='page'><a href="${__p_uri}#$anchor">1</a>
+            </li>#end#foreach($idx in [$begin_idx..$end_idx])#if($idx != $__p)
+            <li class='page'><a href="${__p_uri}${__pn}=$idx#$anchor">$idx</a></li>#else
+            <li class='page current'><a href="${__p_uri}p=$idx">$idx</a></li>#end#end#if($end_idx < $PAGE_COUNT)
+            <li class='page'><a href="${__p_uri}${__pn}=$PAGE_COUNT#$anchor">$PAGE_COUNT</a>
+            </li>#end#if($__p < $PAGE_COUNT)
+            <li class='page next'><a href="${__p_uri}${__pn}=$next_page#$anchor">&gt;</a></li>#end
+        </ul>
+        #end
+    #end
+#end

@@ -1,0 +1,55 @@
+#set($layout = "admin.vm")
+#set($sub_title = "外链列表")
+#set($page = $linkKit.param("p",1))
+#set($pageSize = 2)
+<div class="results table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">标题</th>
+            <th scope="col">描述</th>
+            <th scope="col">链接地址</th>
+            <th scope="col" style="width: 100px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            #set($linkList=$linkTool.linkList($page,$pageSize))
+            #if($linkList.getTotalRow() > 0)
+                #foreach($link in $linkList.getList())
+                <tr>
+                    <td>$link.get("title")</td>
+                    <td>$link.get("desc")</td>
+                    <td>$link.get("url")</td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-xs" onclick="editObj($link.get("id"))">编辑
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" onclick="delObj($link.get("id"))">删除
+                        </button>
+                    </td>
+                </tr>
+                #end
+            #end
+        </tbody>
+    </table>
+</div>
+<div class="pagination pagination-centered pagination-small">
+    #pager("" $blogList)
+</div>
+<script type="text/javascript">
+    function editObj(id) {
+        window.location.href = "/admin/link/linkAdd?id=" + id;
+    }
+
+    function delObj(id) {
+        if (confirm("确认是否需要删除？")) {
+            $.ajax({
+                type: "POST",
+                url: "$linkKit.action("/link/delLink")",
+                data: "id=" + id,
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    }
+</script>

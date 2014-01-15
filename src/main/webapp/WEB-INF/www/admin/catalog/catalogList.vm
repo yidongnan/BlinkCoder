@@ -1,0 +1,55 @@
+#set($layout = "admin.vm")
+#set($sub_title = "分类列表")
+#set($page = $linkKit.param("p",1))
+#set($pageSize = 2)
+<div class="results table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">类别名</th>
+            <th scope="col">类别描述</th>
+            <th scope="col">是否首页显示</th>
+            <th scope="col" style="width: 100px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            #set($catalogList=$catalogTool.catalogList($page,$pageSize))
+            #if($catalogList.getTotalRow() > 0)
+                #foreach($catalog in $catalogList.getList())
+                <tr>
+                    <td>$catalog.get("name")</td>
+                    <td>$catalog.get("desc")</td>
+                    <td>$catalog.get("flag")</td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-xs" onclick="editObj($catalog.get("id"))">编辑
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" onclick="delObj($catalog.get("id"))">删除
+                        </button>
+                    </td>
+                </tr>
+                #end
+            #end
+        </tbody>
+    </table>
+</div>
+<div class="pagination pagination-centered pagination-small">
+    #pager("" $catalogList)
+</div>
+<script type="text/javascript">
+    function editObj(id) {
+        window.location.href = "/admin/catalog/catalogAdd?id=" + id;
+    }
+
+    function delObj(id) {
+        if (confirm("确认是否需要删除？")) {
+            $.ajax({
+                type: "POST",
+                url: "$linkKit.action("/catalog/delCatalog")",
+                data: "id=" + id,
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    }
+</script>

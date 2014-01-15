@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toolbox>
+    <tool>
+        <key>linkKit</key>
+        <scope>request</scope>
+        <class>com.blinkcoder.kit.LinkKit</class>
+    </tool>
+    <tool>
+        <key>formatKit</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.kit.FormatKit</class>
+    </tool>
+
+    <tool>
+        <key>catalogTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.Catalog</class>
+    </tool>
+    <tool>
+        <key>blogTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.Blog</class>
+    </tool>
+    <tool>
+        <key>blogLabelTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.BlogLabel</class>
+    </tool>
+    <tool>
+        <key>labelTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.Label</class>
+    </tool>
+    <tool>
+        <key>linkTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.Link</class>
+    </tool>
+</toolbox>

@@ -1,0 +1,16 @@
+#set($layout = "index.vm")
+#set($page = $linkKit.param("p",1))
+#set($pageSize = 10)
+<div class="container" id="content">
+    <div id="main" class="col-md-9 col-ld-9">
+        #if($linkKit.param("p1"))
+            #invoke("widget/blogdetail.vm")
+        #else
+            #set($blogList=$blogTool.topAndNormalBlogList($page,$pageSize))
+            #invoke("widget/bloglist.vm")
+        #end
+    </div>
+    #invoke("widget/rightbar.vm")
+    <div style="clear: both"></div>
+    #invoke("widget/footerCatalog.vm")
+</div>

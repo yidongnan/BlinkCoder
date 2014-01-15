@@ -1,0 +1,96 @@
+#set($layout = "admin.vm")
+#set($sub_title = "添加分类")
+#set($catalogId = $linkKit.param("id",0))
+#if($catalogId > 0)
+    #set($catalog = $catalogTool.Get($catalogId))
+#end
+<form class="form-horizontal" role="form" id="catalogForm" action="#if($catalog) $linkKit.action("/catalog/updateCatalog") #else $linkKit.action("/catalog/addCatalog")
+#end" method="post">
+    #if($catalog)
+        <input type="hidden" name="catalog.id" value="$catalog.get("id")"/>
+    #end
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">类别名(英文):</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="name" name="catalog.name" placeholder="类别名(英文)" #if($catalog) value="$catalog.get("name")" #end>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="desc" class="col-sm-2 control-label">类别描述:</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="desc" name="catalog.desc" placeholder="类别描述" #if($catalog) value="$catalog.get("desc")" #end>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">是否首页展示:</label>
+
+        <div class="col-sm-1">
+            <label class="checkbox-inline">
+                <input type="checkbox" id="flag" name="catalog.flag" value="1" #if($catalog.isShow()) checked #end>
+                <p style="color: red">显示</p>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="submit" class="btn btn btn-primary">
+                #if($catalog)
+                    更新
+                #else
+                    添加
+                #end
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-danger">重置</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="alert" id="tip" style="display: none"></span>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $('#catalogForm').ajaxForm({
+//            target:        '#output1',   // target element(s) to be updated with server response
+            beforeSubmit: function (args, form, fn) {
+                var tip = form.find("#tip");
+                var name = form.find("#name").val();
+                var desc = form.find("#desc").val();
+                if (name.length <= 0) {
+                    tip.html("请填写类别名!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                if (desc.length <= 0) {
+                    tip.html("请填写类别描述!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                return true;
+            },
+            success: function (msg, b, fn, form) {
+                var tip = form.find("#tip");
+                if (msg.msg == true) {
+                    tip.html("操作成功！");
+                    tip.removeClass("alert-danger");
+                    tip.addClass("alert-success");
+                    tip.show();
+                } else {
+                    tip.html("操作失败！");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                }
+
+            },
+            //url:       url         // override for form's 'action' attribute
+            //type:      type        // 'get' or 'post', override for form's 'method' attribute
+            dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type)
+//            resetForm: true        // reset the form after successful submit
+        });
+    });
+</script>

@@ -1,0 +1,37 @@
+#if($blogList.getTotalRow() > 0)
+    #foreach($blog in $blogList.getList())
+        #if($blog)
+        <div class="caption">
+            <h3 class="under_line">
+                <a href=$linkKit.root($blog.get("global_url"))>
+                    $blog.get("title")
+                    <span class="badge">$blog.get("read_count")°C </span>
+                </a>
+            </h3>
+
+            <div class="info">
+                分类：<a
+                    href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
+                " rel="java tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
+                #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
+                #if($blogLabelList.size() > 0)
+                    | 标签：
+                    #foreach($blogLabel in $blogLabelList)
+                        <a href="$linkKit.label($labelTool.Get($blogLabel.getInt("label_id")).get("name"))"
+                           rel="label">$labelTool.Get($blogLabel.getInt("label_id")).get("desc")</a>&nbsp;
+                    #end
+                #end
+                | 发布：$blog.get("update_time")
+            </div>
+            <br>
+
+            <div class="intro">
+                $formatKit.abbreviate($formatKit.plain_text($blog.getStr("content")),88)
+            </div>
+        </div>
+        #end
+    #end
+#end
+<div class="pagination pagination-centered pagination-small">
+    #pager("" $blogList)
+</div>

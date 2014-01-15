@@ -1,0 +1,101 @@
+#set($globalUrl = ${linkKit.urlPara()})
+#set($blog=$blogTool.getByGlobalUrl($globalUrl))
+#if($blog)
+#set($title = $blog.get("title"))
+<link href="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")"
+      rel="stylesheet" type="text/css"/>
+<script type="text/javascript"
+        src="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="/action/blog/viewBlog?id=$blog.get("id")"></script>
+<br>
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>
+        <a href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
+        " rel="java tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
+    </li>
+    <li class="active">正文</li>
+</ol>
+<div class="detail">
+    <h2 class="under_line">
+        <span>$blog.get("title")</span>
+        <span class="badge">$blog.get("read_count")°C </span>
+    </h2>
+
+    <div class="info">
+        分类：<a
+            href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
+        " rel="java tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
+        #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
+        #if($blogLabelList)
+            | 标签：
+            #foreach($blogLabel in $blogLabelList)
+                <a href="$linkKit.label($labelTool.Get($blogLabel.get("label_id")).get("name"))"
+                   rel="label">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
+            #end
+        #end
+        | 发布：$blog.get("update_time")
+    </div>
+    <br>
+
+    <div class="detail">
+        $blog.get("content")
+        <br><br>
+
+        <p class="pay">
+            此文对我有价值，小额(无负担)赞助下^_^
+            <a href="https://me.alipay.com/yidongnan" class="btn btn-primary"
+               target="_blank">支付宝打赏</a>
+        </p>
+    </div>
+    <br>
+
+    <div class="row">
+        #invoke("share.vm")
+    </div>
+    <br>
+    #set($prevId = $blog.getInt("id") - 1)
+    #set($nextId = $blog.getInt("id") + 1)
+    #set($prevBlog = $blogTool.Get($prevId))
+    #set($nextBlog = $blogTool.Get($nextId))
+
+
+    <div class="box">
+        【上一篇】
+        #if($prevBlog)
+            <a href="$prevBlog.get("global_url")">$prevBlog.get("title")</a>
+        #else
+            没有了
+        #end
+        <br>
+        【下一篇】
+        #if($nextBlog)
+            <a href="$nextBlog.get("global_url")">$nextBlog.get("title")</a>
+        #else
+            没有了
+        #end
+    </div>
+</div>
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name: "yidongnan"};
+    (function () {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = 'http://static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- Duoshuo Comment END -->
+<script>window._bd_share_config = {"common": {"bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16"}, "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "t163"], "viewText": "分享到：", "viewSize": "16"}};
+with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=86835285.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+#else
+##        重定向到404
+#end

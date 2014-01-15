@@ -1,0 +1,143 @@
+#set($urlPara = $linkKit.urlPara())
+#if($user)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="$linkKit.static_res("bootstrap/assets/ico/favicon.png")">
+
+    <title>极速编程网</title>
+    <link href="$linkKit.static_res("bootstrap/dist/css/bootstrap.css")" rel="stylesheet">
+    <link href="$linkKit.static_res("css/starter-template.css")" rel="stylesheet">
+
+    <link href="$linkKit.static_res("ueditor/themes/default/css/ueditor.css")" type="text/css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="$linkKit.static_res("bootstrap/assets/js/html5shiv.js")"></script>
+    <script src="$linkKit.static_res("bootstrap/assets/js/respond.min.js")"></script>
+    <![endif]-->
+
+    <script src="$linkKit.static_res("bootstrap/assets/js/jquery.js")"></script>
+
+    <script type="text/javascript" charset="utf-8" src="$linkKit.static_res("ueditor/ueditor.config.js")"></script>
+    <script type="text/javascript" charset="utf-8" src="$linkKit.static_res("ueditor/ueditor.all.min.js")"></script>
+    <script type="text/javascript" src="$linkKit.static_res("ueditor/lang/zh-cn/zh-cn.js")"></script>
+
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-static-top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="$linkKit.root()">Michael Chen</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="$linkKit.root()">首页</a></li>
+                <li><a href="javascript:void(0)">欢迎,张艺辰</a></li>
+                <li><a href="logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel-group nav-sitemenu col-md-2" id="nav-accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#nav-accordion"
+                       href="#nav-panel-1">
+                        <i class="icon-fixed-width icon-briefcase"></i>
+                        博客管理
+                    </a>
+                </h6>
+            </div>
+            <div id="nav-panel-1"
+                 class="list-group panel-collapse #if($linkKit.startWith($urlPara,"blog")) in#else collapse #end">
+                <a href="$linkKit.root("admin/blog/blogPub")" class="list-group-item">
+                    <i class="icon-fixed-width icon-globe"></i>
+                    添加文章
+                </a>
+                <a href="$linkKit.root("admin/blog/blogList")" class="list-group-item">
+                    <i class="icon-fixed-width icon-globe"></i>
+                    文章列表
+                </a>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#nav-accordion"
+                       href="#nav-panel-2">
+                        外链管理
+                    </a>
+                </h6>
+            </div>
+            <div id="nav-panel-2"
+                 class="list-group panel-collapse #if($linkKit.startWith($urlPara,"link")) in#else collapse#end">
+                <a href="$linkKit.root("admin/link/linkAdd")" class="list-group-item">
+                    添加外链
+                </a>
+                <a href="$linkKit.root("admin/link/linkList")" class="list-group-item">
+                    外链列表
+                </a>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#nav-accordion"
+                       href="#nav-panel-3">
+                        分类管理
+                    </a>
+                </h6>
+            </div>
+            <div id="nav-panel-3"
+                 class="list-group panel-collapse #if($linkKit.startWith($urlPara,"catalog")) in#else collapse#end">
+                <a href="$linkKit.root("admin/catalog/catalogAdd")" class="list-group-item">
+                    添加分类
+                </a>
+                <a href="$linkKit.root("admin/catalog/catalogList")" class="list-group-item">
+                    分类列表
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10" style="padding-right: 30px;padding-left: 5px;">
+        <ul class="breadcrumb" style="display: block;">
+            <li>
+                <a href="/">首页</a>
+            </li>
+            <li>
+                #if($sub_title)$sub_title
+                #end
+            </li>
+        </ul>
+        $screen_content
+    </div>
+</div>
+
+
+</div>
+    #invoke("../www/widget/footer.vm")
+<!-- Bootstrap core JavaeScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="$linkKit.static_res("bootstrap/dist/js/bootstrap.min.js")"></script>
+<script src="$linkKit.static_res("js/jquery.form.js")"></script>
+<script src="$linkKit.static_res("js/bootstrap3-validation.js")"></script>
+</body>
+</html>
+#else
+    $linkKit.redirect("/")
+#end

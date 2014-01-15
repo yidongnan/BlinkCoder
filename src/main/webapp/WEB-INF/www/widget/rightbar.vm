@@ -1,0 +1,71 @@
+<div class="col-md-3 col-ld-3 rightbar">
+    <div class="widget">
+        <h3 class="under_line">关于博主</h3>
+
+        <div class="textwidget">
+
+            一名大四学生。<a href="/about">更多信息</a>
+            <br>
+            <br>
+            博主信息: 张艺辰 <br>
+            Email: <a href="mailto:yidongnan@gmail.com" rel="external">yidongnan@gmail.com</a>
+            <br>
+            <br>
+
+        </div>
+    </div>
+#* <div class="widget">
+     <h3 class="under_line">开源项目</h3>
+
+     <div>
+         <ul class="links">
+             <li><a href="#">1111111</a></li>
+             <li><a href="#">1111111</a></li>
+         </ul>
+     </div>
+ </div>*#
+    <div class="widget">
+        <h3 class="under_line">最热文章</h3>
+
+        <div>
+            <ul class="links">
+                #set($hotBlogList = $blogTool.hotBlogList(1,10))
+                #if($hotBlogList.getTotalRow() > 0)
+                    #foreach($blog in $hotBlogList.getList())
+                        <li><a href="$blog.get("global_url")" title="$blog.get("title")">$blog.get("title")</a></li>
+                    #end
+                #end
+            </ul>
+        </div>
+    </div>
+    <div class="widget">
+        <h3 class="under_line">外链列表</h3>
+        <div>
+            <ul class="links">
+                #set($linkList = $linkTool.getAllLink())
+                #if($linkList && $linkList.size() > 0)
+                    #foreach($link in $linkList)
+                        <li><a href="$link.get("url")" title="$link.get("desc")">$link.get("title")</a></li>
+                    #end
+                #end
+            </ul>
+        </div>
+    </div>
+#*<div class="widget">
+    <h3 class="under_line">最新评论</h3>
+
+    <div>
+        <ul class="links">
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+            <li><a href="#">1111111</a></li>
+        </ul>
+    </div>
+</div>*#
+</div>

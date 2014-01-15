@@ -1,0 +1,143 @@
+#set($layout = "admin.vm")
+#set($sub_title = "添加文章")
+#set($blogId = $linkKit.param("id",0))
+#if($blogId > 0)
+    #set($blog = $blogTool.Get($blogId))
+#end
+
+<form class="form-horizontal" role="form" id="blogForm"
+      action="#if($blog)$linkKit.action("/blog/updateBlog") #else $linkKit.action("/blog/addBlog") #end" method="post">
+    #if($blog)
+        <input type="hidden" name="blog.id" value="$blog.get("id")"/>
+    #end
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">博客标题:</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="title" name="blog.title" placeholder="博客标题"
+                   #if($blog)value="$blog.get("title")"#end>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">是否置顶:</label>
+
+        <div class="col-sm-1">
+            <label class="checkbox-inline">
+                <input type="checkbox" id="type" name="blog.type" value=1 #if($blog.isTopBlog())checked #end>
+
+                <p style="color: red">置顶</p>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="global_url" class="col-sm-2 control-label">个性链接:</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="global_url" name="blog.global_url" placeholder="个性链接"
+                   #if($blog)value="$blog.get("global_url")"#end>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="catalog" class="col-sm-2 control-label">类别:</label>
+
+        <div class="col-sm-8">
+            <select class="form-control" id="catalog" name="blog.catalog">
+                #set($catalogList = $catalogTool.getAllCatalog())
+                #if($catalogList)
+                    #foreach($catalog in $catalogList)
+                        <option value="${catalog.id}" #if($blog)#if($blog.get("catalog") == ${catalog.id})
+                                selected #end#end>${catalog.desc}</option>
+                    #end
+                #end
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content" class="col-sm-2 control-label">正文:</label>
+
+        <div class="col-sm-8">
+            <script type="text/plain" id="content" name="blog.content"
+                    style="height:240px;">#if($blog)$blog.get("content")#end</script>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+
+            <button type="submit" class="btn btn btn-primary">
+                #if($blog)
+                    更新
+                #else
+                    添加
+                #end
+            </button>
+            #if(!$blog)
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger" onclick="resetForm()">重置</button>
+            #end
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="alert" id="tip" style="display: none"></span>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    editor = UE.getEditor('content');
+
+    $(function () {
+        $('#blogForm').ajaxForm({
+            beforeSubmit: function (args, form, fn) {
+                var tip = form.find("#tip");
+                var title = form.find("#title").val();
+                var type = form.find("#type").val();
+                var global_url = form.find("#global_url").val();
+                var catalog = form.find("#catalog").val();
+                var content = editor.getContent();
+                if (title.length <= 0) {
+                    tip.html("请填写博客标题!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                if (global_url.length <= 0) {
+                    tip.html("请填写个性化链接!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                if (content.length <= 0) {
+                    tip.html("请填写博客内容!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                return true;
+            },
+            success: function (msg, b, fn, form) {
+                var tip = form.find("#tip");
+                if (msg.msg) {
+                    tip.html("操作成功！");
+                    tip.removeClass("alert-danger");
+                    tip.addClass("alert-success");
+                    tip.show();
+                } else {
+                    tip.html("操作失败！");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                }
+
+            },
+            //url:       url         // override for form's 'action' attribute
+            //type:      type        // 'get' or 'post', override for form's 'method' attribute
+            dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type)
+//            resetForm: true        // reset the form after successful submit
+        });
+
+        function resetForm() {
+            $("#blogForm")[0].reset();
+            editor.setContent("");
+        }
+
+    });
+</script>

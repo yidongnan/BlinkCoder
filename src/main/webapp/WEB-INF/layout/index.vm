@@ -1,0 +1,70 @@
+#set($catalogList = ${catalogTool.getShowCatalog()})
+#set($urlPara = $linkKit.urlPara())
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="$linkKit.static_res("bootstrap/assets/ico/favicon.png")">
+
+    <title>#if($title) $title -#end 极速编程网</title>
+    <link href="$linkKit.static_res("bootstrap/dist/css/bootstrap.css")" rel="stylesheet">
+    <link href="$linkKit.static_res("css/starter-template.css")" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="$linkKit.static_res("bootstrap/assets/js/html5shiv.js")"></script>
+    <script src="$linkKit.static_res("bootstrap/assets/js/respond.min.js")"></script>
+    <![endif]-->
+</head>
+
+<body>
+<header class="navbar navbar-inverse navbar-static-top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blink Coder</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                #foreach($catalog in $catalogList)
+                    #if($catalog)
+                        <li #if($linkKit.is_catalog_list() && $urlPara == ${catalog.get('name')}) class="active" #end>
+                            <a href="$linkKit.catalog($catalog.get('name'))">$catalog.get('desc')</a></li>
+                    #end
+                #end
+
+            </ul>
+            <form class="top-search-form navbar-form navbar-right" method="get" action="/">
+                <input type="text" class="form-control" name="s" id="s" style="width: 200px;">
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="head">
+    <div class="container">
+        <h1>Michael Chen的技术博客</h1>
+
+        <p class="under_line">关注java、linux、web开发和互联网--</p>
+
+    </div>
+</div>
+    $screen_content
+    #invoke("../www/widget/footer.vm")
+
+<!-- Bootstrap core JavaeScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="$linkKit.static_res("bootstrap/assets/js/jquery.js")"></script>
+<script src="$linkKit.static_res("bootstrap/dist/js/bootstrap.min.js")"></script>
+</body>
+</html>
