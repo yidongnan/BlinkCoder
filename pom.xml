@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>BlinkCoder</groupId>
-  <artifactId>BlinkCoder</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>BlinkCoder Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>BlinkCoder</groupId>
+    <artifactId>BlinkCoder</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>BlinkCoder</name>
+    <url>http://www.blinkcoder.com</url>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -131,7 +132,22 @@
             <version>6.0.0</version>
         </dependency>
     </dependencies>
-  <build>
-    <finalName>BlinkCoder</finalName>
-  </build>
+    <build>
+        <!-- compiler插件, 设定JDK版本 -->
+        <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <debug>true</debug>
+                    </configuration>
+                </plugin>
+        </plugins>
+    </build>
 </project>
