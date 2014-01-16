@@ -33,6 +33,11 @@
         #if($blogLabelList)
             | 标签：
             #foreach($blogLabel in $blogLabelList)
+                #if($velocityCount == 1)
+                    #set($blogLabelArrayStr = $labelTool.Get($blogLabel.get("label_id")).get("desc"))
+                #else
+                    #set($blogLabelArrayStr = ","+$blogLabelArrayStr + $labelTool.Get($blogLabel.get("label_id")).get("desc"))
+                #end
                 <a href="$linkKit.label($labelTool.Get($blogLabel.get("label_id")).get("name"))"
                    rel="label">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
             #end
@@ -52,7 +57,7 @@
         </p>
     </div>
     <br>
-
+    <script type="text/javascript" id="wumiiRelatedItems"></script>
     <div class="row">
         #invoke("share.vm")
     </div>
@@ -82,8 +87,25 @@
 ##    百度推荐
 <div id="hm_t_21753"></div>
     #invoke("duoshuo.vm")
-<script>window._bd_share_config = {"common": {"bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16"}, "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "t163"], "viewText": "分享到：", "viewSize": "16"}};
-with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=86835285.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+    $blog.get("global_url")
+    #if($blogLabelList)
+        #foreach($blogLabel in $blogLabelList)
+
+        #end
+    #end
+##   无觅推荐
+<script type="text/javascript">
+    var wumiiPermaLink = "$blog.get("global_url")"; //请用代码生成文章永久的链接
+    var wumiiTitle = "$blog.get("title")"; //请用代码生成文章标题
+    var wumiiTags = "#if($blogLabelArrayStr)$blogLabelArrayStr#end"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+    var wumiiCategories = ["$catalogTool.Get($blog.getInt("catalog")).get("desc")"]; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+    var wumiiSitePrefix = "http://www.blinkcoder.com/";
+    var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+</script>
+<script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget"></script>
+<a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+    <img src="http://static.wumii.cn/images/pixel.png" alt="无觅关联推荐，快速提升流量" style="border:0;padding:0;margin:0;" />
+</a>
 #else
 ##        重定向到404
 #end
