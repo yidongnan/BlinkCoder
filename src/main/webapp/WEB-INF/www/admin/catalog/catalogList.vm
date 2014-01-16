@@ -1,7 +1,7 @@
 #set($layout = "admin.vm")
 #set($sub_title = "分类列表")
 #set($page = $linkKit.param("p",1))
-#set($pageSize = 2)
+#set($pageSize = 10)
 <div class="results table-responsive">
     <table class="table table-bordered table-striped table-hover">
         <thead>

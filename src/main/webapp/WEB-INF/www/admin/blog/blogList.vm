@@ -1,7 +1,7 @@
 #set($layout = "admin.vm")
 #set($sub_title = "文章列表")
 #set($page = $linkKit.param("p",1))
-#set($pageSize = 2)
+#set($pageSize = 10)
 <script type="text/javascript">
     function editObj(id) {
         window.location.href = "/admin/blog/blogPub?id=" + id;
