@@ -9,4 +9,5 @@ public class myConstants {
     public static String VELOCITY_TEMPLETE_PATH;
     public static String STATIC_RESOURCE_PATH;
     public static String QINIU_BUICKET;
+    public static String QINIU_RETURNURL;
 }

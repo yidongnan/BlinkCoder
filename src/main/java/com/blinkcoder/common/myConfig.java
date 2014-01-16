@@ -92,10 +92,11 @@ public class myConfig extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
-        myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
-        myConstants.QINIU_BUICKET = getProperty("qiniu_buicket");
         Config.ACCESS_KEY = getProperty("qiniu_access_key");
         Config.SECRET_KEY = getProperty("qiniu_secret_key");
+        myConstants.QINIU_BUICKET = getProperty("qiniu_buicket");
+        myConstants.QINIU_RETURNURL = getProperty("qiniu_returnUrl");
+        myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
     }
 
     @Override

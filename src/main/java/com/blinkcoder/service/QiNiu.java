@@ -25,11 +25,10 @@ public class QiNiu {
     public static final Logger log = Logger.getLogger(QiNiu.class);
 
     public static Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
-    public static final String BUICKET = myConstants.QINIU_BUICKET;
 
     public static String token() {
-        PutPolicy putPolicy = new PutPolicy(BUICKET);
-        putPolicy.returnUrl = "http://localhost/action/qiniu/callback";
+        PutPolicy putPolicy = new PutPolicy(myConstants.QINIU_BUICKET);
+        putPolicy.returnUrl = myConstants.QINIU_RETURNURL;
         putPolicy.returnBody = "{\"name\": $(fname),\"size\": \"$(fsize)\",\"w\": \"$(imageInfo.width)\",\"h\": \"$(imageInfo.height)\",\"key\":$(etag)}";
         String token = null;
         try {
