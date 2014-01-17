@@ -19,7 +19,7 @@ public class VisitStatPlugin extends TimerTask implements IPlugin {
 
     public static VisitStatPlugin daemon;
     private static Timer click_timer;
-    private final static long INTERVAL = 1 * 1000;
+    private final static long INTERVAL = 300 * 1000;
 
     /**
      * 支持统计的对象类型
