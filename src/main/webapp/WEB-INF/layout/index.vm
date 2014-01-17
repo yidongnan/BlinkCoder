@@ -13,7 +13,7 @@
 
     <title>#if($title) $title -#end 极速编程网</title>
     <link href="$linkKit.static_res("bootstrap/dist/css/bootstrap.css")" rel="stylesheet">
-    <link href="$linkKit.static_res("css/starter-template.css")" rel="stylesheet">
+    <link href="$linkKit.static_res("css/global.css")" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -64,7 +64,8 @@
 <!-- Bootstrap core JavaeScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="$linkKit.static_res("bootstrap/assets/js/jquery.js")"></script>
+<script src="$linkKit.static_res("js/jquery.min.js")"></script>
+<script src="$linkKit.static_res("js/jquery.min.map")"></script>
 <script src="$linkKit.static_res("bootstrap/dist/js/bootstrap.min.js")"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
 
     <title>极速编程网</title>
     <link href="$linkKit.static_res("bootstrap/dist/css/bootstrap.css")" rel="stylesheet">
-    <link href="$linkKit.static_res("css/starter-template.css")" rel="stylesheet">
+    <link href="$linkKit.static_res("css/global.css")" rel="stylesheet">
 
     <link href="$linkKit.static_res("ueditor/themes/default/css/ueditor.css")" type="text/css" rel="stylesheet">
 
@@ -21,7 +21,8 @@
     <script src="$linkKit.static_res("bootstrap/assets/js/respond.min.js")"></script>
     <![endif]-->
 
-    <script src="$linkKit.static_res("bootstrap/assets/js/jquery.js")"></script>
+    <script src="$linkKit.static_res("js/jquery.min.js")"></script>
+    <script src="$linkKit.static_res("js/jquery.min.map")"></script>
 
     <script type="text/javascript" charset="utf-8" src="$linkKit.static_res("ueditor/ueditor.config.js")"></script>
     <script type="text/javascript" charset="utf-8" src="$linkKit.static_res("ueditor/ueditor.all.min.js")"></script>
@@ -49,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div>
     <div class="panel-group nav-sitemenu col-md-2" id="nav-accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -113,7 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-10" style="padding-right: 30px;padding-left: 5px;">
+    <div class="col-md-10">
         <ul class="breadcrumb" style="display: block;">
             <li>
                 <a href="/">首页</a>
