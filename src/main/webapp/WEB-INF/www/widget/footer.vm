@@ -1,5 +1,6 @@
 <footer class="panel-footer">
     <div class="container">
-        <p>版权所有 © 极速开发网-BlinkCoder.COM #invoke("baiduCount.vm")</p>
+        <p>版权所有 © 极速开发网-BlinkCoder.COM&nbsp;&nbsp;&nbsp; Power By <a
+                href="https://github.com/yidongnan/BlinkCoder">BlinkCoder</a>#invoke("baiduCount.vm")</p>
     </div>
 </footer>
