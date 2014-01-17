@@ -25,7 +25,6 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="$linkKit.static_res("js/jquery.min.js")"></script>
-<script src="$linkKit.static_res("js/jquery.min.map")"></script>
 <script src="$linkKit.static_res("bootstrap/dist/js/bootstrap.min.js")"></script>
 
 </body>
