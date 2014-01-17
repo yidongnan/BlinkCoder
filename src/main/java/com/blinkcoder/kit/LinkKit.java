@@ -36,7 +36,12 @@ public class LinkKit extends StrutsLinkTool {
     public String param(String name, String... def_value) {
         String v = request.getParameter(name);
         if (v == null) {
-            String[] paths = request.getRequestURI().split("/");
+            String target = request.getRequestURI();
+            String contextPath = request.getContextPath();
+            int contextPathLength = (contextPath == null || "/".equals(contextPath) ? 0 : contextPath.length());
+            if (contextPathLength != 0)
+                target = target.substring(contextPathLength);
+            String[] paths = target.split("/");
             Map paramMap = VelocityKit.GetUrlParam(paths, paths.length);
             if (MapUtils.isNotEmpty(paramMap)) {
                 v = (String) paramMap.get(name);
