@@ -23,11 +23,6 @@ public class Label extends MyModel<Label> {
 
     @Override
     protected void removeCache() {
-        removeModelCache();
-    }
-
-    @Override
-    protected void removeModelCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
     }
 

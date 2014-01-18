@@ -40,7 +40,7 @@ public class CatalogController extends MyController {
         int id = getParaToInt("id", 0);
         if (id > 0) {
             Catalog catalog = Catalog.dao.Get(id);
-            result = catalog.delete();
+            result = catalog.Delete();
         }
         renderJson("msg", result);
     }

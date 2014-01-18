@@ -23,11 +23,6 @@ public class Link extends MyModel<Link> {
     }
 
     protected void removeCache() {
-        removeModelCache();
-    }
-
-    @Override
-    protected void removeModelCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
     }
 

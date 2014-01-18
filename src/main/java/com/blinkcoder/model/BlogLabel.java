@@ -24,12 +24,6 @@ public class BlogLabel extends MyModel<BlogLabel> {
 
     @Override
     protected void removeCache() {
-        removeModelCache();
-
-    }
-
-    @Override
-    protected void removeModelCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
     }
 

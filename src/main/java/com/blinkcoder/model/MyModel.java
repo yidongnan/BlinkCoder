@@ -43,7 +43,7 @@ public abstract class MyModel<M extends Model> extends Model<M> {
     public boolean Update() {
         boolean result = this.update();
         if (result)
-            removeModelCache();
+            removeCache();
         return result;
     }
 
@@ -55,8 +55,6 @@ public abstract class MyModel<M extends Model> extends Model<M> {
     }
 
     abstract protected void removeCache();
-
-    abstract protected void removeModelCache();
 
     abstract public M Get(int id);
 }

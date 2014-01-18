@@ -25,13 +25,8 @@ public class Catalog extends MyModel<Catalog> {
     }
 
     protected void removeCache() {
-        removeModelCache();
-        CacheKit.removeAll(MODEL_LIST_CACHE);
-    }
-
-    @Override
-    protected void removeModelCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
+        CacheKit.removeAll(MODEL_LIST_CACHE);
     }
 
     public boolean isShow() {

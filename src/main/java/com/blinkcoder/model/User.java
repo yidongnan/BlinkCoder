@@ -31,11 +31,6 @@ public class User extends MyModel<User> {
 
     }
 
-    @Override
-    protected void removeModelCache() {
-
-    }
-
     public User login(String username, String password) {
         User user = dao.findFirst("select id from user where username=? and password=?", username, getMD5(password.getBytes()));
         return user == null ? null : Get(user.getInt("id"));
