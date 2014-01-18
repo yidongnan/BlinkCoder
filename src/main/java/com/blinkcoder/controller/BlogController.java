@@ -49,6 +49,8 @@ public class BlogController extends MyController {
     @Before(AdminInterceptor.class)
     public void updateBlog() {
         Blog blog = getModel(Blog.class);
+        if(blog.get("type") == null)
+            blog.set("type", 0);
         boolean result = false;
         int id = blog.get("id", 0);
         if (id > 0) {
