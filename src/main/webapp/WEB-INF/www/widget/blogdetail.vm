@@ -3,8 +3,8 @@
 #if($blog)
 #set($_title = $blog.get("title"))
 #set($_keys = $catalogTool.Get($blog.getInt("catalog")).get("desc") + "," + $catalogTool.Get($blog.getInt("catalog")).get("name"))
-<link href="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
+<link href="$linkKit.cloud_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="$linkKit.cloud_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
 <script type="text/javascript">
     SyntaxHighlighter.all();
 </script>

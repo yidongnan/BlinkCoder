@@ -137,19 +137,23 @@ public class LinkKit extends StrutsLinkTool {
         response.sendRedirect(url);
     }
 
-    public static String static_res(String name) {
+    public static String cloud_res(String name) {
         if (name == null)
             return null;
-        StringBuilder sb;
         if (StringUtils.isNotEmpty(myConstants.STATIC_RESOURCE_PATH)) {
+            StringBuilder sb;
             sb = new StringBuilder(myConstants.STATIC_RESOURCE_PATH);
             if (!name.startsWith("/"))
                 sb.append('/');
             sb.append(name);
+            return sb.toString();
         } else {
-            sb = new StringBuilder(root(name));
+            return local_res(name);
         }
-        return sb.toString();
+    }
+
+    public static String local_res(String name) {
+        return root(name);
     }
 
 
