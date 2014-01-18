@@ -119,16 +119,13 @@
                 <a href="/">首页</a>
             </li>
             <li>
-                #if($sub_title)$sub_title
-                #end
+                #if($sub_title)$sub_title#end
             </li>
         </ul>
         $screen_content
     </div>
 </div>
-
-
-</div>
+<div style="clear: both;margin-bottom: 50px;"></div>
     #invoke("../www/widget/footer.vm")
 <!-- Bootstrap core JavaeScript
 ================================================== -->
