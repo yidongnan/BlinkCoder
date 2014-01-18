@@ -166,6 +166,7 @@
                 uploadCompleteCallback: function(data){
                     try{
                         var info = eval("(" + data.info + ")");
+                        info.url = info.url.substring(0, info.url.lastIndexOf("-"));
                         info && imageUrls.push(info);
                         selectedImageCount--;
                     }catch(e){}
@@ -209,7 +210,6 @@
                  * 参数为json对象{"key1":"value1","key2":"value2"}，其中key即为向后台post提交的name，value即为值。
                  * 其中有一个特殊的保留key值为action，若设置，可以更改本次提交的处理地址
                  */
-                console.log(baidu.g("savePath").value);
                 var postParams = {
                     "dir": baidu.g("savePath").value,
 //                    Michael
