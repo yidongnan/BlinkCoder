@@ -1,7 +1,7 @@
-<nav class="panel-footer navbar-default #if($layout=="admin.vm")navbar-fixed-bottom#end" style="text-align: center;" role="navigation">
+<nav class="panel-footer navbar-default #if($layout=="admin.vm")navbar-fixed-bottom#end" style="text-align: center;font-size: 12px;" role="navigation">
         <span>
-            <h6>版权所有 © 极速开发网-BlinkCoder.COM&nbsp;&nbsp;&nbsp; Power By : <a
-                    href="https://github.com/yidongnan/BlinkCoder">BlinkCoder</a>#invoke("baiduCount.vm")
-            </h6>
+            <span id="copyright">版权所有 © 极速开发网-BlinkCoder.COM</span>
+            <span style="margin-left: 20px;">Power By : <a href="https://github.com/yidongnan/BlinkCoder">BlinkCoder</span>
+            #invoke("baiduCount.vm")</h6>
         </span>
 </nav>

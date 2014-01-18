@@ -1,11 +1,10 @@
 #set($globalUrl = ${linkKit.urlPara()})
 #set($blog=$blogTool.getByGlobalUrl($globalUrl))
 #if($blog)
-#set($title = $blog.get("title"))
-<link href="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")"
-      rel="stylesheet" type="text/css"/>
-<script type="text/javascript"
-        src="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
+#set($_title = $blog.get("title"))
+#set($_keys = $catalogTool.Get($blog.getInt("catalog")).get("desc") + "," + $catalogTool.Get($blog.getInt("catalog")).get("name"))
+<link href="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="$linkKit.static_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
 <script type="text/javascript">
     SyntaxHighlighter.all();
 </script>
@@ -15,7 +14,7 @@
     <li><a href="/">首页</a></li>
     <li>
         <a href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
-        " rel="java tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
+        " rel="tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
     </li>
     <li class="active">正文</li>
 </ol>
@@ -28,18 +27,19 @@
     <div class="info">
         分类：<a
             href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
-        " rel="java tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
+        " rel="tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
         #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
         #if($blogLabelList)
             | 标签：
             #foreach($blogLabel in $blogLabelList)
+                #set($_keys = $_keys +","+ $labelTool.Get($blogLabel.get("label_id")).get("name") +","+$labelTool.Get($blogLabel.get("label_id")).get("desc"))
                 #if($velocityCount == 1)
                     #set($blogLabelArrayStr = $labelTool.Get($blogLabel.get("label_id")).get("desc"))
                 #else
                     #set($blogLabelArrayStr = ","+$blogLabelArrayStr + $labelTool.Get($blogLabel.get("label_id")).get("desc"))
                 #end
                 <a href="$linkKit.label($labelTool.Get($blogLabel.get("label_id")).get("name"))"
-                   rel="label">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
+                   rel="tag">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
             #end
         #end
         | 发布：$blog.get("update_time")

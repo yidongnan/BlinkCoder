@@ -3,6 +3,8 @@
 #set($pageSize = 10)
 #set($urlCatalog = $linkKit.param("p1"))
 #set($catalog = $catalogTool.getByName($urlCatalog))
+#set($_title = $catalog.get("desc"))
+#set($_keys = $catalog.get("name")+"/"+$catalog.get("desc"))
 #set($blogList=$blogTool.normalByCatalogBlogList($catalog.get("id"),$page,$pageSize))
 <div class="container" id="content">
     <div id="main" class="col-md-9 col-ld-9">

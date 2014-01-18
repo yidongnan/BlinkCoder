@@ -3,6 +3,8 @@
 #set($pageSize = 10)
 #set($urlLabel = $linkKit.param("p1"))
 #set($label = $labelTool.getByName($urlLabel))
+#set($_title = $label.get("desc"))
+#set($_keys = $label.get("name")+"/"+$label.get("desc"))
 #set($blogList=$blogTool.normalByLabelBlogList($label.get("id"),$page,$pageSize))
 <div class="container" id="content">
     <div id="main" class="col-md-9 col-ld-9">

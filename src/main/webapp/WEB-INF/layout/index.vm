@@ -7,11 +7,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+    <meta name="description" content="#if($_title) $_title #else 极速开发网 www.blinkcoder.com 是用Java开发的一个开源博客，代码精简。Java初学者能迅速在这基础上搭建属于自己的个人博客#end"  />
+    <meta name="keywords" content="#if($_keys) $_keys #else 开源博客,BlinkCoder,开源JAVA博客,Java博客,开源代码,极速编程,极速开发,快速开发,JFinal博客#end"/>
+
+    <meta name="author" content="Michael Chen">
     <link rel="shortcut icon" href="$linkKit.static_res("bootstrap/assets/ico/favicon.png")">
 
-    <title>#if($title) $title -#end 极速开发网</title>
+    <title>#if($_title) $_title -#end 极速开发网</title>
     <link href="$linkKit.static_res("bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
     <link href="$linkKit.static_res("css/global.css")" rel="stylesheet">
 
@@ -38,7 +41,7 @@
                 #foreach($catalog in $catalogList)
                     #if($catalog)
                         <li #if($linkKit.is_catalog_list() && $urlPara == ${catalog.get('name')}) class="active" #end>
-                            <a href="$linkKit.catalog($catalog.get('name'))">$catalog.get('desc')</a></li>
+                            <a href="$linkKit.catalog($catalog.get('name'))" rel="tag">$catalog.get('desc')</a></li>
                     #end
                 #end
 
