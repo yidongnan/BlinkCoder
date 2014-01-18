@@ -95,7 +95,7 @@
     <script type="text/javascript">
 //        Michael
         $(function(){
-            $.get("www.blinkcoder.com/action/qiniu/token", function(data) {
+            $.get("/action/qiniu/token", function(data) {
                 $("#qiniu_token").val(data["token"]);
             });
         });
@@ -209,8 +209,9 @@
                  * 参数为json对象{"key1":"value1","key2":"value2"}，其中key即为向后台post提交的name，value即为值。
                  * 其中有一个特殊的保留key值为action，若设置，可以更改本次提交的处理地址
                  */
+                console.log(baidu.g("savePath").value);
                 var postParams = {
-                    "dir":baidu.g("savePath").value,
+                    "dir": baidu.g("savePath").value,
 //                    Michael
                     "token":$("#qiniu_token").val()
                 };
@@ -223,7 +224,7 @@
         });
 
         function initSavePath () {
-
+            editor.options.savePath = "/";
             if ( editor.options.savePath && editor.options.savePath.length > 0 ) {
                 updateSavePath( editor.options.savePath );
             } else {

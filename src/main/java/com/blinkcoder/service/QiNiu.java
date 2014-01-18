@@ -55,7 +55,7 @@ public class QiNiu {
     public static String imageManager() {
         Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
         RSFClient client = new RSFClient(mac);
-        ListPrefixRet list = client.listPrifix("michaelchen", "", "", 10);
+        ListPrefixRet list = client.listPrifix(myConstants.QINIU_BUICKET, "", "", 10);
         StringBuffer sb = new StringBuffer();
         for (ListItem item : list.results) {
             sb.append("/");
