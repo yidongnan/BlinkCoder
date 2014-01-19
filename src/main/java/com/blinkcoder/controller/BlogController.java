@@ -36,12 +36,10 @@ public class BlogController extends MyController {
     @Before(AdminInterceptor.class)
     public void delBlog() {
         int id = getParaToInt("id", 0);
+        Blog blog = Blog.dao.Get(id);
         boolean result = false;
         if (id > 0) {
-            result = Blog.dao.deleteById(id);
-        }
-        if (result) {
-
+            result = blog.Delete();
         }
         renderJson("result", result);
     }
