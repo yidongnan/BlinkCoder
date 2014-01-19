@@ -62,6 +62,7 @@
     </div>
 </div>
     $screen_content
+<div style="clear: both"></div>
     #invoke("../www/widget/footer.vm")
 
 <!-- Bootstrap core JavaeScript
@@ -69,5 +70,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 <script src="$linkKit.cloud_res("bootstrap/dist/js/bootstrap.min.js")"></script>
+#invoke("../www/widget/duoshuo.vm")
 </body>
 </html>

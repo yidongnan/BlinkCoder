@@ -1,17 +1,15 @@
-<div class="col-md-3 col-ld-3 rightbar">
+<div class="col-md-3 col-ld-3 rightbar" style="float: right">
     <div class="widget">
         <h3 class="under_line">关于博主</h3>
-
         <div class="textwidget">
-
-            一名大四学生。<a href="/about">更多信息</a>
             <br>
             <br>
-            博主信息: 张艺辰 <br>
-            Email: <a href="mailto:yidongnan@gmail.com" rel="external">yidongnan@gmail.com</a>
+            博主信息: <br/>Michael Chen<br/>
+            一名大四学生。#*<a href="/about">更多信息</a>*#<br/>
+            Email: <a href="mailto:yidongnan@gmail.com" rel="external">yidongnan@gmail.com</a><br/>
+            源码交流群：312695705
             <br>
             <br>
-
         </div>
     </div>
 #* <div class="widget">
@@ -36,6 +34,18 @@
                     #end
                 #end
             </ul>
+        </div>
+    </div>
+    <div class="widget">
+        <h3 class="under_line">最新评论</h3>
+        <div>
+            <ul class="ds-recent-comments" style="padding-left: 0px;" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="20"></ul>
+        </div>
+    </div>
+    <div class="widget">
+        <h3 class="under_line">最近访客</h3>
+        <div>
+            <ul class="ds-recent-visitors" style="padding-left: 0px;" data-num-items="10"></ul>
         </div>
     </div>
     <div class="widget">

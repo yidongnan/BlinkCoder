@@ -87,7 +87,7 @@
 ##    百度推荐
 <div id="hm_t_21753"></div>
 ##    多说评论
-#invoke("duoshuo.vm")
+<div data-thread-key="$blog.get("id")" data-title="$blog.get("title")" data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰" class="ds-thread" id="ds-thread"></div>
 ##   无觅推荐
 <script type="text/javascript">
     var wumiiPermaLink = "http://www.blinkcoder.com/$blog.get("global_url")"; //请用代码生成文章永久的链接
