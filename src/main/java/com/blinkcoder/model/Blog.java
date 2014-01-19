@@ -94,4 +94,14 @@ public class Blog extends MyModel<Blog> {
             CacheKit.remove(MODEL_CACHE, id);
         }
     }
+
+    public Blog prevBlog(int id) {
+        String sql = "select * from blog where id < ?";
+        return findFirst(sql, id);
+    }
+
+    public Blog nextBlog(int id) {
+        String sql = "select * from blog where id > ?";
+        return findFirst(sql, id);
+    }
 }

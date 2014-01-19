@@ -62,11 +62,8 @@
         #invoke("share.vm")
     </div>
     <br>
-    #set($prevId = $blog.getInt("id") - 1)
-    #set($nextId = $blog.getInt("id") + 1)
-    #set($prevBlog = $blogTool.Get($prevId))
-    #set($nextBlog = $blogTool.Get($nextId))
-
+    #set($prevBlog = $blogTool.prevBlog($blog.getInt("id")))
+    #set($nextBlog = $blogTool.nextBlog($blog.getInt("id")))
 
     <div class="box">
         【上一篇】
