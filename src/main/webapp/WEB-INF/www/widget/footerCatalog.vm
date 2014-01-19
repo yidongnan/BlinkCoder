@@ -4,7 +4,7 @@
         #set($catalogList = $catalogTool.getHideCatalog())
         #if($catalogList && $catalogList.size() > 0)
             #foreach($catalog in $catalogList)
-                <li><a href="$catalog.title">$catalog.desc</a></li>
+                <li><a href="$catalog.get("title")">$catalog.get("desc")</a></li>
             #end
         #end
     </ul>
