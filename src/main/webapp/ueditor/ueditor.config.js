@@ -93,12 +93,13 @@
                 'print', 'preview', 'searchreplace', 'help', 'drafts']
         ]*/
         , toolbars: [
-            ['fullscreen', 'source', '|', 'undo', 'redo', '|',
+            ['fullscreen', 'source', '|',
                 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|',
-                'paragraph', 'fontfamily', 'fontsize',
-                'link', 'unlink', '|',
-                'insertcode', 'insertimage', 'insertvideo', 'attachment', 'horizontal', 'drafts', '|',
-                'preview']
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+                'link', 'unlink', 'anchor', '|', 'insertimage', 'insertvideo', 'attachment', 'horizontal', 'drafts', '|','preview',
+                'paragraph', 'fontfamily', 'fontsize','insertcode',
+
+                ]
         ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
 //        ,labelMap:{

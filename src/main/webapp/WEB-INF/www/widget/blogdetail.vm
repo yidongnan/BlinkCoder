@@ -46,7 +46,7 @@
     </div>
     <br>
 
-    <div class="detail">
+    <div class="detail" style="font-size: 15px;line-height: 30px;">
         $blog.get("content")
         <br><br>
 
