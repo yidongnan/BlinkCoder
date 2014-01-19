@@ -101,6 +101,5 @@ public class myConfig extends JFinalConfig {
 
     @Override
     public void beforeJFinalStop() {
-        VisitStatPlugin.daemon.stop();
     }
 }
