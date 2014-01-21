@@ -39,4 +39,20 @@ public class LinkController extends MyController {
         }
         renderJson("msg", result);
     }
+
+    @Before(AdminInterceptor.class)
+    public void upLink() {
+        int id = getParaToInt("id");
+        boolean result = false;
+        result = Link.dao.upLink(id);
+        renderJson("msg", result);
+    }
+
+    @Before(AdminInterceptor.class)
+    public void downLink() {
+        int id = getParaToInt("id");
+        boolean result = false;
+        result = Link.dao.downLink(id);
+        renderJson("msg", result);
+    }
 }

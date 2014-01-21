@@ -5,7 +5,7 @@
     #set($link = $linkTool.Get($linkId))
 #end
 <form class="form-horizontal" role="form" id="linkForm"
-      action="#if($link) $linkKit.action("/link/updateLink") #else $linkKit.root("/link/addLink") #end" method="post">
+      action="#if($link) $linkKit.action("/link/updateLink") #else $linkKit.action("/link/addLink") #end" method="post">
     #if($link)
         <input type="hidden" name="link.id" value="$link.get("id")"/>
     #end

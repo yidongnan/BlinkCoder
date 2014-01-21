@@ -10,6 +10,7 @@
             <th scope="col">标题</th>
             <th scope="col">描述</th>
             <th scope="col">链接地址</th>
+            <th scope="col" style="width: 60px;">顺序</th>
             <th scope="col" style="width: 100px;">操作</th>
         </tr>
         </thead>
@@ -22,6 +23,10 @@
                     <td>$link.get("desc")</td>
                     <td>$link.get("url")</td>
                     <td>
+                        <span class="glyphicon glyphicon-circle-arrow-up" style="color: red;margin-right: 10px;cursor: pointer;" onclick="upLink($link.get("id"))"></span>
+                        <span class="glyphicon glyphicon-circle-arrow-down" style="color:green;cursor: pointer;" onclick="downLink($link.get("id"))"></span>
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-success btn-xs" onclick="editObj($link.get("id"))">编辑
                         </button>
                         <button type="button" class="btn btn-danger btn-xs" onclick="delObj($link.get("id"))">删除
@@ -30,7 +35,6 @@
                 </tr>
                 #end
             #end
-        </tbody>
     </table>
 </div>
 <div class="pagination pagination-centered pagination-small">
@@ -67,5 +71,31 @@
                 }
             });
         }
+    }
+
+    function upLink(id) {
+        $.ajax({
+            type: "POST",
+            url: "$linkKit.action("/link/upLink")",
+            data: "id=" + id,
+            success: function (data) {
+                if(data.msg) {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
+    function downLink(id) {
+        $.ajax({
+            type: "POST",
+            url: "$linkKit.action("/link/downLink")",
+            data: "id=" + id,
+            success: function (data) {
+                if(data.msg) {
+                    window.location.reload();
+                }
+            }
+        });
     }
 </script>
