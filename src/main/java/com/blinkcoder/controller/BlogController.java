@@ -41,7 +41,7 @@ public class BlogController extends MyController {
         if (id > 0) {
             result = blog.Delete();
         }
-        renderJson("result", result);
+        renderJson("msg", result);
     }
 
     @Before(AdminInterceptor.class)

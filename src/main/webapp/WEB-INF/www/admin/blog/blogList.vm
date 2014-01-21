@@ -9,17 +9,33 @@
 
     function delObj(id) {
         if (confirm("确认是否需要删除？")) {
+            var tip = $("#tip");
+            tip.hide();
             $.ajax({
                 type: "POST",
                 url: "$linkKit.action("/blog/delBlog")",
                 data: "id=" + id,
                 success: function (data) {
-                    alert(data.result);
+                    if(data.msg) {
+                        tip.html("操作成功！");
+                        tip.removeClass("alert-danger");
+                        tip.addClass("alert-success");
+                        tip.animate({opacity:1},3000);
+                        tip.css('display', 'block');
+                        $("#tr" + id).hide("slow");
+                    } else {
+                        tip.html("操作失败！");
+                        tip.removeClass("alert-success");
+                        tip.addClass("alert-danger");
+                        tip.animate({opacity:1},30000);
+                        tip.css('display', 'block');
+                    }
                 }
             });
         }
     }
 </script>
+<span class="alert" id="tip" style="display: none;"></span>
 <div class="results table-responsive">
     <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -35,7 +51,7 @@
             #set($blogList=$blogTool.topAndNormalBlogList($page,$pageSize))
             #if($blogList.getTotalRow() > 0)
                 #foreach($blog in $blogList.getList())
-                <tr style="font-size:12px;">
+                <tr style="font-size:12px;" id="tr$blog.get("id")">
                     <td>$blog.get("title")</td>
                     <td>$blog.get("global_url")</td>
                     <td>$catalogTool.Get($blog.get("catalog")).get("desc")</td>

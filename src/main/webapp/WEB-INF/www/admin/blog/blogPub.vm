@@ -110,6 +110,7 @@
                     tip.show();
                     return false;
                 }
+                tip.hide();
                 return true;
             },
             success: function (msg, b, fn, form) {
