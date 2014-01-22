@@ -35,6 +35,8 @@ public class VisitStatPlugin extends TimerTask implements IPlugin {
                     for (byte type : TYPES)
                         put(type, new ConcurrentHashMap<Integer, Integer>());
                 }
+
+                private static final long serialVersionUID = 3094140348751410779L;
             };
 
 
@@ -43,7 +45,7 @@ public class VisitStatPlugin extends TimerTask implements IPlugin {
         if (queue != null) {
             Integer nCount = queue.get(obj_id);
             nCount = (nCount == null) ? 1 : nCount + 1;
-            queue.put(obj_id, nCount.intValue());
+            queue.put(obj_id, nCount);
         }
     }
 
