@@ -70,24 +70,13 @@ public class Blog extends MyModel<Blog> {
 
 
     public static void VisitBlog(ConcurrentHashMap<Integer, Integer> datas) {
-        Object[][] args = new Object[datas.size()][11];
+        Object[][] args = new Object[datas.size()][2];
         int i = 0;
         for (Integer id : datas.keySet()) {
-            int count = datas.get(id);
             args[i][0] = id;
-            Blog blog = Blog.dao.Get(id);
-            args[i][1] = blog.get("title");
-            args[i][2] = blog.get("global_url");
-            args[i][3] = blog.get("catalog");
-            args[i][4] = blog.get("content");
-            args[i][5] = blog.get("desc");
-            args[i][6] = blog.get("update_time");
-            args[i][7] = count;
-            args[i][8] = blog.get("comment_count");
-            args[i][9] = blog.get("type");
-            args[i][10] = count;
+            args[i][1] =  datas.get(id);
         }
-        String sql = "INSERT INTO blog VALUES(?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+        String sql = "INSERT INTO blog (id) VALUES(?) ON DUPLICATE KEY UPDATE " +
                 "read_count = read_count + ?";
         Db.batch(sql, args, 500);
         for (int id : datas.keySet()) {
