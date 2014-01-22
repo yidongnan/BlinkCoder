@@ -1,4 +1,4 @@
-<nav class="panel-footer navbar-default #if($layout=="admin.vm")navbar-fixed-bottom#end" style="text-align: center;font-size: 12px;" role="navigation">
+<nav id="footer" class="panel-footer navbar-default #if($layout=="admin.vm")navbar-fixed-bottom#end" style="text-align: center;font-size: 12px;" role="navigation">
         <span>
             <span id="copyright">版权所有 © 极速开发网-BlinkCoder.COM</span>
 ##            建议用户保留下述Power BY 链接，感谢你对开源BlinkCoder的支持

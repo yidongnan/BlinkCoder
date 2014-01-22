@@ -71,5 +71,36 @@
 <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 <script src="$linkKit.cloud_res("bootstrap/dist/js/bootstrap.min.js")"></script>
 #invoke("../www/widget/duoshuo.vm")
+
+
+<script>
+    $(function () {
+        if ($("#footer").length > 0) {
+            $("body").append('<div id="backtotop"><div class="bttbg"></div></div>');
+            initGoToTop()
+        }
+    });
+    function initGoToTop() {
+        var b = jQuery("#footer").position().top - jQuery(window).height() - 200;
+        jQuery(function () {
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() > 100) {
+                    jQuery("#backtotop").addClass("showme")
+                } else {
+                    jQuery("#backtotop").removeClass("showme")
+                }
+            });
+            jQuery("#backtotop").click(function () {
+                jQuery("body,html").animate({scrollTop: 0}, 400);
+                return false
+            })
+        });
+        if (jQuery(window).scrollTop() == 0) {
+            jQuery("#backtotop").removeClass("showme")
+        } else {
+            jQuery("#backtotop").addClass("showme")
+        }
+    }
+</script>
 </body>
 </html>
