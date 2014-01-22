@@ -19,7 +19,7 @@
     <![endif]-->
     <style>
         html {
-            background: url(http://www.williamghelfi.com/demos/img/6133364748_89f2365922_o.jpg) no-repeat center center fixed;
+            background: url($linkKit.cloud_res("img/background.jpg")) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
