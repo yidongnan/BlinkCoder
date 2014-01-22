@@ -10,12 +10,36 @@
     <title>极速开发网</title>
     <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
     <link href="$linkKit.cloud_res("css/global.css")" rel="stylesheet">
+    <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="$linkKit.cloud_res("bootstrap/assets/js/html5shiv.js")"></script>
     <script src="$linkKit.cloud_res("bootstrap/assets/js/respond.min.js")"></script>
     <![endif]-->
+    <style>
+        html {
+            background: url(http://www.williamghelfi.com/demos/img/6133364748_89f2365922_o.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        body {
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: "Open Sans",serif;
+            background: transparent;
+        }
+        .panel {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .margin-base-vertical {
+            margin: 40px 0;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -24,7 +48,6 @@
 <!-- Bootstrap core JavaeScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 <script src="$linkKit.cloud_res("bootstrap/dist/js/bootstrap.min.js")"></script>
 
 </body>
