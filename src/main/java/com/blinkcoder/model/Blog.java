@@ -73,8 +73,11 @@ public class Blog extends MyModel<Blog> {
         Object[][] args = new Object[datas.size()][2];
         int i = 0;
         for (Integer id : datas.keySet()) {
+            Blog blog = Blog.dao.Get(id);
+            if(blog == null) break;
             args[i][0] = id;
             args[i][1] =  datas.get(id);
+            i++;
         }
         String sql = "INSERT INTO blog (id) VALUES(?) ON DUPLICATE KEY UPDATE " +
                 "read_count = read_count + ?";
