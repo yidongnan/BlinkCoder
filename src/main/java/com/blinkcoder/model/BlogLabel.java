@@ -1,6 +1,7 @@
 package com.blinkcoder.model;
 
 import com.blinkcoder.kit.ModelKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class BlogLabel extends MyModel<BlogLabel> {
     @Override
     protected void removeCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
+        CacheKit.removeAll(MODEL_LIST_CACHE);
     }
 
     public List<BlogLabel> getBlogLabelByLabel(int label_id) {
@@ -33,6 +35,12 @@ public class BlogLabel extends MyModel<BlogLabel> {
 
     public List<BlogLabel> getBlogLabelByBlog(int blog_id) {
         return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "blog_id-" + blog_id, "select id from blog_label where blog_id = ?", blog_id));
+    }
+
+    public int delBlogLabelByBlog(int blogId) {
+        int result = Db.update("delete from blog_label where blog_id = ?", blogId);
+        removeCache();
+        return result;
     }
 
 }

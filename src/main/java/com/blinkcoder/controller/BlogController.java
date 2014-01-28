@@ -3,8 +3,11 @@ package com.blinkcoder.controller;
 import com.blinkcoder.interceptor.AdminInterceptor;
 import com.blinkcoder.kit.HtmlKit;
 import com.blinkcoder.model.Blog;
+import com.blinkcoder.model.BlogLabel;
+import com.blinkcoder.model.Label;
 import com.blinkcoder.plugin.visitStat.VisitStatPlugin;
 import com.jfinal.aop.Before;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -21,6 +24,8 @@ public class BlogController extends MyController {
 
     @Before(AdminInterceptor.class)
     public void addBlog() {
+        int blogId = -1;
+        int labelId = -1;
         Blog blog = getModel(Blog.class);
         boolean result = false;
         String url = blog.get("global_url");
@@ -29,6 +34,26 @@ public class BlogController extends MyController {
             blog.set("update_time", new Timestamp(new Date().getTime()));
             blog.set("content", HtmlKit.cleanBody(blog.getStr("content")));
             result = blog.Save();
+            blogId = blog.get("id");
+            BlogLabel.dao.delBlogLabelByBlog(blogId);
+            String[] labels = getParaValues("labels");
+            if (ArrayUtils.isNotEmpty(labels)) {
+                for (String labelStr : labels) {
+                    Label label = Label.dao.getByName(labelStr);
+                    if (label != null) {
+                        labelId = label.get("id");
+                    } else {
+                        Label newLabel = new Label();
+                        newLabel.set("name", labelStr);
+                        newLabel.Save();
+                        labelId = newLabel.get("id");
+                    }
+                    BlogLabel blogLabel = new BlogLabel();
+                    blogLabel.set("blog_id", blogId);
+                    blogLabel.set("label_id", labelId);
+                    blogLabel.Save();
+                }
+            }
         }
         renderJson("msg", result);
     }
@@ -40,12 +65,15 @@ public class BlogController extends MyController {
         boolean result = false;
         if (id > 0) {
             result = blog.Delete();
+            BlogLabel.dao.delBlogLabelByBlog(blog.getInt("id"));
         }
         renderJson("msg", result);
     }
 
     @Before(AdminInterceptor.class)
     public void updateBlog() {
+        int blogId = -1;
+        int labelId = -1;
         Blog blog = getModel(Blog.class);
         if(blog.get("type") == null)
             blog.set("type", 0);
@@ -58,6 +86,26 @@ public class BlogController extends MyController {
                 blog.set("read_count", old.get("read_count"));
                 blog.set("comment_count", old.get("comment_count"));
                 result = blog.Update();
+                blogId = blog.get("id");
+                BlogLabel.dao.delBlogLabelByBlog(blogId);
+                String[] labels = getParaValues("labels");
+                if (ArrayUtils.isNotEmpty(labels)) {
+                    for (String labelStr : labels) {
+                        Label label = Label.dao.getByName(labelStr);
+                        if (label != null) {
+                            labelId = label.get("id");
+                        } else {
+                            Label newLabel = new Label();
+                            newLabel.set("name", labelStr);
+                            newLabel.Save();
+                            labelId = newLabel.get("id");
+                        }
+                        BlogLabel blogLabel = new BlogLabel();
+                        blogLabel.set("blog_id", blogId);
+                        blogLabel.set("label_id", labelId);
+                        blogLabel.Save();
+                    }
+                }
             }
         }
         renderJson("msg", result);

@@ -34,12 +34,12 @@
             #foreach($blogLabel in $blogLabelList)
                 #set($_keys = $_keys +","+ $labelTool.Get($blogLabel.get("label_id")).get("name") +","+$labelTool.Get($blogLabel.get("label_id")).get("desc"))
                 #if($velocityCount == 1)
-                    #set($blogLabelArrayStr = $labelTool.Get($blogLabel.get("label_id")).get("desc"))
+                    #set($blogLabelArrayStr = $labelTool.Get($blogLabel.get("label_id")).get("name"))
                 #else
-                    #set($blogLabelArrayStr = ","+$blogLabelArrayStr + $labelTool.Get($blogLabel.get("label_id")).get("desc"))
+                    #set($blogLabelArrayStr = ","+$blogLabelArrayStr + $labelTool.Get($blogLabel.get("label_id")).get("name"))
                 #end
                 <a href="$linkKit.label($labelTool.Get($blogLabel.get("label_id")).get("name"))"
-                   rel="tag">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
+                   rel="tag">$labelTool.Get($blogLabel.get("label_id")).get("name")</a>&nbsp;
             #end
         #end
         | 发布：$blog.get("update_time")

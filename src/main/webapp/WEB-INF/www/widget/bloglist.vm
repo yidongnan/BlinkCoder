@@ -18,7 +18,7 @@
                     | 标签：
                     #foreach($blogLabel in $blogLabelList)
                         <a href="$linkKit.label($labelTool.Get($blogLabel.getInt("label_id")).get("name"))"
-                           rel="tag">$labelTool.Get($blogLabel.getInt("label_id")).get("desc")</a>&nbsp;
+                           rel="tag">$labelTool.Get($blogLabel.getInt("label_id")).get("name")</a>&nbsp;
                     #end
                 #end
                 | 发布：$blog.get("update_time")
