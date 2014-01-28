@@ -8,6 +8,7 @@ import com.blinkcoder.model.Label;
 import com.blinkcoder.plugin.visitStat.VisitStatPlugin;
 import com.jfinal.aop.Before;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class BlogController extends MyController {
             String[] labels = getParaValues("labels");
             if (ArrayUtils.isNotEmpty(labels)) {
                 for (String labelStr : labels) {
+                    labelStr = StringUtils.lowerCase(labelStr);
                     Label label = Label.dao.getByName(labelStr);
                     if (label != null) {
                         labelId = label.get("id");
@@ -91,6 +93,7 @@ public class BlogController extends MyController {
                 String[] labels = getParaValues("labels");
                 if (ArrayUtils.isNotEmpty(labels)) {
                     for (String labelStr : labels) {
+                        labelStr = StringUtils.lowerCase(labelStr);
                         Label label = Label.dao.getByName(labelStr);
                         if (label != null) {
                             labelId = label.get("id");
