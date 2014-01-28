@@ -67,3 +67,7 @@
 #backtotop .bttbg:hover {
     background-position: left bottom;
 }
+
+.detail img{
+    max-width: 100%;
+}
