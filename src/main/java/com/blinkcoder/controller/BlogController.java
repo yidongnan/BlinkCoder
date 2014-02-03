@@ -40,13 +40,14 @@ public class BlogController extends MyController {
             String[] labels = getParaValues("labels");
             if (ArrayUtils.isNotEmpty(labels)) {
                 for (String labelStr : labels) {
-                    labelStr = StringUtils.lowerCase(labelStr);
-                    Label label = Label.dao.getByName(labelStr);
+                    String labelLowStr = StringUtils.lowerCase(labelStr);
+                    Label label = Label.dao.getByName(labelLowStr);
                     if (label != null) {
                         labelId = label.get("id");
                     } else {
                         Label newLabel = new Label();
-                        newLabel.set("name", labelStr);
+                        newLabel.set("name", labelLowStr);
+                        newLabel.set("desc", labelStr);
                         newLabel.Save();
                         labelId = newLabel.get("id");
                     }
@@ -93,13 +94,14 @@ public class BlogController extends MyController {
                 String[] labels = getParaValues("labels");
                 if (ArrayUtils.isNotEmpty(labels)) {
                     for (String labelStr : labels) {
-                        labelStr = StringUtils.lowerCase(labelStr);
-                        Label label = Label.dao.getByName(labelStr);
+                        String labelLowStr = StringUtils.lowerCase(labelStr);
+                        Label label = Label.dao.getByName(labelLowStr);
                         if (label != null) {
                             labelId = label.get("id");
                         } else {
                             Label newLabel = new Label();
-                            newLabel.set("name", labelStr);
+                            newLabel.set("name", labelLowStr);
+                            newLabel.set("desc", labelStr);
                             newLabel.Save();
                             labelId = newLabel.get("id");
                         }
