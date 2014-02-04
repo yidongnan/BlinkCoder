@@ -1,26 +1,21 @@
-package com.blinkcoder.plugin.visitStat;
+package com.blinkcoder.job;
 
 import com.blinkcoder.model.Blog;
-import com.jfinal.plugin.IPlugin;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * User: Michael Chen
  * Email: yidongnan@gmail.com
- * Date: 14-1-5
- * Time: 上午9:38
+ * Date: 14-2-4
+ * Time: 下午4:22
  */
-public class VisitStatPlugin extends TimerTask implements IPlugin {
+public class VisitCountJob implements Job {
 
     public final static transient byte TYPE_BLOG = 0x01;
-
-    public static VisitStatPlugin daemon;
-    private static Timer click_timer;
-    private final static long INTERVAL = 300 * 1000;
-
     /**
      * 支持统计的对象类型
      */
@@ -31,12 +26,12 @@ public class VisitStatPlugin extends TimerTask implements IPlugin {
 
     private final static ConcurrentHashMap<Byte, ConcurrentHashMap<Integer, Integer>> queues =
             new ConcurrentHashMap<Byte, ConcurrentHashMap<Integer, Integer>>() {
+                private static final long serialVersionUID = 3094140348751410779L;
+
                 {
                     for (byte type : TYPES)
                         put(type, new ConcurrentHashMap<Integer, Integer>());
                 }
-
-                private static final long serialVersionUID = 3094140348751410779L;
             };
 
 
@@ -50,34 +45,12 @@ public class VisitStatPlugin extends TimerTask implements IPlugin {
     }
 
     @Override
-    public boolean start() {
-        daemon = new VisitStatPlugin();
-        click_timer = new Timer("VisitStatPlugin", true);
-        click_timer.schedule(daemon, INTERVAL, INTERVAL);
-        return true;
-    }
-
-    @Override
-    public boolean stop() {
-        click_timer.cancel();
-        daemon.cancel();
-        return false;
-    }
-
-    @Override
-    public void run() {
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         for (byte type : TYPES) {
             ConcurrentHashMap<Integer, Integer> queue = queues.remove(type);
             queues.put(type, new ConcurrentHashMap<Integer, Integer>());
             _flush(type, queue);
         }
-    }
-
-    @Override
-    public boolean cancel() {
-        boolean b = super.cancel();
-        this.run();
-        return b;
     }
 
     private void _flush(byte type, ConcurrentHashMap<Integer, Integer> queue) {

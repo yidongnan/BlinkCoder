@@ -1,11 +1,11 @@
 package com.blinkcoder.controller;
 
 import com.blinkcoder.interceptor.AdminInterceptor;
+import com.blinkcoder.job.VisitCountJob;
 import com.blinkcoder.kit.HtmlKit;
 import com.blinkcoder.model.Blog;
 import com.blinkcoder.model.BlogLabel;
 import com.blinkcoder.model.Label;
-import com.blinkcoder.plugin.visitStat.VisitStatPlugin;
 import com.jfinal.aop.Before;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -78,7 +78,7 @@ public class BlogController extends MyController {
         int blogId = -1;
         int labelId = -1;
         Blog blog = getModel(Blog.class);
-        if(blog.get("type") == null)
+        if (blog.get("type") == null)
             blog.set("type", 0);
         boolean result = false;
         int id = blog.get("id", 0);
@@ -119,7 +119,7 @@ public class BlogController extends MyController {
     public void viewBlog() {
         int id = _prepare(false);
         if (id > 0)
-            VisitStatPlugin.record(VisitStatPlugin.TYPE_BLOG, id);
+            VisitCountJob.record(VisitCountJob.TYPE_BLOG, id);
         renderNull();
     }
 

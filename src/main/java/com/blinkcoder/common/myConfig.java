@@ -3,7 +3,7 @@ package com.blinkcoder.common;
 
 import com.blinkcoder.controller.*;
 import com.blinkcoder.model.*;
-import com.blinkcoder.plugin.visitStat.VisitStatPlugin;
+import com.blinkcoder.plugin.quartz.QuartzPlugin;
 import com.blinkcoder.render.VelocityToolboxRenderFactory;
 import com.jfinal.config.*;
 import com.jfinal.kit.PathKit;
@@ -67,17 +67,16 @@ public class myConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 
         // 缓存插件
-        me.add(new EhCachePlugin(PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes" + File.separator + "ehcache.xml"));
-//        me.add(new RedisPlugin("113.116.200.231", 6379, 0));
-//        arp.setCache(new Redis());
-
-        me.add(new VisitStatPlugin());
+        me.add(new EhCachePlugin(PathKit.getWebRootPath() + File.separator + "WEB-INF" + File
+                .separator + "classes" + File.separator + "ehcache.xml"));
+        me.add(new QuartzPlugin());
 
         if (isLocal) {
             arp.setShowSql(true);
         }
-        arp.addMapping("blog", Blog.class).addMapping("user", User.class).addMapping("catalog", Catalog.class)
-                .addMapping("blog_label", BlogLabel.class).addMapping("label", Label.class).addMapping("link", Link.class);
+        arp.addMapping("blog", Blog.class).addMapping("user", User.class).addMapping("catalog",
+                Catalog.class).addMapping("blog_label", BlogLabel.class).addMapping("label",
+                Label.class).addMapping("link", Link.class);
         me.add(arp);
     }
 
