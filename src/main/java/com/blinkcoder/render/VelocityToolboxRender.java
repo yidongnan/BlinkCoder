@@ -93,7 +93,8 @@ public class VelocityToolboxRender extends Render {
                     vw.recycle(null);
                     writerPool.put(vw);
                 } catch (Exception e) {
-//                    Velocity.debug("VelocityViewServlet: " + "Trouble releasing VelocityWriter: " + e.getMessage());
+//                    Velocity.debug("VelocityViewServlet: " + "Trouble releasing VelocityWriter:
+// " + e.getMessage());
                 }
             }
         }
@@ -127,7 +128,8 @@ public class VelocityToolboxRender extends Render {
 
     @SuppressWarnings("unchecked")
     protected Context createContext(HttpServletRequest req, HttpServletResponse resp) {
-        ChainedContext ctx = new ChainedContext(new VelocityEngine(), req, resp, JFinal.me().getServletContext());
+        ChainedContext ctx = new ChainedContext(new VelocityEngine(), req, resp,
+                JFinal.me().getServletContext());
 
         if (toolboxManager != null) {
             ctx.setToolbox(toolboxManager.getToolbox(ctx));

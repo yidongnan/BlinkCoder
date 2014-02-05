@@ -30,11 +30,13 @@ public class BlogLabel extends MyModel<BlogLabel> {
     }
 
     public List<BlogLabel> getBlogLabelByLabel(int label_id) {
-        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "label_id-" + label_id, "select id from blog_label where label_id = ?", label_id));
+        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "label_id-" + label_id,
+                "select id from blog_label where label_id = ?", label_id));
     }
 
     public List<BlogLabel> getBlogLabelByBlog(int blog_id) {
-        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "blog_id-" + blog_id, "select id from blog_label where blog_id = ?", blog_id));
+        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "blog_id-" + blog_id,
+                "select id from blog_label where blog_id = ?", blog_id));
     }
 
     public int delBlogLabelByBlog(int blogId) {

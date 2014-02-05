@@ -33,7 +33,8 @@ public class Blog extends MyModel<Blog> {
     }
 
     public Blog getByGlobalUrl(String global_url) {
-        Blog blog = findFirstByCache(MODEL_CACHE, "golbal_url - " + global_url, "select id from blog where global_url = ?", global_url);
+        Blog blog = findFirstByCache(MODEL_CACHE, "golbal_url - " + global_url,
+                "select id from blog where global_url = ?", global_url);
         if (blog == null)
             return null;
         else
@@ -45,27 +46,37 @@ public class Blog extends MyModel<Blog> {
     }
 
     public Page<Blog> hotBlogList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "hot#blog" + page + pageSize, page, pageSize, "select id", "from blog order by read_count desc"));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "hot#blog" + page + pageSize,
+                page, pageSize, "select id", "from blog order by read_count desc"));
     }
 
     public Page<Blog> topBlogList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "top#blog" + page + pageSize, page, pageSize, "select id", "from blog where type = ? order by id", TOP));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "top#blog" + page + pageSize,
+                page, pageSize, "select id", "from blog where type = ? order by id", TOP));
     }
 
     public Page<Blog> normalBlogList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#blog" + page + pageSize, page, pageSize, "select id", "from blog where type = ? order by id", NORMAL));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE,
+                "normal#blog" + page + pageSize, page, pageSize, "select id",
+                "from blog where type = ? order by id", NORMAL));
     }
 
     public Page<Blog> topAndNormalBlogList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "all#blog" + page + pageSize, page, pageSize, "select id", "from blog order by type desc, id desc"));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "all#blog" + page + pageSize,
+                page, pageSize, "select id", "from blog order by type desc, id desc"));
     }
 
     public Page<Blog> normalByCatalogBlogList(int catalog_id, int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#catalog#" + catalog_id + "#blog" + page + pageSize, page, pageSize, "select id", "from blog where catalog = ?  order by id desc", catalog_id));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#catalog#" + catalog_id
+                + "#blog" + page + pageSize, page, pageSize, "select id",
+                "from blog where catalog = ?  order by id desc", catalog_id));
     }
 
     public Page<Blog> normalByLabelBlogList(int label_id, int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#label#" + label_id + "#blog" + page + pageSize, page, pageSize, "SELECT b.*", " from blog b ,blog_label bl where b.id = bl.blog_id and bl.label_id = ? order by b.id", label_id));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#label#" + label_id +
+                "#blog" + page + pageSize, page, pageSize, "SELECT b.*", " from blog b ," +
+                "blog_label bl where b.id = bl.blog_id and bl.label_id = ? order by b.id",
+                label_id));
     }
 
 
@@ -74,9 +85,9 @@ public class Blog extends MyModel<Blog> {
         int i = 0;
         for (Integer id : datas.keySet()) {
             Blog blog = Blog.dao.Get(id);
-            if(blog == null) break;
+            if (blog == null) break;
             args[i][0] = id;
-            args[i][1] =  datas.get(id);
+            args[i][1] = datas.get(id);
             i++;
         }
         String sql = "INSERT INTO blog (id) VALUES(?) ON DUPLICATE KEY UPDATE " +

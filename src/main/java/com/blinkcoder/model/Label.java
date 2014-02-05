@@ -31,7 +31,8 @@ public class Label extends MyModel<Label> {
     }
 
     public Label getByName(String name) {
-        Label label = dao.findFirstByCache(MODEL_CACHE, "name" + name, "select id from label where name = ?", name);
+        Label label = dao.findFirstByCache(MODEL_CACHE, "name" + name,
+                "select id from label where name = ?", name);
         if (label != null)
             return Get(label.getInt("id"));
         else

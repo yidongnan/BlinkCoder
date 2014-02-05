@@ -29,7 +29,8 @@ public class QiNiu {
     public static String token() {
         PutPolicy putPolicy = new PutPolicy(myConstants.QINIU_BUICKET);
         putPolicy.returnUrl = myConstants.QINIU_RETURNURL;
-        putPolicy.returnBody = "{\"name\": $(fname),\"size\": \"$(fsize)\",\"w\": \"$(imageInfo.width)\",\"h\": \"$(imageInfo.height)\",\"key\":$(etag)}";
+        putPolicy.returnBody = "{\"name\": $(fname),\"size\": \"$(fsize)\"," +
+                "\"w\": \"$(imageInfo.width)\",\"h\": \"$(imageInfo.height)\",\"key\":$(etag)}";
         String token = null;
         try {
             token = putPolicy.token(mac);
@@ -40,7 +41,8 @@ public class QiNiu {
     }
 
     public static JSONObject callbackUEditor(String upload_ret) {
-        JSONObject callback = JSONObject.parseObject(StringUtils.newStringUtf8(Base64.decodeBase64(upload_ret)));
+        JSONObject callback = JSONObject.parseObject(StringUtils.newStringUtf8(Base64
+                .decodeBase64(upload_ret)));
         JSONObject json = new JSONObject();
         if (callback.containsKey("error")) {
             json.put("state", callback.get("error"));
@@ -64,7 +66,8 @@ public class QiNiu {
         }
         String imgStr = sb.toString();
         if (imgStr != "") {
-            imgStr = imgStr.substring(0, imgStr.lastIndexOf("ue_separate_ue")).replace(File.separator, "/").trim();
+            imgStr = imgStr.substring(0, imgStr.lastIndexOf("ue_separate_ue")).replace(File
+                    .separator, "/").trim();
         }
         return imgStr;
     }

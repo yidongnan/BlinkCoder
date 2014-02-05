@@ -34,11 +34,13 @@ public class Catalog extends MyModel<Catalog> {
     }
 
     public List<Catalog> getShowCatalog() {
-        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, SHOW_CATALOG, "select id from catalog where flag = ?", SHOW_CATALOG));
+        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, SHOW_CATALOG,
+                "select id from catalog where flag = ?", SHOW_CATALOG));
     }
 
     public List<Catalog> getHideCatalog() {
-        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, HIDE_CATALOG, "select id from catalog where flag = ?", HIDE_CATALOG));
+        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, HIDE_CATALOG,
+                "select id from catalog where flag = ?", HIDE_CATALOG));
     }
 
     public List<Catalog> getAllCatalog() {
@@ -46,7 +48,8 @@ public class Catalog extends MyModel<Catalog> {
     }
 
     public Catalog getByName(String name) {
-        Catalog catalog = dao.findFirstByCache(MODEL_CACHE, "name" + name, "select id from catalog where name = ?", name);
+        Catalog catalog = dao.findFirstByCache(MODEL_CACHE, "name" + name,
+                "select id from catalog where name = ?", name);
         if (catalog != null)
             return Get(catalog.getInt("id"));
         else
@@ -54,7 +57,8 @@ public class Catalog extends MyModel<Catalog> {
     }
 
     public Page<Catalog> catalogList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "catalog" + page + pageSize, page, pageSize, "select id", "from catalog order by id"));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "catalog" + page + pageSize,
+                page, pageSize, "select id", "from catalog order by id"));
     }
 
 

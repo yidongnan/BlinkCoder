@@ -94,7 +94,8 @@ public class PropertyKit {
         InputStream in = null;
         BufferedReader reader = null;
         try {
-            in = (loader == null) ? PropertyKit.class.getResourceAsStream(resource) : loader.getResourceAsStream(resource);
+            in = (loader == null) ? PropertyKit.class.getResourceAsStream(resource) : loader
+                    .getResourceAsStream(resource);
             reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
             return stringToProperties(IOUtils.toString(reader));
         } catch (Exception excp) {

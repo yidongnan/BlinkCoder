@@ -32,7 +32,8 @@ public class User extends MyModel<User> {
     }
 
     public User login(String username, String password) {
-        User user = dao.findFirst("select id from user where username=? and password=?", username, getMD5(password.getBytes()));
+        User user = dao.findFirst("select id from user where username=? and password=?",
+                username, getMD5(password.getBytes()));
         return user == null ? null : Get(user.getInt("id"));
     }
 
@@ -42,7 +43,8 @@ public class User extends MyModel<User> {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             md.update(src);
             for (byte b : md.digest())
-                sb.append(Integer.toString(b >>> 4 & 0xF, 16)).append(Integer.toString(b & 0xF, 16));
+                sb.append(Integer.toString(b >>> 4 & 0xF, 16)).append(Integer.toString(b & 0xF,
+                        16));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

@@ -37,7 +37,8 @@ public class MyController extends Controller {
                     if (StringUtils.isBlank(tmpip))
                         continue;
                     tmpip = tmpip.trim();
-                    if (isIPAddr(tmpip) && !tmpip.startsWith("10.") && !tmpip.startsWith("192.168.") && !"127.0.0.1".equals(tmpip)) {
+                    if (isIPAddr(tmpip) && !tmpip.startsWith("10.") && !tmpip.startsWith("192.168" +
+                            ".") && !"127.0.0.1".equals(tmpip)) {
                         return tmpip.trim();
                     }
                 }

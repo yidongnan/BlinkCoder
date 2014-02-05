@@ -38,7 +38,8 @@ public class LinkKit extends StrutsLinkTool {
         if (v == null) {
             String target = request.getRequestURI();
             String contextPath = request.getContextPath();
-            int contextPathLength = (contextPath == null || "/".equals(contextPath) ? 0 : contextPath.length());
+            int contextPathLength = (contextPath == null || "/".equals(contextPath) ? 0 :
+                    contextPath.length());
             if (contextPathLength != 0)
                 target = target.substring(contextPathLength);
             String[] paths = target.split("/");

@@ -37,7 +37,8 @@ public class VelocityKit {
         if (StringUtils.isNotEmpty(params)) {
             sb.append("UrlPara     : ").append(params.substring(1)).append("\n");
         }
-        sb.append("--------------------------------------------------------------------------------\n");
+        sb.append
+                ("--------------------------------------------------------------------------------\n");
         System.out.println(sb);
         return params.toString();
     }
@@ -59,7 +60,8 @@ public class VelocityKit {
      */
     public static boolean _IsVmExist(String path) {
         if (vm_cache.contains(path)) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new Date())).append(" ------------------------------\n");
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                    .append(sdf.format(new Date())).append(" ------------------------------\n");
             sb.append("Velocity Template File : ").append(path);
             System.out.println(sb);
             return true;
@@ -68,7 +70,8 @@ public class VelocityKit {
         boolean isVM = testFile.exists() && testFile.isFile();
         if (isVM) {
             vm_cache.add(path);
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new Date())).append(" ------------------------------\n");
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                    .append(sdf.format(new Date())).append(" ------------------------------\n");
             sb.append("Velocity Template File : ").append(path);
             System.out.println(sb);
         }
@@ -79,7 +82,8 @@ public class VelocityKit {
         StringBuilder vm = new StringBuilder(myConstants.VELOCITY_TEMPLETE_PATH);
 
         if (length == 0) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new Date())).append(" ------------------------------\n");
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                    .append(sdf.format(new Date())).append(" ------------------------------\n");
             sb.append("Velocity Template File : ").append(vm.toString() + VM_INDEX);
             System.out.println(sb);
             return vm.toString() + VM_INDEX + _MakeQueryString(paths, length);

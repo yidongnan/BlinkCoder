@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.ehcache.CacheKit;
 import org.apache.commons.collections.CollectionUtils;
+
 import java.util.List;
 
 /**
@@ -40,11 +41,13 @@ public class Link extends MyModel<Link> {
     }
 
     public List<Link> getAllLink() {
-        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "all", "select id from link order by sequence"));
+        return mk.loadModel(dao.findByCache(MODEL_LIST_CACHE, "all",
+                "select id from link order by sequence"));
     }
 
     public Page<Link> linkList(int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "link" + page + pageSize, page, pageSize, "select id", "from link order by sequence"));
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "link" + page + pageSize, page,
+                pageSize, "select id", "from link order by sequence"));
     }
 
     public int getMaxSequence() {
@@ -58,7 +61,8 @@ public class Link extends MyModel<Link> {
 
     public Link getLinkFromSequence(int sequence) {
         String sql = "select id from link where sequence = ?";
-        return Get(findFirstByCache(MODEL_CACHE, "sequence#" + sequence, sql, sequence).getInt("id"));
+        return Get(findFirstByCache(MODEL_CACHE, "sequence#" + sequence, sql,
+                sequence).getInt("id"));
     }
 
     public boolean upLink(int id) {
