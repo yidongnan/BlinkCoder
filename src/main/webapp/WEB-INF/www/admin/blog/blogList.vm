@@ -16,18 +16,18 @@
                 url: "$linkKit.action("/blog/delBlog")",
                 data: "id=" + id,
                 success: function (data) {
-                    if(data.msg) {
+                    if (data.msg) {
                         tip.html("操作成功！");
                         tip.removeClass("alert-danger");
                         tip.addClass("alert-success");
-                        tip.animate({opacity:1},3000);
+                        tip.animate({opacity: 1}, 3000);
                         tip.css('display', 'block');
                         $("#tr" + id).hide("slow");
                     } else {
                         tip.html("操作失败！");
                         tip.removeClass("alert-success");
                         tip.addClass("alert-danger");
-                        tip.animate({opacity:1},30000);
+                        tip.animate({opacity: 1}, 30000);
                         tip.css('display', 'block');
                     }
                 }
@@ -55,11 +55,13 @@
                     <td>$blog.get("title")</td>
                     <td>$blog.get("global_url")</td>
                     <td>$catalogTool.Get($blog.get("catalog")).get("desc")</td>
-                    <td>$formatKit.abbreviate($formatKit.plain_text($blog.get("content")),40)</td>
+                    <td>$formatKit.abbreviate($formatKit.plain_text($blog.content()),40)</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-xs" onclick="editObj($blog.get("id"))">编辑
+                        <button type="button" class="btn btn-success btn-xs"
+                                onclick="editObj($blog.get("id"))">编辑
                         </button>
-                        <button type="button" class="btn btn-danger btn-xs" onclick="delObj($blog.get("id"))">删除
+                        <button type="button" class="btn btn-danger btn-xs"
+                                onclick="delObj($blog.get("id"))">删除
                         </button>
                     </td>
                 </tr>

@@ -13,7 +13,8 @@
     <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
     <link href="$linkKit.cloud_res("css/global.css")" rel="stylesheet">
 
-    <link href="$linkKit.local_res("ueditor/themes/default/css/ueditor.css")" type="text/css" rel="stylesheet">
+    <link href="$linkKit.cloud_res("google-code-prettify/prettify.css")" type="text/css"
+          rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -22,10 +23,12 @@
     <![endif]-->
 
     <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
+    <script src="$linkKit.cloud_res("markdown/Markdown.Converter.js")"></script>
+    <script src="$linkKit.cloud_res("markdown/Markdown.Extra.js")"></script>
 
-    <script type="text/javascript" charset="utf-8" src="$linkKit.local_res("ueditor/ueditor.config.js")"></script>
-    <script type="text/javascript" charset="utf-8" src="$linkKit.local_res("ueditor/ueditor.all.min.js")"></script>
-    <script type="text/javascript" src="$linkKit.local_res("ueditor/lang/zh-cn/zh-cn.js")"></script>
+    <script src="$linkKit.cloud_res("markdown/markdown-editor.js")"></script>
+    <script type="text/javascript"
+            src="$linkKit.cloud_res("google-code-prettify/prettify.js")"></script>
 
 </head>
 

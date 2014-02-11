@@ -1,12 +1,19 @@
 #set($globalUrl = ${linkKit.urlPara()})
 #set($blog=$blogTool.getByGlobalUrl($globalUrl))
 #if($blog)
-#set($_title = $blog.get("title"))
-#set($_keys = $catalogTool.Get($blog.getInt("catalog")).get("desc") + "," + $catalogTool.Get($blog.getInt("catalog")).get("name"))
-<link href="$linkKit.cloud_res("ueditor/third-party/SyntaxHighlighter/shCoreDefault.css")" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="$linkKit.cloud_res("ueditor/third-party/SyntaxHighlighter/shCore.js")"></script>
+    #set($_title = $blog.get("title"))
+    #set($_keys = $catalogTool.Get($blog.getInt("catalog")).get("desc") + "," + $catalogTool.Get($blog.getInt("catalog")).get("name"))
+##    Code Highlight
+<link href="$linkKit.cloud_res("google-code-prettify/prettify.css")" type="text/css"
+      rel="stylesheet">
+<script type="text/javascript"
+        src="$linkKit.cloud_res("google-code-prettify/prettify.js")"></script>
+
 <script type="text/javascript">
-    SyntaxHighlighter.all();
+    $(function () {
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+    });
 </script>
 <script type="text/javascript" src="/action/blog/viewBlog?id=$blog.get("id")"></script>
 <br>
@@ -47,7 +54,7 @@
     <br>
 
     <div class="detail" style="font-size: 15px;line-height: 30px;">
-        $blog.get("content")
+        $blog.content();
         <br><br>
 
         <p class="pay">
@@ -84,7 +91,9 @@
 ##    百度推荐
 <div id="hm_t_21753"></div>
 ##    多说评论
-<div data-thread-key="$blog.get("id")" data-title="$blog.get("title")" data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰" class="ds-thread" id="ds-thread"></div>
+<div data-thread-key="$blog.get("id")" data-title="$blog.get("title")"
+     data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰"
+     class="ds-thread" id="ds-thread"></div>
 ##   无觅推荐
 <script type="text/javascript">
     var wumiiPermaLink = "http://www.blinkcoder.com/$blog.get("global_url")"; //请用代码生成文章永久的链接
@@ -96,7 +105,8 @@
 </script>
 <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget"></script>
 <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
-    <img src="http://static.wumii.cn/images/pixel.png" alt="无觅关联推荐，快速提升流量" style="border:0;padding:0;margin:0;" />
+    <img src="http://static.wumii.cn/images/pixel.png" alt="无觅关联推荐，快速提升流量"
+         style="border:0;padding:0;margin:0;"/>
 </a>
 #else
 ##        重定向到404

@@ -23,6 +23,7 @@
     <script src="$linkKit.cloud_res("bootstrap/assets/js/html5shiv.js")"></script>
     <script src="$linkKit.cloud_res("bootstrap/assets/js/respond.min.js")"></script>
     <![endif]-->
+    <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 </head>
 
 <body>
@@ -68,7 +69,6 @@
 <!-- Bootstrap core JavaeScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 <script src="$linkKit.cloud_res("bootstrap/dist/js/bootstrap.min.js")"></script>
 #invoke("../www/widget/duoshuo.vm")
 

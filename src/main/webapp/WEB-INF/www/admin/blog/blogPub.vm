@@ -80,8 +80,8 @@
         <label for="content" class="col-sm-2 control-label">正文:</label>
 
         <div class="col-sm-8">
-            <script type="text/plain" id="content" name="blog.content"
-                    style="height:240px;">#if($blog)$blog.get("content")#end</script>
+            <textarea class="form-control" id="content" name="blog.content"
+                      rows="15">#if($blog)$blog.get("content")#end</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -102,9 +102,11 @@
     </div>
 </form>
 <script type="text/javascript">
-    editor = UE.getEditor('content');
 
     $(function () {
+        window.prettyPrint && prettyPrint();
+        $('#content').markdown();
+
         $('#blogForm').ajaxForm({
             beforeSubmit: function (args, form, fn) {
                 var tip = form.find("#tip");
@@ -112,7 +114,7 @@
                 var type = form.find("#type").val();
                 var global_url = form.find("#global_url").val();
                 var catalog = form.find("#catalog").val();
-                var content = editor.getContent();
+                var content = form.find("#content").val();
                 if (title.length <= 0) {
                     tip.html("请填写博客标题!");
                     tip.removeClass("alert-success");
@@ -160,7 +162,6 @@
 
         function resetForm() {
             $("#blogForm")[0].reset();
-            editor.setContent("");
         }
 
     });

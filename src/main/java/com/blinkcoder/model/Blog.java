@@ -1,5 +1,6 @@
 package com.blinkcoder.model;
 
+import com.blinkcoder.kit.MarkdownKit;
 import com.blinkcoder.kit.ModelKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -107,4 +108,9 @@ public class Blog extends MyModel<Blog> {
         String sql = "select * from blog where id > ?";
         return findFirst(sql, id);
     }
+
+    public String content() {
+        return MarkdownKit.parse(this.getStr("content"));
+    }
+
 }
