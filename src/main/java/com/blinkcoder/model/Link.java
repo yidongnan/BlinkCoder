@@ -36,7 +36,7 @@ public class Link extends MyModel<Link> {
     @Override
     public boolean Save() {
         int maxOrder = getMaxSequence() + 1;
-        this.set("order", maxOrder);
+        this.set("sequence", maxOrder);
         return super.Save();
     }
 
