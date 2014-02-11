@@ -71,3 +71,17 @@
 .detail img{
     max-width: 100%;
 }
+
+blockquote {
+    border-left-width: 10px;
+    background-color: rgba(102, 128, 153, 0.1);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px 20px
+}
+
+blockquote p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.428571429
+}
