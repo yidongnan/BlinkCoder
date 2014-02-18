@@ -2,7 +2,6 @@ package com.blinkcoder.controller;
 
 import com.blinkcoder.interceptor.AdminInterceptor;
 import com.blinkcoder.job.VisitCountJob;
-import com.blinkcoder.kit.HtmlKit;
 import com.blinkcoder.model.Blog;
 import com.blinkcoder.model.BlogLabel;
 import com.blinkcoder.model.Label;
@@ -33,7 +32,7 @@ public class BlogController extends MyController {
         Blog urlBlog = Blog.dao.getByGlobalUrl(url);
         if (urlBlog == null) {
             blog.set("update_time", new Timestamp(new Date().getTime()));
-            blog.set("content", HtmlKit.cleanBody(blog.getStr("content")));
+            blog.set("content", blog.getStr("content"));
             result = blog.Save();
             blogId = blog.get("id");
             BlogLabel.dao.delBlogLabelByBlog(blogId);
