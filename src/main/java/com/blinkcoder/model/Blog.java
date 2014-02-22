@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -80,6 +81,10 @@ public class Blog extends MyModel<Blog> {
                 label_id));
     }
 
+    public List<Blog> allBlog() {
+        return mk.loadModel(findByCache(MODEL_LIST_CACHE, "all#blog",
+                "select id from blog order by id"));
+    }
 
     public static void VisitBlog(ConcurrentHashMap<Integer, Integer> datas) {
         Object[][] args = new Object[datas.size()][2];

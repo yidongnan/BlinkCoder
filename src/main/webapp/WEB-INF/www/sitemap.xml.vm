@@ -1,0 +1,16 @@
+    #set($__nothing = $response.setContentType("text/xml;charset=UTF-8"))
+        #set($layout = "empty.vm")
+    <?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        #set($blogList = $blogTool.allBlog())
+        #if($blogList)
+            #foreach($blog in $blogList)
+                <url>
+                    <loc>$blog.get("global_url")</loc>
+                    <priority>1.0</priority>
+                    <lastmod>$dateKit.format($blog.getTimestamp("update_time"))</lastmod>
+                    <changefreq>always</changefreq>
+                </url>
+            #end
+        #end
+    </urlset>

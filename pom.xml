@@ -260,7 +260,6 @@
                     <excludes>
                         <exclude>**/*.min.js</exclude>
                         <exclude>**/*.min.css</exclude>
-                        <exclude>**/video.dev.js</exclude>
                     </excludes>
                 </configuration>
             </plugin>
