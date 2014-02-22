@@ -5,12 +5,14 @@
         #set($blogList = $blogTool.allBlog())
         #if($blogList)
             #foreach($blog in $blogList)
-                <url>
-                    <loc>$blog.get("global_url")</loc>
-                    <priority>1.0</priority>
-                    <lastmod>$dateKit.format($blog.getTimestamp("update_time"))</lastmod>
-                    <changefreq>always</changefreq>
-                </url>
+                #if($blog)
+                    <url>
+                        <loc>http://www.blinkcoder.com/$blog.get("global_url")</loc>
+                        <priority>1.0</priority>
+                        <lastmod>$dateKit.format($blog.getTimestamp("update_time"))</lastmod>
+                        <changefreq>weekly</changefreq>
+                    </url>
+                #end
             #end
         #end
-    </urlset>
+</urlset>
