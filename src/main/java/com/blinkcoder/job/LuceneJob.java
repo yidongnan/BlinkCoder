@@ -9,7 +9,9 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static com.blinkcoder.model.LuceneTask.dao;
@@ -43,7 +45,8 @@ public class LuceneJob implements Job {
                         case LuceneTask.OPT_UPDATE:
                             search.update(Arrays.asList(obj));
                     }
-                    task.set("status", 1).Update();
+                    task.set("status", 1).set("handle_time",
+                            new Timestamp(new Date().getTime())).Update();
                 }
             }
         } catch (IOException e) {

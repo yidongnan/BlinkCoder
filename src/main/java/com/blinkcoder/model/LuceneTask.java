@@ -1,5 +1,7 @@
 package com.blinkcoder.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ public class LuceneTask extends MyModel<LuceneTask> {
     public LuceneTask(long obj_id, int obj_type, int opt) {
         this.set("obj_id", obj_id);
         this.set("obj_type", obj_type);
+        this.set("create_time", new Timestamp(new Date().getTime()));
         this.set("opt", opt);
         this.set("status", 0);
     }
