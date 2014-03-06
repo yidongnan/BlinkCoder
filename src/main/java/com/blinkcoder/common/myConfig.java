@@ -74,9 +74,11 @@ public class myConfig extends JFinalConfig {
         if (isLocal) {
             arp.setShowSql(true);
         }
-        arp.addMapping("blog", Blog.class).addMapping("user", User.class).addMapping("catalog",
-                Catalog.class).addMapping("blog_label", BlogLabel.class).addMapping("label",
-                Label.class).addMapping("link", Link.class);
+        arp.addMapping("blog", Blog.class).addMapping("user", User.class)
+                .addMapping("catalog", Catalog.class).addMapping
+                ("blog_label", BlogLabel.class).addMapping("label",
+                Label.class).addMapping("link", Link.class).addMapping
+                ("lucene_task", LuceneTask.class);
         me.add(arp);
     }
 
