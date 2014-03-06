@@ -43,7 +43,7 @@ public class SearchHelper {
         indexPath = FilenameUtils.normalize(indexPath);
         File file = new File(indexPath);
         if (!file.exists() || !file.isDirectory()) {
-            throw new FileNotFoundException(indexPath);
+            file.mkdirs();
         }
         if (!indexPath.endsWith(File.separator)) {
             indexPath += File.separator;
