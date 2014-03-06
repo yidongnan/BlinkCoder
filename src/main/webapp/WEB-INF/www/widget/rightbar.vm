@@ -28,7 +28,9 @@
                 #set($hotBlogList = $blogTool.hotBlogList(1,10))
                 #if($hotBlogList.getTotalRow() > 0)
                     #foreach($blog in $hotBlogList.getList())
-                        <li><a href="$blog.get("global_url")" title="$blog.get("title")">$blog.get("title")</a></li>
+                        <li><a href="$linkKit.root($blog.get("global_url"))"
+                               title="$blog.get("title")">$blog.get("title")</a>
+                        </li>
                     #end
                 #end
             </ul>
