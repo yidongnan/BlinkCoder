@@ -5,6 +5,7 @@ import com.blinkcoder.job.VisitCountJob;
 import com.blinkcoder.model.Blog;
 import com.blinkcoder.model.BlogLabel;
 import com.blinkcoder.model.Label;
+import com.blinkcoder.model.LuceneTask;
 import com.jfinal.aop.Before;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +36,7 @@ public class BlogController extends MyController {
             blog.set("content", blog.getStr("content"));
             result = blog.Save();
             blogId = blog.get("id");
+            LuceneTask.add(blogId, LuceneTask.TYPE_BLOG);
             BlogLabel.dao.delBlogLabelByBlog(blogId);
             String[] labels = getParaValues("labels");
             if (ArrayUtils.isNotEmpty(labels)) {
@@ -67,7 +69,9 @@ public class BlogController extends MyController {
         boolean result = false;
         if (id > 0) {
             result = blog.Delete();
-            BlogLabel.dao.delBlogLabelByBlog(blog.getInt("id"));
+            int blogId = blog.getInt("id");
+            LuceneTask.delete(blogId, LuceneTask.TYPE_BLOG);
+            BlogLabel.dao.delBlogLabelByBlog(blogId);
         }
         renderJson("msg", result);
     }
@@ -89,6 +93,7 @@ public class BlogController extends MyController {
                 blog.set("comment_count", old.get("comment_count"));
                 result = blog.Update();
                 blogId = blog.get("id");
+                LuceneTask.update(blogId, LuceneTask.TYPE_BLOG);
                 BlogLabel.dao.delBlogLabelByBlog(blogId);
                 String[] labels = getParaValues("labels");
                 if (ArrayUtils.isNotEmpty(labels)) {
@@ -128,16 +133,6 @@ public class BlogController extends MyController {
         else
             header("Cache-Control", "no-cache");
         header("Content-Type", "text/javascript");
-        String user_agent = header("user-agent");
-        String referer = header("referer");
-        /*if(isRobot()){
-            try {
-                ctx.not_found();
-            } catch (IOException e) {}
-            return -1;
-        }*/
-        /*if(StringUtils.isNotBlank(referer) && referer.indexOf("oschina.net")<0)
-            return -3;*/
         return getParaToInt("id", 0);
     }
 

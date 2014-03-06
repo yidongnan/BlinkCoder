@@ -96,6 +96,7 @@ public class myConfig extends JFinalConfig {
         myConstants.QINIU_BUICKET = getProperty("qiniu_buicket");
         myConstants.QINIU_RETURNURL = getProperty("qiniu_returnUrl");
         myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
+        myConstants.LUCENE_DIR = getProperty("lucene_dir");
     }
 
     @Override

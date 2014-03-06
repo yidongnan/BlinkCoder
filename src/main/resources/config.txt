@@ -1,6 +1,9 @@
 ## Velocity模板引擎的根目录
 velocity_templete_path = /WEB-INF/www
 
+## Lucene索引存放位置
+lucene_dir = lucene_idx
+
 ##########################################################################
 ## 本地开发环境上 data source 的配置 用户在部署时填入自己的数据值
 driverClass = com.mysql.jdbc.Driver

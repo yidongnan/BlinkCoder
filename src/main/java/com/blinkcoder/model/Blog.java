@@ -2,11 +2,14 @@ package com.blinkcoder.model;
 
 import com.blinkcoder.kit.MarkdownKit;
 import com.blinkcoder.kit.ModelKit;
+import com.blinkcoder.search.Searchable;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -15,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Date: 13-10-10
  * Time: 下午9:58
  */
-public class Blog extends MyModel<Blog> {
+public class Blog extends MyModel<Blog> implements Searchable {
     public static final Blog dao = new Blog();
     private static final String MODEL_CACHE = "blog";
     private static final ModelKit mk = new ModelKit(dao, MODEL_CACHE);
@@ -23,6 +26,7 @@ public class Blog extends MyModel<Blog> {
 
     private static final int TOP = 0x01;
     private static final int NORMAL = 0x00;
+    private static final long serialVersionUID = 1441921092958223502L;
 
     public Blog Get(int id) {
         return mk.getModel(id);
@@ -118,4 +122,50 @@ public class Blog extends MyModel<Blog> {
         return MarkdownKit.parse(this.getStr("content"));
     }
 
+    @Override
+    public int getId() {
+        return this.getInt("id");
+    }
+
+    @Override
+    public void setId(int id) {
+        this.set("id", id);
+    }
+
+    @Override
+    public float boost() {
+        return 1.0f;
+    }
+
+    @Override
+    public Map<String, Object> storeDatas() {
+        final Blog blog = this;
+        return new HashMap<String, Object>() {{
+            put("content", blog.get("content"));
+        }};
+    }
+
+    @Override
+    public Map<String, Object> indexDatas() {
+        final Blog blog = this;
+        return new HashMap<String, Object>() {{
+            put("title", blog.get("title"));
+            put("content", blog.get("content"));
+            List<BlogLabel> blogLabelList = BlogLabel.dao.getBlogLabelByBlog
+                    (blog.getInt("id"));
+            StringBuilder labelStr = new StringBuilder();
+            for (BlogLabel blogLabel : blogLabelList) {
+                labelStr.append(Label.dao.Get(blogLabel.getInt("label_id"))
+                        .get("name"));
+            }
+            put("labels", labelStr);
+        }};
+    }
+
+    @Override
+    public int compareTo(Searchable o) {
+        int cid1 = this.getId();
+        int cid2 = o.getId();
+        return cid1 - cid2;
+    }
 }

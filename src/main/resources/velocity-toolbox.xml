@@ -16,6 +16,11 @@
         <scope>application</scope>
         <class>com.blinkcoder.kit.DateKit</class>
     </tool>
+    <tool>
+        <key>searchKit</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.kit.SearchKit</class>
+    </tool>
 
     <tool>
         <key>catalogTool</key>
