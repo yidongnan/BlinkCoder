@@ -50,8 +50,8 @@ public class FormatKit {
         html = StringUtils.replace(html, "'", "&apos;");
         html = StringUtils.replace(html, "\"", "&quot;");
         html = StringUtils.replace(html, "\t", "&nbsp;&nbsp;");
-        html = StringUtils.replace(context, "<", "&lt;");
-        html = StringUtils.replace(context, ">", "&gt;");
+        html = StringUtils.replace(html, "<", "&lt;");
+        html = StringUtils.replace(html, ">", "&gt;");
         return html;
     }
 

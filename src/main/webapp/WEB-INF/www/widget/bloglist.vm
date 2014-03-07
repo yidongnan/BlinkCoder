@@ -26,7 +26,7 @@
             <br>
 
             <div class="intro">
-                $formatKit.abbreviate($formatKit.plain_text($blog.content()),150)
+                $formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),150)
             </div>
         </div>
         #end
