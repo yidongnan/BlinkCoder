@@ -2,7 +2,7 @@ package com.blinkcoder.search;
 
 import com.jfinal.log.Logger;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;

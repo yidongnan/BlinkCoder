@@ -3,8 +3,8 @@ package com.blinkcoder.kit;
 import com.blinkcoder.common.myConstants;
 import com.jfinal.core.JFinal;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.tools.struts.StrutsLinkTool;
 import org.apache.velocity.tools.view.context.ViewContext;
@@ -38,7 +38,8 @@ public class LinkKit extends StrutsLinkTool {
         if (v == null) {
             String target = request.getRequestURI();
             String contextPath = request.getContextPath();
-            int contextPathLength = (contextPath == null || "/".equals(contextPath) ? 0 :
+            int contextPathLength = (contextPath == null || "/".equals
+                    (contextPath) ? 0 :
                     contextPath.length());
             if (contextPathLength != 0)
                 target = target.substring(contextPathLength);

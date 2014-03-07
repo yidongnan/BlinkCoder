@@ -3,7 +3,7 @@ package com.blinkcoder.controller;
 import com.blinkcoder.common.myConstants;
 import com.blinkcoder.render.VelocityToolboxRender;
 import com.jfinal.core.Controller;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +18,16 @@ public class MyController extends Controller {
     public static MyController me;
 
     @Override
-    protected void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
+    protected void init(HttpServletRequest request,
+                        HttpServletResponse response, String urlPara) {
         super.init(request, response, urlPara);
         me = this;
     }
 
     @Override
     public void renderVelocity(String view) {
-        render(new VelocityToolboxRender(myConstants.VELOCITY_TEMPLETE_PATH + view));
+        render(new VelocityToolboxRender(myConstants.VELOCITY_TEMPLETE_PATH +
+                view));
     }
 
     public String ip() {
@@ -37,8 +39,9 @@ public class MyController extends Controller {
                     if (StringUtils.isBlank(tmpip))
                         continue;
                     tmpip = tmpip.trim();
-                    if (isIPAddr(tmpip) && !tmpip.startsWith("10.") && !tmpip.startsWith("192.168" +
-                            ".") && !"127.0.0.1".equals(tmpip)) {
+                    if (isIPAddr(tmpip) && !tmpip.startsWith("10.") && !tmpip
+                            .startsWith("192.168" +
+                                    ".") && !"127.0.0.1".equals(tmpip)) {
                         return tmpip.trim();
                     }
                 }

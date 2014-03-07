@@ -1,8 +1,8 @@
 package com.blinkcoder.kit;
 
 
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.CharUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 
 /**
@@ -20,7 +20,8 @@ public class FormatKit {
      * @return
      */
     public static String trim_html(String html) {
-        return StringUtils.replace(StringUtils.replace(html, "\r\n", ""), "\t", "");
+        return StringUtils.replace(StringUtils.replace(html, "\r\n", ""),
+                "\t", "");
     }
 
     /**

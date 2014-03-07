@@ -1,7 +1,7 @@
 package com.blinkcoder.kit;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.Properties;
@@ -90,11 +90,13 @@ public class PropertyKit {
      * @param resource
      * @return
      */
-    public static Properties loadFromResource(Class<?> loader, String resource) {
+    public static Properties loadFromResource(Class<?> loader,
+                                              String resource) {
         InputStream in = null;
         BufferedReader reader = null;
         try {
-            in = (loader == null) ? PropertyKit.class.getResourceAsStream(resource) : loader
+            in = (loader == null) ? PropertyKit.class.getResourceAsStream
+                    (resource) : loader
                     .getResourceAsStream(resource);
             reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
             return stringToProperties(IOUtils.toString(reader));
