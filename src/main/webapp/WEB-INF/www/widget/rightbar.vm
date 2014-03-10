@@ -36,15 +36,6 @@
             </ul>
         </div>
     </div>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- 右侧 200*200 -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:200px;height:200px"
-         data-ad-client="ca-pub-8417687790092876"
-         data-ad-slot="8972248348"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
     <div class="widget">
         <h3 class="under_line">最新评论</h3>
         <div>
@@ -56,6 +47,17 @@
         <div>
             <ul class="ds-recent-visitors" style="padding-left: 0px;" data-num-items="10"></ul>
         </div>
+    </div>
+    <div class="widget">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 右侧 200*200 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:200px;height:200px"
+         data-ad-client="ca-pub-8417687790092876"
+         data-ad-slot="8972248348"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     </div>
     <div class="widget">
         <h3 class="under_line">外链列表</h3>
