@@ -15,7 +15,7 @@
 
     <meta name="author" content="Michael Chen">
     <link rel="shortcut icon"
-          href="$linkKit.cloud_res("bootstrap/assets/ico/favicon.png")">
+          href="$linkKit.cloud_res("img/favicon.png")">
 
     <title>#if($_title) $_title -#end 极速开发网</title>
     <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")"

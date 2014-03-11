@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="$linkKit.cloud_res("bootstrap/assets/ico/favicon.png")">
+    <link rel="shortcut icon" href="$linkKit.cloud_res("img/favicon.png")">
 
     <title>极速开发网</title>
     <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
