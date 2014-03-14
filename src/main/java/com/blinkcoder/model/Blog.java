@@ -109,13 +109,19 @@ public class Blog extends MyModel<Blog> implements Searchable {
     }
 
     public Blog prevBlog(int id) {
-        String sql = "select * from blog where id < ?";
-        return findFirst(sql, id);
+        String sql = "select id from blog where id < ? order by id desc";
+        Blog blog = findFirstByCache(MODEL_LIST_CACHE, "prev" + id, sql,id);
+        if(blog != null)
+            return Get(blog.getInt("id"));
+        else return null;
     }
 
     public Blog nextBlog(int id) {
-        String sql = "select * from blog where id > ?";
-        return findFirst(sql, id);
+        String sql = "select id from blog where id > ?";
+        Blog blog = findFirstByCache(MODEL_LIST_CACHE, "next" + id, sql, id);
+        if(blog != null)
+            return Get(blog.getInt("id"));
+        else return null;
     }
 
     public String content() {
