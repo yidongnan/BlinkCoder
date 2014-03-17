@@ -21,6 +21,7 @@ public class IKAnalyzerKit {
 
     private final static Logger log = Logger.getLogger(IKAnalyzerKit.class);
 
+    @SuppressWarnings("unchecked")
     private final static List<String> nowords = new ArrayList<String>() {{
         try {
             addAll(IOUtils.readLines(IKAnalyzerKit.class.getResourceAsStream
@@ -30,6 +31,7 @@ public class IKAnalyzerKit {
         }
     }};
 
+    @SuppressWarnings("unchecked")
     private final static List<String> ReserveKeys = new ArrayList<String>() {{
         try {
             addAll(IOUtils.readLines(IKAnalyzerKit.class.getResourceAsStream
