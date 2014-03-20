@@ -2,7 +2,7 @@
 #set($page = $linkKit.param("p",1))
 #set($pageSize = 10)
 <div class="container" id="content">
-    <div id="main" class="col-md-9 col-ld-9">
+    <div id="main" class="col-lg-9 col-md-9 col-sm-12 clo-xs-12">
         #if($linkKit.param("p1"))
             #invoke("widget/blogdetail.vm")
         #else

@@ -1,5 +1,5 @@
-<div class="col-md-3 col-ld-3 rightbar" style="float: right">
-    <div class="widget">
+<div class="col-lg-3 col-md-3 col-sm-12 clo-xs-12 .visible-md .visible-lg rightbar">
+<div class="widget">
         <h3 class="under_line">关于博主</h3>
         <div class="textwidget">
             博主信息: <br/>Michael Chen<br/>

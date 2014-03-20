@@ -11,7 +11,7 @@
     <meta name="description"
           content="#if($_title) $_title #else 极速开发网 www.blinkcoder.com 是用Java开发的一个开源博客，代码精简。Java初学者能迅速在这基础上搭建属于自己的个人博客#end"/>
     <meta name="keywords"
-          content="#if($_keys) $_keys #else 开源博客,BlinkCoder,开源JAVA博客,Java博客,开源代码,极速编程,极速开发,快速开发,JFinal博客#end"/>
+          content="#if($_keys) $_keys #else 开源博客,BlinkCoder,开源JAVA博客,Java博客,开源代码,极速编程,极速开发,快速开发,JFinal博客，JFinal#end"/>
 
     <meta name="author" content="Michael Chen">
     <link rel="shortcut icon"
