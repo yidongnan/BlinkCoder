@@ -162,7 +162,7 @@ public class Blog extends MyModel<Blog> implements Searchable {
             StringBuilder labelStr = new StringBuilder();
             for (BlogLabel blogLabel : blogLabelList) {
                 labelStr.append(Label.dao.Get(blogLabel.getInt("label_id"))
-                        .get("name"));
+                        .getStr("name"));
             }
             put("labels", labelStr);
         }};

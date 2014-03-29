@@ -1,8 +1,7 @@
 package com.blinkcoder.model;
 
-import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.cache.ICache;
+import com.jfinal.plugin.ehcache.CacheKit;
 
 /**
  * User: Michael Chen
@@ -11,24 +10,25 @@ import com.jfinal.plugin.activerecord.cache.ICache;
  * Time: 上午10:58
  */
 public abstract class MyModel<M extends Model> extends Model<M> {
+
+
+
     static final Object[] NULL_PARA_ARRAY = new Object[0];
 
     public M findFirstByCache(String cacheName, Object key, String sql, Object... paras) {
-        ICache cache = DbKit.getCache();
-        M result = cache.get(cacheName, key);
+        M result = CacheKit.get(cacheName, key);
         if (result == null) {
             result = findFirst(sql, paras);
-            cache.put(cacheName, key, result);
+            CacheKit.put(cacheName, key, result);
         }
         return result;
     }
 
     public M findFirstByCache(String cacheName, Object key, String sql) {
-        ICache cache = DbKit.getCache();
-        M result = cache.get(cacheName, key);
+        M result = CacheKit.get(cacheName, key);
         if (result == null) {
             result = findFirst(sql, NULL_PARA_ARRAY);
-            cache.put(cacheName, key, result);
+            CacheKit.put(cacheName, key, result);
         }
         return result;
     }

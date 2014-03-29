@@ -16,6 +16,7 @@
 
 package com.jfinal.core;
 
+import com.blinkcoder.kit.VelocityKit;
 import com.jfinal.config.Constants;
 import com.jfinal.handler.Handler;
 import com.jfinal.log.Logger;
@@ -48,7 +49,7 @@ final class ActionHandler extends Handler {
 	 * 3: render(...)
 	 */
 	public final void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		if (target.indexOf(".") != -1) {
+/*        if (target.indexOf(".") != -1) {
 			return ;
 		}
 		
@@ -63,9 +64,25 @@ final class ActionHandler extends Handler {
 			}
 			renderFactory.getErrorRender(404).setContext(request, response).render();
 			return ;
-		}
-		
-		try {
+		}*/
+
+        // 动态生成的sitemap.xml和rss的xml
+        if (target.indexOf(".") != -1 && !target.endsWith(".xml")) {
+            return;
+        }
+
+        isHandled[0] = true;
+        String[] urlPara = {null};
+        Action action = actionMapping.getAction(target, urlPara);
+
+        if (action == null) {
+            String[] paths = target.split("/");
+            target = VelocityKit.GetTemplate(paths, paths.length);
+            renderFactory.getRender(target).setContext(request, response).render();
+            return;
+        }
+
+        try {
 			Controller controller = action.getControllerClass().newInstance();
 			controller.init(request, response, urlPara[0]);
 			

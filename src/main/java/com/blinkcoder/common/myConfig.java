@@ -46,9 +46,9 @@ public class myConfig extends JFinalConfig {
 
     @Override
     public void configRoute(Routes me) {
-        me.add("/blog", BlogController.class).add("/catalog", CatalogController.class)
-                .add("/label", LabelController.class).add("/link", LinkController.class)
-                .add("/user", UserController.class).add("/qiniu", QiNiuController.class);
+        me.add("/action/blog", BlogController.class).add("/action/catalog", CatalogController.class)
+                .add("/action/label", LabelController.class).add("/action/link", LinkController.class)
+                .add("/action/user", UserController.class).add("/action/qiniu", QiNiuController.class);
     }
 
     @Override

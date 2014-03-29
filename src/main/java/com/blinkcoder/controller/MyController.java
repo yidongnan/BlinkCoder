@@ -79,4 +79,20 @@ public class MyController extends Controller {
         }
         return false;
     }
+
+    public String header(String name) {
+        return getRequest().getHeader(name);
+    }
+
+    public void header(String name, String value) {
+        getResponse().setHeader(name, value);
+    }
+
+    public void header(String name, int value) {
+        getResponse().setIntHeader(name, value);
+    }
+
+    public void header(String name, long value) {
+        getResponse().setDateHeader(name, value);
+    }
 }

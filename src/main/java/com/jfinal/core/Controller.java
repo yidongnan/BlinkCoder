@@ -53,7 +53,7 @@ public abstract class Controller {
 	private static final String[] NULL_URL_PARA_ARRAY = new String[0];
 	private static final String URL_PARA_SEPARATOR = Config.getConstants().getUrlParaSeparator();
 	
-	void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
+	protected void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
 		this.request = request;
 		this.response = response;
 		this.urlPara = urlPara;

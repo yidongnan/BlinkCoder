@@ -29,6 +29,7 @@ public abstract class Render implements Serializable {
 	
 	private static final long serialVersionUID = 4055676662365675029L;
 	protected String view;
+	protected String url;
 	protected transient HttpServletRequest request;
 	protected transient HttpServletResponse response;
 	
