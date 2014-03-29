@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package com.jfinal.aop;
 
-import java.lang.reflect.Method;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
+
+import java.lang.reflect.Method;
 
 /**
  * ActionInvocationWrapper invoke the InterceptorStack.
@@ -41,7 +42,7 @@ class ActionInvocationWrapper extends ActionInvocation {
 	public final void invoke() {
 		if (index < inters.length)
 			inters[index++].intercept(this);
-		else
+		else if (index++ == inters.length)
 			actionInvocation.invoke();
 	}
 	

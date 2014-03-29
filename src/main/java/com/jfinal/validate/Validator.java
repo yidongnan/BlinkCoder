@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package com.jfinal.validate;
 
+import com.jfinal.aop.Interceptor;
+import com.jfinal.core.ActionInvocation;
+import com.jfinal.core.Controller;
+
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,9 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
-import com.jfinal.core.Controller;
 
 /**
  * Validator.
@@ -284,12 +285,12 @@ public abstract class Validator implements Interceptor {
 	 * Validate regular expression.
 	 */
 	protected void validateRegex(String field, String regExpression, boolean isCaseSensitive, String errorKey, String errorMessage) {
-		Pattern pattern = isCaseSensitive ? Pattern.compile(regExpression) : Pattern.compile(regExpression, Pattern.CASE_INSENSITIVE);
         String value = controller.getPara(field);
         if (value == null) {
         	addError(errorKey, errorMessage);
         	return ;
         }
+        Pattern pattern = isCaseSensitive ? Pattern.compile(regExpression) : Pattern.compile(regExpression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches())
         	addError(errorKey, errorMessage);

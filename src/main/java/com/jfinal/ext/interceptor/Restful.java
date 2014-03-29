@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package com.jfinal.ext.interceptor;
 
-import java.util.HashSet;
-import java.util.Set;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * ActionInvocation 中添加 Method method

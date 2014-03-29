@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 
 package com.jfinal.server;
 
-import java.io.File;
 import com.jfinal.kit.PathKit;
+
+import java.io.File;
 
 /**
  * ServerFactory
@@ -69,8 +70,10 @@ public class ServerFactory {
 		String[] temp = null;
 		if (rootClassPath.indexOf("\\WEB-INF\\") != -1)
 			temp = rootClassPath.split("\\\\");
-		else
+		else if (rootClassPath.indexOf("/WEB-INF/") != -1)
 			temp = rootClassPath.split("/");
+		else
+			throw new RuntimeException("WEB-INF directory not found.");
 		return temp[temp.length - 3];
 	}
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package com.jfinal.render;
 
+import com.jfinal.kit.JsonKit;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import com.jfinal.kit.JsonKit;
 
 /**
  * JsonRender.

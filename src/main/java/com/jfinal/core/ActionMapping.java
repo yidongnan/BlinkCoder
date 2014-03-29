@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,13 @@
 
 package com.jfinal.core;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.config.Interceptors;
 import com.jfinal.config.Routes;
+
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * ActionMapping

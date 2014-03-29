@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,23 @@
 
 package com.jfinal.core;
 
-import java.io.File;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import static com.jfinal.core.Const.I18N_LOCALE;
 import com.jfinal.i18n.I18N;
 import com.jfinal.kit.StringKit;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderFactory;
 import com.jfinal.upload.MultipartRequest;
 import com.jfinal.upload.UploadFile;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.text.ParseException;
+import java.util.*;
+import java.util.Map.Entry;
+
+import static com.jfinal.core.Const.I18N_LOCALE;
 
 /**
  * Controller
@@ -54,8 +52,8 @@ public abstract class Controller {
 	
 	private static final String[] NULL_URL_PARA_ARRAY = new String[0];
 	private static final String URL_PARA_SEPARATOR = Config.getConstants().getUrlParaSeparator();
-
-    protected void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
+	
+	void init(HttpServletRequest request, HttpServletResponse response, String urlPara) {
 		this.request = request;
 		this.response = response;
 		this.urlPara = urlPara;
@@ -1081,24 +1079,6 @@ public abstract class Controller {
 	public void renderHtml(String htmlText) {
 		render = renderFactory.getHtmlRender(htmlText);
 	}
-
-    // ----------------
-    // HTTP Header---
-    public String header(String name) {
-        return request.getHeader(name);
-    }
-
-    public void header(String name, String value) {
-        response.setHeader(name, value);
-    }
-
-    public void header(String name, int value) {
-        response.setIntHeader(name, value);
-    }
-
-    public void header(String name, long value) {
-        response.setDateHeader(name, value);
-    }
 }
 
 

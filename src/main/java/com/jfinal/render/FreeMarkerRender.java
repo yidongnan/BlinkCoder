@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,11 @@
 
 package com.jfinal.render;
 
-import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import freemarker.template.*;
+
 import javax.servlet.ServletContext;
-import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
+import java.io.PrintWriter;
+import java.util.*;
 
 /**
  * FreeMarkerRender.
@@ -107,6 +100,9 @@ public class FreeMarkerRender extends Render {
         // 去掉int型输出时的逗号, 例如: 123,456
         // config.setNumberFormat("#");		// config.setNumberFormat("0"); 也可以
         config.setNumberFormat("#0.#####");
+        config.setDateFormat("yyyy-MM-dd");
+        config.setTimeFormat("HH:mm:ss");
+        config.setDateTimeFormat("yyyy-MM-dd HH:mm:ss");
     }
     
 	@SuppressWarnings({"unchecked", "rawtypes"})

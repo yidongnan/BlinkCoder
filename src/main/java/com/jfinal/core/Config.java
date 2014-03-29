@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,11 @@
 
 package com.jfinal.core;
 
-import java.util.List;
-import com.jfinal.config.Constants;
-import com.jfinal.config.JFinalConfig;
-import com.jfinal.config.Routes;
-import com.jfinal.config.Plugins;
-import com.jfinal.config.Handlers;
-import com.jfinal.config.Interceptors;
+import com.jfinal.config.*;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.IPlugin;
+
+import java.util.List;
 
 class Config {
 	
@@ -75,6 +71,13 @@ class Config {
 		if (pluginList != null) {
 			for (IPlugin plugin : pluginList) {
 				try {
+					// process ActiveRecordPlugin devMode
+					if (plugin instanceof com.jfinal.plugin.activerecord.ActiveRecordPlugin) {
+						com.jfinal.plugin.activerecord.ActiveRecordPlugin arp = (com.jfinal.plugin.activerecord.ActiveRecordPlugin)plugin;
+						if (arp.getDevMode() == null)
+							arp.setDevMode(constants.getDevMode());
+					}
+					
 					boolean success = plugin.start();
 					if (!success) {
 						String message = "Plugin start error: " + plugin.getClass().getName();

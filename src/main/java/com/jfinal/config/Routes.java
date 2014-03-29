@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package com.jfinal.config;
 
+import com.jfinal.core.Controller;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import com.jfinal.core.Controller;
 
 /**
  * Routes.
@@ -60,11 +61,11 @@ public abstract class Routes {
 			throw new IllegalArgumentException("The controllerKey can not be blank");
 		if (controllerClass == null)
 			throw new IllegalArgumentException("The controllerClass can not be null");
-		if (map.containsKey(controllerKey))
-			throw new IllegalArgumentException("The controllerKey already exists");
-		
 		if (!controllerKey.startsWith("/"))
 			controllerKey = "/" + controllerKey;
+		if (map.containsKey(controllerKey))
+			throw new IllegalArgumentException("The controllerKey already exists: " + controllerKey);
+		
 		map.put(controllerKey, controllerClass);
 		
 		if (viewPath == null || "".equals(viewPath.trim()))	// view path is controllerKey by default
@@ -90,7 +91,7 @@ public abstract class Routes {
 	 * @param controllerClass Controller Class
 	 */
 	public Routes add(String controllerkey, Class<? extends Controller> controllerClass) {
-        return add("/action"+controllerkey, controllerClass, controllerkey);
+		return add(controllerkey, controllerClass, controllerkey);
 	}
 	
 	public Set<Entry<String, Class<? extends Controller>>> getEntrySet() {

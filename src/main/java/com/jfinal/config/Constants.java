@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,6 @@
 
 package com.jfinal.config;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 import com.jfinal.core.Const;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StringKit;
@@ -30,6 +26,11 @@ import com.jfinal.render.IMainRenderFactory;
 import com.jfinal.render.RenderFactory;
 import com.jfinal.render.ViewType;
 import com.jfinal.token.ITokenCache;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The constant for JFinal runtime.

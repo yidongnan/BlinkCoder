@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,6 @@
 
 package com.jfinal.plugin.druid;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.alibaba.druid.stat.DruidStatService;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.util.IPRange;
@@ -31,6 +24,14 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.IOUtils;
 import com.jfinal.handler.Handler;
 import com.jfinal.kit.HandlerKit;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 替代 StatViewServlet

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,6 @@
 
 package com.jfinal.core;
 
-import java.io.File;
-import java.util.List;
-import javax.servlet.ServletContext;
 import com.jfinal.config.Constants;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.handler.Handler;
@@ -26,13 +23,16 @@ import com.jfinal.handler.HandlerFactory;
 import com.jfinal.i18n.I18N;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.render.RenderFactory;
 import com.jfinal.server.IServer;
 import com.jfinal.server.ServerFactory;
 import com.jfinal.token.ITokenCache;
 import com.jfinal.token.TokenManager;
 import com.jfinal.upload.OreillyCos;
+
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.util.List;
 
 /**
  * JFinal
@@ -71,7 +71,6 @@ public final class JFinal {
 		initActionMapping();
 		initHandler();
 		initRender();
-		initActiveRecord();
 		initOreillyCos();
 		initI18n();
 		initTokenManager();
@@ -111,10 +110,6 @@ public final class JFinal {
 			}
 			OreillyCos.init(uploadedFileSaveDirectory, ct.getMaxPostSize(), ct.getEncoding());
 		}
-	}
-	
-	private void initActiveRecord() {
-		ActiveRecordPlugin.setDevMode(constants.getDevMode());
 	}
 	
 	private void initPathUtil() {

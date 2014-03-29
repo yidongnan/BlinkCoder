@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,17 @@
 
 package com.jfinal.plugin.c3p0;
 
+import com.jfinal.kit.StringKit;
+import com.jfinal.plugin.IPlugin;
+import com.jfinal.plugin.activerecord.IDataSourceProvider;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import javax.sql.DataSource;
-import com.jfinal.kit.StringKit;
-import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.activerecord.IDataSourceProvider;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * The c3p0 datasource plugin.

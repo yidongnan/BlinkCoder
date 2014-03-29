@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,16 @@
 
 package com.jfinal.plugin.activerecord.tx;
 
+import com.jfinal.aop.Interceptor;
+import com.jfinal.core.ActionInvocation;
+import com.jfinal.plugin.activerecord.Config;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.DbKit;
+import com.jfinal.plugin.activerecord.IAtom;
+
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
 
 /**
  * TxByActionMethods
@@ -40,8 +43,12 @@ public class TxByActionMethods implements Interceptor {
 	}
 	
 	public void intercept(final ActionInvocation ai) {
+		Config config = Tx.getConfigWithTxConfig(ai);
+		if (config == null)
+			config = DbKit.getConfig();
+		
 		if (actionMethodSet.contains(ai.getMethodName())) {
-			Db.tx(new IAtom(){
+			Db.tx(config.getName(), new IAtom(){
 				public boolean run() throws SQLException {
 					ai.invoke();
 					return true;
@@ -52,6 +59,10 @@ public class TxByActionMethods implements Interceptor {
 		}
 	}
 }
+
+
+
+
 
 
 

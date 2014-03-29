@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
 
 package com.jfinal.render;
 
-import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.Map.Entry;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
-import javax.servlet.ServletContext;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+
+import javax.servlet.ServletContext;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * VelocityRender.

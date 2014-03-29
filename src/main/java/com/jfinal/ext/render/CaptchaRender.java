@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, James Zhan 詹波 (jfinal@126.com).
+ * Copyright (c) 2011-2014, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,18 @@
 
 package com.jfinal.ext.render;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import com.jfinal.core.Controller;
+import com.jfinal.kit.StringKit;
+import com.jfinal.render.Render;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.Random;
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import com.jfinal.core.Controller;
-import com.jfinal.kit.StringKit;
-import com.jfinal.render.Render;
 
 public class CaptchaRender extends Render {
 	
