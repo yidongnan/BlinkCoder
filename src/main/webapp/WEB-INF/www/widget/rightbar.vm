@@ -52,15 +52,16 @@
         </div>
     </div>
     <div class="widget">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- 右侧 200*200 -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:200px;height:200px"
-         data-ad-client="ca-pub-8417687790092876"
-         data-ad-slot="8972248348"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 右侧 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8417687790092876"
+             data-ad-slot="7495515143"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     <div class="widget">
         <h3 class="under_line">外链列表</h3>
