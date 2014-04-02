@@ -53,12 +53,11 @@
     </div>
     <div class="widget">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- 右侧 -->
+        <!-- 右侧200×200 -->
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:inline-block;width:200px;height:200px"
              data-ad-client="ca-pub-8417687790092876"
-             data-ad-slot="7495515143"
-             data-ad-format="auto"></ins>
+             data-ad-slot="2604533541"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
