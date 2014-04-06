@@ -3,6 +3,7 @@ package com.blinkcoder.handler;
 import com.blinkcoder.common.myConstants;
 import com.jfinal.core.JFinal;
 import com.jfinal.handler.Handler;
+import com.jfinal.log.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import java.util.Vector;
  */
 public class VelocityHandler extends Handler {
 
+    private final static Logger log = Logger.getLogger(VelocityHandler.class);
+
     private final static String VM_EXT = ".vm";
     private final static String VM_INDEX = "/index" + VM_EXT;
     private final static List<String> vm_cache = new Vector<String>();
@@ -30,14 +33,13 @@ public class VelocityHandler extends Handler {
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response,
                        boolean[] isHandled) {
-        if (target.indexOf(".") != -1) {
+        if (target.contains(".")) {
             return;
         }
 
-        String[] urlPara = {null};
         if (!target.startsWith(Prefix)) {
             String[] paths = target.split("/");
-            target = GetTemplate(request, paths, paths.length);
+            target = GetTemplate(paths, paths.length);
         }
         nextHandler.handle("/WEB-INF/www/index", request, response, isHandled);
     }
@@ -59,9 +61,8 @@ public class VelocityHandler extends Handler {
         if (StringUtils.isNotEmpty(params)) {
             sb.append("UrlPara     : ").append(params.substring(1)).append("\n");
         }
-        sb.append
-                ("--------------------------------------------------------------------------------\n");
-        System.out.println(sb);
+        sb.append("--------------------------------------------------------------------------------\n");
+        log.info(sb.toString());
         return params.toString();
     }
 
@@ -73,32 +74,32 @@ public class VelocityHandler extends Handler {
      */
     private boolean _IsVmExist(String path) {
         if (vm_cache.contains(path)) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(path);
-            System.out.println(sb);
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new
+                    Date())).append(" ------------------------------\n").append("Velocity Template File : ").append
+                    (path);
+            log.info(sb.toString());
             return true;
         }
         File testFile = new File(JFinal.me().getServletContext().getRealPath(path));
         boolean isVM = testFile.exists() && testFile.isFile();
         if (isVM) {
             vm_cache.add(path);
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(path);
-            System.out.println(sb);
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new
+                    Date())).append(" ------------------------------\n").append("Velocity Template File : ").append
+                    (path);
+            log.info(sb.toString());
         }
         return isVM;
     }
 
-    private String GetTemplate(HttpServletRequest request, String[] paths, int length) {
+    private String GetTemplate(String[] paths, int length) {
         StringBuilder vm = new StringBuilder(myConstants.VELOCITY_TEMPLETE_PATH);
 
         if (length == 0) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(vm.toString() + VM_INDEX);
-            System.out.println(sb);
+            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ").append(sdf.format(new
+                    Date())).append(" ------------------------------\n").append("Velocity Template File : ").append
+                    (vm.toString() + VM_INDEX);
+            log.info(sb.toString());
             return vm.toString() + VM_INDEX + _MakeQueryString(paths, length);
         }
 
@@ -122,7 +123,6 @@ public class VelocityHandler extends Handler {
         vms += VM_EXT;
         if (_IsVmExist(vms))
             return vms + _MakeQueryString(paths, length);
-        String view = GetTemplate(request, paths, length - 1);
-        return view;
+        return GetTemplate(paths, length - 1);
     }
 }

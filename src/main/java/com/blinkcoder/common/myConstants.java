@@ -11,4 +11,6 @@ public class myConstants {
     public static String QINIU_BUICKET;
     public static String QINIU_RETURNURL;
     public static String LUCENE_DIR;
+    public static String USER_ENCRYPT_KEY;
+    public static byte[] COOKIE_ENCRYPT_KEY;
 }

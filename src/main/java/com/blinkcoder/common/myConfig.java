@@ -2,6 +2,7 @@ package com.blinkcoder.common;
 
 
 import com.blinkcoder.controller.*;
+import com.blinkcoder.handler.UserHandler;
 import com.blinkcoder.model.*;
 import com.blinkcoder.plugin.quartz.QuartzPlugin;
 import com.blinkcoder.render.VelocityToolboxRenderFactory;
@@ -30,7 +31,7 @@ public class myConfig extends JFinalConfig {
 
     @Override
     public void configConstant(Constants me) {
-        conf = loadPropertyFile("classes" + File.separator + "config.txt");
+        conf = loadPropertyFile("classes" + File.separator + "config.properties");
         myConstants.VELOCITY_TEMPLETE_PATH = getProperty("velocity_templete_path");
         if (isLocal) {
             me.setDevMode(true);
@@ -89,6 +90,7 @@ public class myConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
+        me.add(new UserHandler());
     }
 
     @Override
@@ -99,6 +101,8 @@ public class myConfig extends JFinalConfig {
         myConstants.QINIU_RETURNURL = getProperty("qiniu_returnUrl");
         myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
         myConstants.LUCENE_DIR = getProperty("lucene_dir");
+        myConstants.COOKIE_ENCRYPT_KEY = getProperty("cookie_encrypt_key").getBytes();
+        myConstants.USER_ENCRYPT_KEY = getProperty("user_encrypt_key");
     }
 
     @Override
