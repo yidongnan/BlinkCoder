@@ -24,7 +24,8 @@ public class UserHandler extends Handler {
 
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-        if (target.contains(".")) {
+        // 动态生成的sitemap.xml和rss的xml
+        if (target.indexOf(".") != -1 && !target.endsWith(".xml")) {
             return;
         }
 
