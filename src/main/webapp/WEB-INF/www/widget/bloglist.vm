@@ -23,7 +23,7 @@
         </p>
 
         <hr>
-        <p style="font-size: 16px;">$formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),300)</p>
+        <p style="font-size: 16px;line-height: 25px;">$formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),300)</p>
         <a class="btn btn-primary" href="$linkKit.root($blog.get("global_url"))">Read More <span
                 class="glyphicon glyphicon-chevron-right"></span></a>
         <hr>
