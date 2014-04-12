@@ -25,6 +25,43 @@ public class LinkKit extends StrutsLinkTool {
 
     private VelocityContext velocity;
 
+    public static String root() {
+        return root("/");
+    }
+
+    public static String root(String uri) {
+        StringBuilder root = new StringBuilder(JFinal.me().getContextPath());
+        if (uri.length() > 0 && uri.charAt(0) != '/')
+            root.append('/');
+        root.append(uri);
+        return root.toString();
+    }
+
+    public static String action(String uri) {
+        if (uri.length() > 0 && uri.charAt(0) != '/')
+            return root("/action/" + uri);
+        return root("/action" + uri);
+    }
+
+    public static String cloud_res(String name) {
+        if (name == null)
+            return null;
+        if (StringUtils.isNotEmpty(myConstants.STATIC_RESOURCE_PATH)) {
+            StringBuilder sb;
+            sb = new StringBuilder(myConstants.STATIC_RESOURCE_PATH);
+            if (!name.startsWith("/"))
+                sb.append('/');
+            sb.append(name);
+            return sb.toString();
+        } else {
+            return local_res(name);
+        }
+    }
+
+    public static String local_res(String name) {
+        return root(name);
+    }
+
     public void init(Object obj) {
         super.init(obj);
         if (obj instanceof ViewContext) {
@@ -93,42 +130,16 @@ public class LinkKit extends StrutsLinkTool {
         return velocity.getCurrentTemplateName();
     }
 
-    public static String root() {
-        return root("/");
-    }
-
-    public static String root(String uri) {
-        StringBuilder root = new StringBuilder(JFinal.me().getContextPath());
-        if (uri.length() > 0 && uri.charAt(0) != '/')
-            root.append('/');
-        root.append(uri);
-        return root.toString();
-    }
-
-    public static String action(String uri) {
-        if (uri.length() > 0 && uri.charAt(0) != '/')
-            return root("/action/" + uri);
-        return root("/action" + uri);
-    }
-
-    public static String catalog(String uri) {
-        return root("catalog/" + uri);
-    }
-
-    public static String label(String uri) {
-        return root("label/" + uri);
-    }
-
     public boolean is_catalog_list() {
         return request.getRequestURI().startsWith("/catalog/");
     }
 
-    public boolean is_label_list() {
-        return request.getRequestURI().startsWith("/label/");
+    public boolean is_tag_list() {
+        return request.getRequestURI().startsWith("/tag/");
     }
 
     public boolean is_blog_detail() {
-        return !is_catalog_list() && !is_label_list() && param("p1") != null;
+        return !is_catalog_list() && !is_tag_list() && param("p1") != null;
     }
 
     public boolean startWith(String str, String prefix) {
@@ -137,25 +148,6 @@ public class LinkKit extends StrutsLinkTool {
 
     public void redirect(String url) throws IOException {
         response.sendRedirect(url);
-    }
-
-    public static String cloud_res(String name) {
-        if (name == null)
-            return null;
-        if (StringUtils.isNotEmpty(myConstants.STATIC_RESOURCE_PATH)) {
-            StringBuilder sb;
-            sb = new StringBuilder(myConstants.STATIC_RESOURCE_PATH);
-            if (!name.startsWith("/"))
-                sb.append('/');
-            sb.append(name);
-            return sb.toString();
-        } else {
-            return local_res(name);
-        }
-    }
-
-    public static String local_res(String name) {
-        return root(name);
     }
 
 

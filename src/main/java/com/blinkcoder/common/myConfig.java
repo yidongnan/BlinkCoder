@@ -27,11 +27,10 @@ public class myConfig extends JFinalConfig {
 
     private String json = java.lang.System.getenv("VCAP_SERVICES");
     private boolean isLocal = StringKit.isBlank(json);
-    private Properties conf = null;
 
     @Override
     public void configConstant(Constants me) {
-        conf = loadPropertyFile("classes" + File.separator + "config.properties");
+        Properties conf = loadPropertyFile("classes" + File.separator + "config.properties");
         myConstants.VELOCITY_TEMPLETE_PATH = getProperty("velocity_templete_path");
         if (isLocal) {
             me.setDevMode(true);
@@ -48,7 +47,7 @@ public class myConfig extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.add("/action/blog", BlogController.class).add("/action/catalog", CatalogController.class)
-                .add("/action/label", LabelController.class).add("/action/link", LinkController.class)
+                .add("/action/tag", TagController.class).add("/action/link", LinkController.class)
                 .add("/action/user", UserController.class).add("/action/qiniu", QiNiuController.class);
     }
 
@@ -77,8 +76,8 @@ public class myConfig extends JFinalConfig {
         }
         arp.addMapping("blog", Blog.class).addMapping("user", User.class)
                 .addMapping("catalog", Catalog.class).addMapping
-                ("blog_label", BlogLabel.class).addMapping("label",
-                Label.class).addMapping("link", Link.class).addMapping
+                ("blog_tag", BlogTag.class).addMapping("tag",
+                Tag.class).addMapping("link", Link.class).addMapping
                 ("lucene_task", LuceneTask.class);
         me.add(arp);
     }

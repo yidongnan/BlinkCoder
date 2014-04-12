@@ -20,7 +20,7 @@
                 <tr id="tr$catalog.get("id")">
                     <td>$catalog.get("name")</td>
                     <td>$catalog.get("desc")</td>
-                    <td>$catalog.get("flag")</td>
+                    <td>#if($catalog.get("flag") == 1)显示 #else 不显示#end</td>
                     <td>
                         <button type="button" class="btn btn-success btn-xs" onclick="editObj($catalog.get("id"))">编辑
                         </button>
@@ -50,18 +50,18 @@
                 url: "$linkKit.action("/catalog/delCatalog")",
                 data: "id=" + id,
                 success: function (data) {
-                    if(data.msg) {
+                    if (data.msg) {
                         tip.html("操作成功！");
                         tip.removeClass("alert-danger");
                         tip.addClass("alert-success");
-                        tip.animate({opacity:1},3000);
+                        tip.animate({opacity: 1}, 3000);
                         tip.css('display', 'block');
                         $("#tr" + id).hide("slow");
                     } else {
                         tip.html("操作失败！");
                         tip.removeClass("alert-success");
                         tip.addClass("alert-danger");
-                        tip.animate({opacity:1},30000);
+                        tip.animate({opacity: 1}, 30000);
                         tip.css('display', 'block');
                     }
                 }

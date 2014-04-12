@@ -16,84 +16,60 @@
     });
 </script>
 <script type="text/javascript" src="/action/blog/viewBlog?id=$blog.get("id")"></script>
-<br>
-<ol class="breadcrumb">
-    <li><a href="/">首页</a></li>
-    <li>
-        <a href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
-        " rel="tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
-    </li>
-    <li class="active">正文</li>
-</ol>
-<div class="detail">
-    <h2 class="under_line">
-        <span>$blog.get("title")</span>
-        <span class="badge">$blog.get("read_count")°C </span>
-    </h2>
 
-    <div class="info">
-        分类：<a
-            href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
-        " rel="tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
-        #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
-        #if($blogLabelList)
-            | 标签：
-            #foreach($blogLabel in $blogLabelList)
-                #set($_keys = $_keys +","+ $labelTool.Get($blogLabel.get("label_id")).get("name") +","+$labelTool.Get($blogLabel.get("label_id")).get("desc"))
-                #if($velocityCount == 1)
-                    #set($blogLabelArrayStr = $labelTool.Get($blogLabel.get("label_id")).get("name"))
-                #else
-                    #set($blogLabelArrayStr = ","+$blogLabelArrayStr + $labelTool.Get($blogLabel.get("label_id")).get("name"))
-                #end
-                <a href="$linkKit.label($labelTool.Get($blogLabel.get("label_id")).get("name"))"
-                   rel="tag">$labelTool.Get($blogLabel.get("label_id")).get("desc")</a>&nbsp;
-            #end
+<!-- the actual blog post: title/author/date/content -->
+<h2>$blog.get("title")</h2>
+##<p class="lead">by <a href="index.php">Michael</a></p>
+<hr>
+<p>
+    <span class="glyphicon glyphicon-list-alt" title="分类"></span>
+    <a href=$blog.blogCatalog().url() title="$blog.blogCatalog().get("desc")"
+       rel="tag">$blog.blogCatalog().get("desc")</a>
+
+    #set($tagList = $blog.blogTags())
+    #if($tagList.size() > 0)
+        <span class="glyphicon glyphicon-tags" title="标签"></span>
+        #foreach($tag in $tagList)
+            <a href="$tag.url()" rel="tag" title="$tag.get("desc")">$tag.get("desc")</a>&nbsp;
         #end
-        | 发布：$blog.get("update_time")
-    </div>
-    <br>
+    #end
 
-    <div class="detail" style="font-size: 15px;line-height: 30px;">
-        $blog.content();
-        <br><br>
+    <span class="glyphicon glyphicon-time" title="最后更新时间"></span> $dateKit.format($blog.get("update_time"))
+    <span class="glyphicon glyphicon-eye-open" title="浏览数"></span> $blog.get("read_count")
+</p>
+<hr>
+    $blog.content();
+<p class="pay">
+    此文对我有价值，小额(无负担)赞助下^_^
+    <a href="https://me.alipay.com/yidongnan" class="btn btn-primary"
+       target="_blank">支付宝打赏</a>
+</p>
+<script type="text/javascript" id="wumiiRelatedItems"></script>
 
-        <p class="pay">
-            此文对我有价值，小额(无负担)赞助下^_^
-            <a href="https://me.alipay.com/yidongnan" class="btn btn-primary"
-               target="_blank">支付宝打赏</a>
-        </p>
-    </div>
-    <br>
-    <script type="text/javascript" id="wumiiRelatedItems"></script>
-    <div class="row">
-        #invoke("share.vm")
-    </div>
-    <br>
+<br>
     #set($prevBlog = $blogTool.prevBlog($blog.getInt("id")))
     #set($nextBlog = $blogTool.nextBlog($blog.getInt("id")))
 
-    <div class="box">
-        【上一篇】
-        #if($prevBlog)
-            <a href="$prevBlog.get("global_url")">$prevBlog.get("title")</a>
-        #else
-            没有了
-        #end
-        <br>
-        【下一篇】
-        #if($nextBlog)
-            <a href="$nextBlog.get("global_url")">$nextBlog.get("title")</a>
-        #else
-            没有了
-        #end
-    </div>
+<div class="box">
+    【上一篇】
+    #if($prevBlog)
+        <a href="$prevBlog.get("global_url")">$prevBlog.get("title")</a>
+    #else
+        没有了
+    #end
+    <br>
+    【下一篇】
+    #if($nextBlog)
+        <a href="$nextBlog.get("global_url")">$nextBlog.get("title")</a>
+    #else
+        没有了
+    #end
 </div>
-##    百度推荐
-<div id="hm_t_21753"></div>
+
 ##    多说评论
 <div data-thread-key="$blog.get("id")" data-title="$blog.get("title")"
-     data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰"
-     class="ds-thread" id="ds-thread"></div>
+     data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰" class="ds-thread"
+     id="ds-thread"></div>
 ##   无觅推荐
 <script type="text/javascript">
     var wumiiPermaLink = "http://www.blinkcoder.com/$blog.get("global_url")"; //请用代码生成文章永久的链接

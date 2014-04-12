@@ -4,10 +4,8 @@
 #set($key = $linkKit.param("s"))
 
 #set($blogList = $searchKit.findBlogs($key,false,true,$page,$pageSize))
-
-<div class="container" id="content">
-    <div id="main" class="col-md-9 col-ld-9">
-        #invoke("/WEB-INF/www/widget/bloglist.vm")
-    </div>
-    #invoke("/WEB-INF/www/widget/rightbar.vm")
-</div>
+#if(!$blogList)
+<h2 class="text-center">找不到你想要的内容！</h2>
+#else
+    #invoke("/WEB-INF/www/widget/bloglist.vm")
+#end

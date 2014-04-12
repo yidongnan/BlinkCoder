@@ -1,3 +1,7 @@
+body {
+    font-family: Microsoft YaHei, Verdana, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
 .head {
     text-align: left;
 }
@@ -11,7 +15,6 @@
 }
 
 .container {
-    max-width: 980px;
 }
 
 .under_line {
@@ -84,4 +87,8 @@ blockquote p {
     margin-bottom: 15px;
     font-size: 14px;
     line-height: 1.428571429
+}
+
+#ds-recent-comments li.ds-comment {
+    border-top: 0;
 }

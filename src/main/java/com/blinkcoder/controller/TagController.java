@@ -1,7 +1,7 @@
 package com.blinkcoder.controller;
 
 import com.blinkcoder.interceptor.AdminInterceptor;
-import com.blinkcoder.model.Label;
+import com.blinkcoder.model.Tag;
 import com.jfinal.aop.Before;
 
 /**
@@ -9,16 +9,16 @@ import com.jfinal.aop.Before;
  * Date: 13-10-10
  * Time: 下午9:27
  */
-public class LabelController extends MyController {
+public class TagController extends MyController {
 
     @Before(AdminInterceptor.class)
     public void addLabel() {
-        Label label = getModel(Label.class);
+        Tag tag = getModel(Tag.class);
         boolean result = false;
-        String name = label.get("name");
-        Label nameLabel = Label.dao.getByName(name);
-        if (nameLabel == null) {
-            result = label.Save();
+        String name = tag.get("name");
+        Tag nameTag = Tag.dao.getByName(name);
+        if (nameTag == null) {
+            result = tag.Save();
         }
         renderJson("msg", result);
     }
@@ -28,8 +28,8 @@ public class LabelController extends MyController {
         boolean result = false;
         int id = getParaToInt("id", 0);
         if (id > 0) {
-            Label label = Label.dao.Get(id);
-            result = label.delete();
+            Tag tag = Tag.dao.Get(id);
+            result = tag.delete();
         }
         renderJson("msg", result);
     }

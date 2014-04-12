@@ -1,90 +1,186 @@
-#set($catalogList = ${catalogTool.getShowCatalog()})
-#set($urlPara = $linkKit.urlPara())
-
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description"
           content="#if($_title) $_title #else 极速开发网 www.blinkcoder.com 是用Java开发的一个开源博客，代码精简。Java初学者能迅速在这基础上搭建属于自己的个人博客#end"/>
     <meta name="keywords"
           content="#if($_keys) $_keys #else 开源博客,BlinkCoder,开源JAVA博客,Java博客,开源代码,极速编程,极速开发,快速开发,JFinal博客，JFinal#end"/>
-
     <meta name="author" content="Michael Chen">
-    <link rel="shortcut icon"
-          href="$linkKit.cloud_res("img/favicon.png")">
-
+    <meta name="google-site-verification" content="Kn-8HLAZgyAJRIdCqRZ5QiAz0oiBfNsFSrmfgzGZ0Q4"/>
+    <link rel="shortcut icon" href="$linkKit.cloud_res("img/favicon.png")">
     <title>#if($_title) $_title -#end 极速开发网</title>
-    <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")"
-          rel="stylesheet">
+
+    <link href="$linkKit.cloud_res("bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
     <link href="$linkKit.cloud_res("css/global.css")" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="$linkKit.cloud_res("
-    bootstrap                       ")  </script>
-    <
-    script
-            src= $linkKit.cloud_res("bootstrap / assets / js / respond.min.js") ></script>
-    <![endif]-->
     <script src="$linkKit.cloud_res("js/jquery.min.js")"></script>
 </head>
-
 <body>
-<header class="navbar navbar-inverse navbar-static-top" role="banner">
+<nav class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Blink Coder</a>
+            <a class="navbar-brand" href="/">极速开发网</a>
         </div>
-        <div class="collapse navbar-collapse">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                #foreach($catalog in $catalogList)
-                    #if($catalog)
-                        <li #if($linkKit.is_catalog_list() && $urlPara == ${catalog.get('name')})
-                                class="active" #end>
-                            <a href="$linkKit.catalog($catalog.get('name'))"
-                               rel="tag">$catalog.get('desc')</a></li>
-                    #end
-                #end
-
+            #* <li><a href="/about">关于</a>
+             </li>*#
+                <li><a href="https://github.com/yidongnan/BlinkCoder">Fork On GitHub</a></li>
             </ul>
-            <form class="top-search-form navbar-form navbar-right" method="get"
-                  action="/search/">
-                <input type="text" class="form-control" name="s" id="s"
-                       style="width: 200px;" value="#if($key)$key#end">
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8">
+            $screen_content
+        </div>
+
+        <div class="col-lg-4">
+            <div class="well">
+                <h4>搜索</h4>
+
+                <form action="/search/" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="s" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+                <!-- /input-group -->
+            </div>
+            <!-- /well -->
+            <div class="well">
+                <h4>分类列表</h4>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            #set($catalogList = ${catalogTool.getShowCatalog()})
+                            #foreach($catalog in $catalogList)
+                                #if($velocityCount % 2 == 1)
+                                    <li><a href="$catalog.url()" rel="tag"
+                                           title="$catalog.get('desc')">$catalog.get('desc')</a></li>
+                                #end
+                            #end
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            #foreach($catalog in $catalogList)
+                                #if($velocityCount % 2 == 0)
+                                    <li><a href="$catalog.url()" rel="tag"
+                                           title="$catalog.get('desc')">$catalog.get('desc')</a></li>
+                                #end
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <h4 class="under_line">热门文章</h4>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            #set($hotBlogList = $blogTool.hotBlogList(1,10))
+                            #if($hotBlogList.getTotalRow() > 0)
+                                #foreach($blog in $hotBlogList.getList())
+                                    <li><a href="$linkKit.root($blog.get("global_url"))"
+                                           title="$blog.get("title")">$blog.get("title")</a>
+                                    </li>
+                                #end
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <h4 style="padding-bottom: 5px;">最新评论</h4>
+
+                <div>
+                    <ul class="ds-recent-comments" style="padding-left: 0px;" data-num-items="10" data-show-avatars="1"
+                        data-show-time="1" data-show-admin="1" data-excerpt-length="20"></ul>
+                </div>
+            </div>
+            <div class="well">
+                <h4 class="under_line">最近访客</h4>
+
+                <div>
+                    <ul class="ds-recent-visitors" style="padding-left: 0px;" data-num-items="16"></ul>
+                </div>
+            </div>
+            <div class="well">
+                <h4>外链列表</h4>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            #set($linkList = $linkTool.getAllLink())
+                            #if($linkList && $linkList.size() > 0)
+                                #foreach($link in $linkList)
+                                    #if($velocityCount % 2 == 1)
+                                        <li><a href="$link.get("url")" title="$link.get("desc")">$link.get("title")</a>
+                                        </li>
+                                    #end
+                                #end
+                            #end
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            #if($linkList && $linkList.size() > 0)
+                                #foreach($link in $linkList)
+                                    #if($velocityCount % 2 == 0)
+                                        <li><a href="$link.get("url")" title="$link.get("desc")">$link.get("title")</a>
+                                        </li>
+                                    #end
+                                #end
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 自适应 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8417687790092876"
+                 data-ad-slot="9594259944"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
-</header>
-<div class="head">
-    <div class="container">
-        <h1>Michael Chen的技术博客</h1>
 
-        <p class="under_line">关注java、linux、web开发和互联网--</p>
+    <hr>
 
-    </div>
 </div>
-    $screen_content
-<div style="clear: both"></div>
+<!-- /.container -->
     #invoke("../www/widget/footer.vm")
+</body>
+</html>
 
-<!-- Bootstrap core JavaeScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+<!-- JavaScript -->
 <script src="$linkKit.cloud_res("bootstrap/dist/js/bootstrap.min.js")"></script>
-    #invoke("../www/widget/duoshuo.vm")
-
-
 <script>
     $(function () {
         if ($("#footer").length > 0) {
@@ -114,5 +210,4 @@
         }
     }
 </script>
-</body>
-</html>
+#invoke("../www/widget/duoshuo.vm")

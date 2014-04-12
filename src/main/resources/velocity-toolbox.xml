@@ -33,14 +33,14 @@
         <class>com.blinkcoder.model.Blog</class>
     </tool>
     <tool>
-        <key>blogLabelTool</key>
+        <key>blogTagTool</key>
         <scope>application</scope>
-        <class>com.blinkcoder.model.BlogLabel</class>
+        <class>com.blinkcoder.model.BlogTag</class>
     </tool>
     <tool>
-        <key>labelTool</key>
+        <key>tagTool</key>
         <scope>application</scope>
-        <class>com.blinkcoder.model.Label</class>
+        <class>com.blinkcoder.model.Tag</class>
     </tool>
     <tool>
         <key>linkTool</key>

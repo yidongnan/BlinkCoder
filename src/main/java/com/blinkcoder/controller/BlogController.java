@@ -3,9 +3,9 @@ package com.blinkcoder.controller;
 import com.blinkcoder.interceptor.AdminInterceptor;
 import com.blinkcoder.job.VisitCountJob;
 import com.blinkcoder.model.Blog;
-import com.blinkcoder.model.BlogLabel;
-import com.blinkcoder.model.Label;
+import com.blinkcoder.model.BlogTag;
 import com.blinkcoder.model.LuceneTask;
+import com.blinkcoder.model.Tag;
 import com.jfinal.aop.Before;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ public class BlogController extends MyController {
     @Before(AdminInterceptor.class)
     public void addBlog() {
         int blogId = -1;
-        int labelId = -1;
+        int tagId = -1;
         Blog blog = getModel(Blog.class);
         boolean result = false;
         String url = blog.get("global_url");
@@ -37,25 +37,25 @@ public class BlogController extends MyController {
             result = blog.Save();
             blogId = blog.get("id");
             LuceneTask.add(blogId, LuceneTask.TYPE_BLOG);
-            BlogLabel.dao.delBlogLabelByBlog(blogId);
-            String[] labels = getParaValues("labels");
-            if (ArrayUtils.isNotEmpty(labels)) {
-                for (String labelStr : labels) {
-                    String labelLowStr = StringUtils.lowerCase(labelStr);
-                    Label label = Label.dao.getByName(labelLowStr);
-                    if (label != null) {
-                        labelId = label.get("id");
+            BlogTag.dao.delBlogTagByBlog(blogId);
+            String[] tagArray = getParaValues("tags");
+            if (ArrayUtils.isNotEmpty(tagArray)) {
+                for (String tagStr : tagArray) {
+                    String tagLowStr = StringUtils.lowerCase(tagStr);
+                    Tag tag = Tag.dao.getByName(tagLowStr);
+                    if (tag != null) {
+                        tagId = tag.get("id");
                     } else {
-                        Label newLabel = new Label();
-                        newLabel.set("name", labelLowStr);
-                        newLabel.set("desc", labelStr);
-                        newLabel.Save();
-                        labelId = newLabel.get("id");
+                        Tag newTag = new Tag();
+                        newTag.set("name", tagLowStr);
+                        newTag.set("desc", tagStr);
+                        newTag.Save();
+                        tagId = newTag.get("id");
                     }
-                    BlogLabel blogLabel = new BlogLabel();
-                    blogLabel.set("blog_id", blogId);
-                    blogLabel.set("label_id", labelId);
-                    blogLabel.Save();
+                    BlogTag blogTag = new BlogTag();
+                    blogTag.set("blog_id", blogId);
+                    blogTag.set("tag_id", tagId);
+                    blogTag.Save();
                 }
             }
         }
@@ -71,7 +71,7 @@ public class BlogController extends MyController {
             result = blog.Delete();
             int blogId = blog.getInt("id");
             LuceneTask.delete(blogId, LuceneTask.TYPE_BLOG);
-            BlogLabel.dao.delBlogLabelByBlog(blogId);
+            BlogTag.dao.delBlogTagByBlog(blogId);
         }
         renderJson("msg", result);
     }
@@ -79,7 +79,7 @@ public class BlogController extends MyController {
     @Before(AdminInterceptor.class)
     public void updateBlog() {
         int blogId = -1;
-        int labelId = -1;
+        int tagId = -1;
         Blog blog = getModel(Blog.class);
         if (blog.get("type") == null)
             blog.set("type", 0);
@@ -94,25 +94,25 @@ public class BlogController extends MyController {
                 result = blog.Update();
                 blogId = blog.get("id");
                 LuceneTask.update(blogId, LuceneTask.TYPE_BLOG);
-                BlogLabel.dao.delBlogLabelByBlog(blogId);
-                String[] labels = getParaValues("labels");
-                if (ArrayUtils.isNotEmpty(labels)) {
-                    for (String labelStr : labels) {
-                        String labelLowStr = StringUtils.lowerCase(labelStr);
-                        Label label = Label.dao.getByName(labelLowStr);
-                        if (label != null) {
-                            labelId = label.get("id");
+                BlogTag.dao.delBlogTagByBlog(blogId);
+                String[] tags = getParaValues("tags");
+                if (ArrayUtils.isNotEmpty(tags)) {
+                    for (String tagStr : tags) {
+                        String tagLowStr = StringUtils.lowerCase(tagStr);
+                        Tag tag = Tag.dao.getByName(tagLowStr);
+                        if (tag != null) {
+                            tagId = tag.get("id");
                         } else {
-                            Label newLabel = new Label();
-                            newLabel.set("name", labelLowStr);
-                            newLabel.set("desc", labelStr);
-                            newLabel.Save();
-                            labelId = newLabel.get("id");
+                            Tag newTag = new Tag();
+                            newTag.set("name", tagLowStr);
+                            newTag.set("desc", tagStr);
+                            newTag.Save();
+                            tagId = newTag.get("id");
                         }
-                        BlogLabel blogLabel = new BlogLabel();
-                        blogLabel.set("blog_id", blogId);
-                        blogLabel.set("label_id", labelId);
-                        blogLabel.Save();
+                        BlogTag blogTag = new BlogTag();
+                        blogTag.set("blog_id", blogId);
+                        blogTag.set("tag_id", tagId);
+                        blogTag.Save();
                     }
                 }
             }

@@ -1,34 +1,32 @@
 #if($blogList.getTotalRow() > 0)
     #foreach($blog in $blogList.getList())
         #if($blog)
-        <div class="caption">
-            <h3 class="under_line">
-                <a href=$linkKit.root($blog.get("global_url"))>
-                    $blog.get("title")
-                    <span class="badge">$blog.get("read_count")°C </span>
-                </a>
-            </h3>
+        <!-- blog entry -->
+        <h2><a href="$linkKit.root($blog.get("global_url"))">$blog.get("title")</a></h2>
+        ##        <p class="lead">by <a href="index.php">Michael</a></p>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-list-alt" title="分类"></span>
+            <a href=$blog.blogCatalog().url() title="$blog.blogCatalog().get("desc")"
+               rel="tag">$blog.blogCatalog().get("desc")</a>
 
-            <div class="info">
-                分类：<a
-                    href=$linkKit.catalog($catalogTool.Get($blog.getInt("catalog")).get("name")) title="$catalogTool.Get($blog.getInt("catalog")).get("desc")
-                " rel="tag">$catalogTool.Get($blog.getInt("catalog")).get("desc")</a>
-                #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
-                #if($blogLabelList.size() > 0)
-                    | 标签：
-                    #foreach($blogLabel in $blogLabelList)
-                        <a href="$linkKit.label($labelTool.Get($blogLabel.getInt("label_id")).get("name"))"
-                           rel="tag">$labelTool.Get($blogLabel.getInt("label_id")).get("desc")</a>&nbsp;
-                    #end
+            #set($tagList = $blog.blogTags())
+            #if($tagList.size() > 0)
+                <span class="glyphicon glyphicon-tags" title="标签"></span>
+                #foreach($tag in $tagList)
+                    <a href="$tag.url()" rel="tag" title="$tag.get("desc")">$tag.get("desc")</a>&nbsp;
                 #end
-                | 发布：$blog.get("update_time")
-            </div>
-            <br>
+            #end
 
-            <div class="intro">
-                $formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),150)
-            </div>
-        </div>
+            <span class="glyphicon glyphicon-time" title="最后更新时间"></span> $dateKit.format($blog.get("update_time"))
+            <span class="glyphicon glyphicon-eye-open" title="浏览数"></span> $blog.get("read_count")
+        </p>
+
+        <hr>
+        <p style="font-size: 16px;">$formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),300)</p>
+        <a class="btn btn-primary" href="$linkKit.root($blog.get("global_url"))">Read More <span
+                class="glyphicon glyphicon-chevron-right"></span></a>
+        <hr>
         #end
     #end
 #end

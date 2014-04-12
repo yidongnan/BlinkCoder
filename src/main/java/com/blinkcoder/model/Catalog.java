@@ -1,5 +1,6 @@
 package com.blinkcoder.model;
 
+import com.blinkcoder.kit.LinkKit;
 import com.blinkcoder.kit.ModelKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
@@ -13,10 +14,12 @@ import java.util.List;
  * Time: 下午9:58
  */
 public class Catalog extends MyModel<Catalog> {
+
     public static final Catalog dao = new Catalog();
+    private static final long serialVersionUID = 988988497526793211L;
     private static final String MODEL_CACHE = "catalog";
-    private static final String MODEL_LIST_CACHE = "catalog#list";
     private static final ModelKit mk = new ModelKit(dao, MODEL_CACHE);
+    private static final String MODEL_LIST_CACHE = "catalog#list";
     private static final int SHOW_CATALOG = 1;
     private static final int HIDE_CATALOG = 0;
 
@@ -61,5 +64,8 @@ public class Catalog extends MyModel<Catalog> {
                 page, pageSize, "select id", "from catalog order by id"));
     }
 
+    public String url() {
+        return LinkKit.root("catalog/" + this.get("name"));
+    }
 
 }

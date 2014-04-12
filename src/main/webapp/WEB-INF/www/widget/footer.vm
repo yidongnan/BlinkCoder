@@ -2,7 +2,8 @@
         <span>
             <span id="copyright">版权所有 © 极速开发网-BlinkCoder.COM</span>
 ##            建议用户保留下述Power BY 链接，感谢你对开源BlinkCoder的支持
-            <span style="margin-left: 20px;">Power By : <a href="https://github.com/yidongnan/BlinkCoder" target="_blank">BlinkCoder</a></span>
-            #invoke("baiduCount.vm")</h6>
+            <span style="margin-left: 20px;">Power By : <a href="https://github.com/yidongnan/BlinkCoder"
+                                                           target="_blank">极速开发网</a></span>
+            #invoke("analytics.vm")
         </span>
 </nav>

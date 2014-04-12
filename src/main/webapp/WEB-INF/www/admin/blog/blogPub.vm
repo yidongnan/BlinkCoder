@@ -56,7 +56,7 @@
         <label for="global_url" class="col-sm-2 control-label" id="tagsLabel">标签:</label>
         <script>
             function addTags(msg) {
-                $("#tagInput").before('<button type="button" class="btn btn-info" ondblclick="removeTags(this)" style="float: left;margin-right: 5px;"><input type="hidden" name="labels" value="'+msg+'"/>'+msg+'</button>');
+                $("#tagInput").before('<button type="button" class="btn btn-info" ondblclick="removeTags(this)" style="float: left;margin-right: 5px;"><input type="hidden" name="tags" value="' + msg + '"/>' + msg + '</button>');
                 $("#tagInput").val("");
             }
             function removeTags(obj) {
@@ -65,14 +65,19 @@
 
         </script>
         <div class="col-sm-8">
-            #set($blogLabelList = $blogLabelTool.getBlogLabelByBlog($blog.getInt("id")))
-            #if($blogLabelList)
-                #foreach($blogLabel in $blogLabelList)
-                    <button type="button" class="btn btn-info" ondblclick="removeTags(this)" style="float: left;margin-right: 5px;"><input type="hidden" name="labels" value="$labelTool.Get($blogLabel.get("label_id")).get("name")">$labelTool.Get($blogLabel.get("label_id")).get("name")</button>
+            #set($tags = $blog.blogTags())
+            #if($tags)
+                #foreach($tag in $tags)
+                    <button type="button" class="btn btn-info" ondblclick="removeTags(this)"
+                            style="float: left;margin-right: 5px;">
+                        <input type="hidden" name="tags" value="$tag.get("name")">
+                        $tag.get("name")
+                    </button>
                 #end
             #end
             <input type="text" class="form-control" id="tagInput" placeholder="输入标签" style="width: 100px;float: left;">
-            <button type="button" class="btn btn-primary" id="addTag" onclick="addTags($('#tagInput').val())" style="float: left;">&#43;</button>
+            <button type="button" class="btn btn-primary" id="addTag" onclick="addTags($('#tagInput').val())"
+                    style="float: left;">&#43;</button>
         </div>
 
     </div>

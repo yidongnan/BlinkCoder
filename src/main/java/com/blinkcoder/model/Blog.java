@@ -6,7 +6,9 @@ import com.blinkcoder.search.Searchable;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
+import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,24 @@ public class Blog extends MyModel<Blog> implements Searchable {
     private static final int TOP = 0x01;
     private static final int NORMAL = 0x00;
     private static final long serialVersionUID = 1441921092958223502L;
+
+    public static void VisitBlog(ConcurrentHashMap<Integer, Integer> datas) {
+        Object[][] args = new Object[datas.size()][2];
+        int i = 0;
+        for (Integer id : datas.keySet()) {
+            Blog blog = Blog.dao.Get(id);
+            if (blog == null) break;
+            args[i][0] = id;
+            args[i][1] = datas.get(id);
+            i++;
+        }
+        String sql = "INSERT INTO blog (id) VALUES(?) ON DUPLICATE KEY UPDATE " +
+                "read_count = read_count + ?";
+        Db.batch(sql, args, 500);
+        for (int id : datas.keySet()) {
+            CacheKit.remove(MODEL_CACHE, id);
+        }
+    }
 
     public Blog Get(int id) {
         return mk.getModel(id);
@@ -74,15 +94,17 @@ public class Blog extends MyModel<Blog> implements Searchable {
 
     public Page<Blog> normalByCatalogBlogList(int catalog_id, int page, int pageSize) {
         return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#catalog#" + catalog_id
-                + "#blog" + page + pageSize, page, pageSize, "select id",
-                "from blog where catalog = ?  order by id desc", catalog_id));
+                        + "#blog" + page + pageSize, page, pageSize, "select id",
+                "from blog where catalog = ?  order by id desc", catalog_id
+        ));
     }
 
-    public Page<Blog> normalByLabelBlogList(int label_id, int page, int pageSize) {
-        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#label#" + label_id +
-                "#blog" + page + pageSize, page, pageSize, "SELECT b.*", " from blog b ," +
-                "blog_label bl where b.id = bl.blog_id and bl.label_id = ? order by b.id",
-                label_id));
+    public Page<Blog> normalByTagBlogList(int tag_id, int page, int pageSize) {
+        return mk.loadModelPage(paginateByCache(MODEL_LIST_CACHE, "normal#tag#" + tag_id +
+                        "#blog" + page + pageSize, page, pageSize, "SELECT b.*", " from blog b ," +
+                        "blog_tag bl where b.id = bl.blog_id and bl.tag_id = ? order by b.id",
+                tag_id
+        ));
     }
 
     public List<Blog> allBlog() {
@@ -90,28 +112,10 @@ public class Blog extends MyModel<Blog> implements Searchable {
                 "select id from blog order by id"));
     }
 
-    public static void VisitBlog(ConcurrentHashMap<Integer, Integer> datas) {
-        Object[][] args = new Object[datas.size()][2];
-        int i = 0;
-        for (Integer id : datas.keySet()) {
-            Blog blog = Blog.dao.Get(id);
-            if (blog == null) break;
-            args[i][0] = id;
-            args[i][1] = datas.get(id);
-            i++;
-        }
-        String sql = "INSERT INTO blog (id) VALUES(?) ON DUPLICATE KEY UPDATE " +
-                "read_count = read_count + ?";
-        Db.batch(sql, args, 500);
-        for (int id : datas.keySet()) {
-            CacheKit.remove(MODEL_CACHE, id);
-        }
-    }
-
     public Blog prevBlog(int id) {
         String sql = "select id from blog where id < ? order by id desc";
-        Blog blog = findFirstByCache(MODEL_LIST_CACHE, "prev" + id, sql,id);
-        if(blog != null)
+        Blog blog = findFirstByCache(MODEL_LIST_CACHE, "prev" + id, sql, id);
+        if (blog != null)
             return Get(blog.getInt("id"));
         else return null;
     }
@@ -119,13 +123,28 @@ public class Blog extends MyModel<Blog> implements Searchable {
     public Blog nextBlog(int id) {
         String sql = "select id from blog where id > ?";
         Blog blog = findFirstByCache(MODEL_LIST_CACHE, "next" + id, sql, id);
-        if(blog != null)
+        if (blog != null)
             return Get(blog.getInt("id"));
         else return null;
     }
 
     public String content() {
         return MarkdownKit.parse(this.getStr("content"));
+    }
+
+    public Catalog blogCatalog() {
+        return Catalog.dao.Get(this.getInt("catalog"));
+    }
+
+    public List<Tag> blogTags() {
+        List<Tag> tags = new ArrayList<>();
+        List<BlogTag> blogTags = BlogTag.dao.getBlogTagByBlog(this.getInt("id"));
+        if (CollectionUtils.isNotEmpty(blogTags)) {
+            for (BlogTag blogTag : blogTags) {
+                tags.add(Tag.dao.Get(blogTag.getInt("tag_id")));
+            }
+        }
+        return tags;
     }
 
     @Override
@@ -157,12 +176,10 @@ public class Blog extends MyModel<Blog> implements Searchable {
         return new HashMap<String, Object>() {{
             put("title", blog.get("title"));
             put("content", blog.get("content"));
-            List<BlogLabel> blogLabelList = BlogLabel.dao.getBlogLabelByBlog
-                    (blog.getInt("id"));
+            List<BlogTag> blogTagList = BlogTag.dao.getBlogTagByBlog(blog.getInt("id"));
             StringBuilder labelStr = new StringBuilder();
-            for (BlogLabel blogLabel : blogLabelList) {
-                labelStr.append(Label.dao.Get(blogLabel.getInt("label_id"))
-                        .getStr("name"));
+            for (BlogTag blogTag : blogTagList) {
+                labelStr.append(Tag.dao.Get(blogTag.getInt("label_id")).getStr("name"));
             }
             put("labels", labelStr);
         }};

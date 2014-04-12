@@ -6,9 +6,4 @@
 #set($_title = $catalog.get("desc"))
 #set($_keys = $catalog.get("name")+"/"+$catalog.get("desc"))
 #set($blogList=$blogTool.normalByCatalogBlogList($catalog.get("id"),$page,$pageSize))
-<div class="container" id="content">
-    <div id="main" class="col-md-9 col-ld-9">
-        #invoke("/WEB-INF/www/widget/bloglist.vm")
-    </div>
-    #invoke("/WEB-INF/www/widget/rightbar.vm")
-</div>
+#invoke("/WEB-INF/www/widget/bloglist.vm")

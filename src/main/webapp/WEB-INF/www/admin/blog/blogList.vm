@@ -42,7 +42,7 @@
         <tr>
             <th scope="col">标题</th>
             <th scope="col">个性链接</th>
-            <th scope="col" width="50px">类别</th>
+            <th scope="col" width="70px">类别</th>
             <th scope="col" width="500px">正文</th>
             <th scope="col" width="100px">操作</th>
         </tr>
