@@ -43,8 +43,8 @@ public class UserController extends MyController {
     }
 
     public void logout() {
-        removeCookie("sid");
+        removeCookie("blinkcoder");
         getRequest().removeAttribute("g_user");
-        redirect("/admin/login");
+        redirect("/");
     }
 }

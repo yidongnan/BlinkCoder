@@ -101,7 +101,6 @@ public class myConfig extends JFinalConfig {
         myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
         myConstants.LUCENE_DIR = getProperty("lucene_dir");
         myConstants.COOKIE_ENCRYPT_KEY = getProperty("cookie_encrypt_key").getBytes();
-        myConstants.USER_ENCRYPT_KEY = getProperty("user_encrypt_key");
     }
 
     @Override
