@@ -1,0 +1,27 @@
+    #set($__nothing = $response.setContentType("text/xml;charset=UTF-8"))
+        #set($layout = "empty.vm")
+    <?xml version="1.0" encoding="utf-8" ?>
+    <rss version="2.0">
+        <channel>
+            <title>极速开发网，JFinal开源博客！</title>
+            <link>http://www.blinkcoder.com</link>
+            <language>zh-cn</language>
+            <description>极速开发网 www.blinkcoder.com 是用Java开发的一个开源博客，代码精简。Java初学者能迅速在这基础上搭建属于自己的个人博客</description>
+            #set($blogList = $blogTool.allBlog())
+            #if($blogList)
+                #foreach($blog in $blogList)
+                    #if($blog)
+                        <item>
+                            <title><![CDATA[$blog.get("title")]]></title>
+                            <link>http://www.blinkcoder.com/$blog.get("global_url")</link>
+                            <guid>http://www.blinkcoder.com/$blog.get("global_url")</guid>
+                            <description>
+                                <![CDATA[$formatKit.abbreviate($formatKit.html($formatKit.plain_text($blog.content())),500)]]></description>
+                            <author>$blog.owner().get("nickname")</author>
+                            <pubDate>$dateKit.format($blog.getTimestamp("update_time"))</pubDate>
+                        </item>
+                    #end
+                #end
+            #end
+        </channel>
+    </rss>

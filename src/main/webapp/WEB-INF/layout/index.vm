@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="well">
-                <h4 style="padding-bottom: 5px;">最新评论</h4>
+                <h4>最新评论</h4>
 
                 <div>
                     <ul class="ds-recent-comments" style="padding-left: 0px;" data-num-items="10" data-show-avatars="1"
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="well">
-                <h4>外链列表</h4>
+                <h4 class="under_line">外链列表</h4>
 
                 <div class="row">
                     <div class="col-lg-6">

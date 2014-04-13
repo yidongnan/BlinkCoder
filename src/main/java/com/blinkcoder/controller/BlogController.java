@@ -34,6 +34,7 @@ public class BlogController extends MyController {
         if (urlBlog == null) {
             blog.set("update_time", new Timestamp(new Date().getTime()));
             blog.set("content", blog.getStr("content"));
+            blog.set("owner_id", loginUser().get("id"));
             result = blog.Save();
             blogId = blog.get("id");
             LuceneTask.add(blogId, LuceneTask.TYPE_BLOG);

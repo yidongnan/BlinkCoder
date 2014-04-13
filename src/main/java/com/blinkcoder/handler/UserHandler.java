@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 /**
@@ -25,7 +24,7 @@ public class UserHandler extends Handler {
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
         // 动态生成的sitemap.xml和rss的xml
-        if (target.indexOf(".") != -1 && !target.endsWith(".xml")) {
+        if (target.contains(".") && !target.endsWith(".xml")) {
             return;
         }
 
@@ -38,8 +37,8 @@ public class UserHandler extends Handler {
                     try {
                         key = new String(DesKit.decrypt(Base64.decodeBase64(URLDecoder.decode(loginKey, "UTF-8")),
                                 myConstants.COOKIE_ENCRYPT_KEY));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        key = null;
                     }
                     if (StringUtils.isNotEmpty(key) && key.contains("|")) {
                         String[] fieldArray = key.split("\\|");

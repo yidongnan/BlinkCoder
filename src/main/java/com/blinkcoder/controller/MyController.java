@@ -1,6 +1,7 @@
 package com.blinkcoder.controller;
 
 import com.blinkcoder.common.myConstants;
+import com.blinkcoder.model.User;
 import com.blinkcoder.render.VelocityToolboxRender;
 import com.jfinal.core.Controller;
 import org.apache.commons.lang3.StringUtils;
@@ -94,5 +95,9 @@ public class MyController extends Controller {
 
     public void header(String name, long value) {
         getResponse().setDateHeader(name, value);
+    }
+
+    public User loginUser() {
+        return (User) getRequest().getAttribute("g_user");
     }
 }

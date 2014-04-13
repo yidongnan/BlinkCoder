@@ -147,6 +147,10 @@ public class Blog extends MyModel<Blog> implements Searchable {
         return tags;
     }
 
+    public User owner() {
+        return User.dao.Get(this.getInt("owner_id"));
+    }
+
     @Override
     public int getId() {
         return this.getInt("id");

@@ -13,8 +13,6 @@ import java.security.SecureRandom;
  * Time: 20:05
  */
 public class DesKit {
-    private final static byte[] E_KEY = new byte[]{'B', 'L', 'I', 'N', 'K',
-            'C', 'O', 'D', 'E', 'R'};
     private static final String DES = "DES";
 
     /**
@@ -56,7 +54,7 @@ public class DesKit {
      * @throws DesException
      * @throws Exception
      */
-    public static byte[] decrypt(byte[] src, byte[] key) {
+    public static byte[] decrypt(byte[] src, byte[] key) throws RuntimeException {
         // DES算法要求有一个可信任的随机数源
         SecureRandom sr = new SecureRandom();
         try {
