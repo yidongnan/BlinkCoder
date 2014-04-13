@@ -15,15 +15,17 @@ public abstract class MyModel<M extends Model> extends Model<M> {
 
     static final Object[] NULL_PARA_ARRAY = new Object[0];
 
+    
+    ////通过缓存查找
     public M findFirstByCache(String cacheName, Object key, String sql, Object... paras) {
-        M result = CacheKit.get(cacheName, key);
+        M result = CacheKit.get(cacheName, key);		////获取缓存
         if (result == null) {
-            result = findFirst(sql, paras);
-            CacheKit.put(cacheName, key, result);
+            result = findFirst(sql, paras);		//返回查找结果
+            CacheKit.put(cacheName, key, result);	////把查找结果放置在cache中
         }
-        return result;
+        return result;	////返回查找结果
     }
-
+    /////通过缓存查找
     public M findFirstByCache(String cacheName, Object key, String sql) {
         M result = CacheKit.get(cacheName, key);
         if (result == null) {
@@ -32,7 +34,7 @@ public abstract class MyModel<M extends Model> extends Model<M> {
         }
         return result;
     }
-
+    /////保存model
     public boolean Save() {
         boolean result = super.save();
         if (result)
@@ -40,6 +42,7 @@ public abstract class MyModel<M extends Model> extends Model<M> {
         return result;
     }
 
+    ////更新model
     public boolean Update() {
         boolean result = this.update();
         if (result)
@@ -47,6 +50,7 @@ public abstract class MyModel<M extends Model> extends Model<M> {
         return result;
     }
 
+    ////删除model
     public boolean Delete() {
         boolean result = this.delete();
         if (result)
@@ -54,6 +58,7 @@ public abstract class MyModel<M extends Model> extends Model<M> {
         return result;
     }
 
+    ////删除缓存
     abstract protected void removeCache();
 
     abstract public M Get(int id);

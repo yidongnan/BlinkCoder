@@ -48,35 +48,35 @@ public class Page<T> implements Serializable {
 		this.totalRow = totalRow;
 	}
 	
-	/**
+	/**返回当前页的条目
 	 * Return list of this page.
 	 */
 	public List<T> getList() {
 		return list;
 	}
 	
-	/**
+	/**返回页数
 	 * Return page number.
 	 */
 	public int getPageNumber() {
 		return pageNumber;
 	}
 	
-	/**
+	/**返回一页的全部条目容量
 	 * Return page size.
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 	
-	/**
+	/**返回全部分页
 	 * Return total page.
 	 */
 	public int getTotalPage() {
 		return totalPage;
 	}
 	
-	/**
+	/**返回表的全部列属性
 	 * Return total row.
 	 */
 	public int getTotalRow() {

@@ -8,9 +8,9 @@ lucene_dir = lucene_idx
 ## 本地开发环境上 data source 的配置 用户在部署时填入自己的数据值
 driverClass = com.mysql.jdbc.Driver
 devMode = true
-jdbcUrl = jdbc:mysql://localhost:3306/blog
-username =
-password =
+jdbcUrl = jdbc:mysql://localhost:3307/blog
+username =root
+password =hww8773084123
 
 ##########################################################################
 ## 用户在部署时填入自己的七牛的数据值

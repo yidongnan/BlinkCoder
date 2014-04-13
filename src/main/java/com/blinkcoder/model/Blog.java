@@ -19,34 +19,39 @@ import java.util.concurrent.ConcurrentHashMap;
  * Time: 下午9:58
  */
 public class Blog extends MyModel<Blog> implements Searchable {
-    public static final Blog dao = new Blog();
-    private static final String MODEL_CACHE = "blog";
-    private static final ModelKit mk = new ModelKit(dao, MODEL_CACHE);
+    public static final Blog dao = new Blog();	////静态的类成员变量，直接为类所引用而不通过类的对象。
+    private static final String MODEL_CACHE = "blog";	////为blog  model设置cache
+    private static final ModelKit mk = new ModelKit(dao, MODEL_CACHE);	////为blog model定义一个ModelKit
     private static final String MODEL_LIST_CACHE = "blog#list";
 
     private static final int TOP = 0x01;
     private static final int NORMAL = 0x00;
     private static final long serialVersionUID = 1441921092958223502L;
 
+    ////获取blog表的id
     public Blog Get(int id) {
-        return mk.getModel(id);
+        return mk.getModel(id);		////返回
     }
 
+    ////移除缓存
     protected void removeCache() {
         CacheKit.remove(MODEL_CACHE, this.get("id"));
         CacheKit.remove(MODEL_CACHE, this.get("global_url"));
         CacheKit.removeAll(MODEL_LIST_CACHE);
     }
 
+    ////
     public Blog getByGlobalUrl(String global_url) {
         Blog blog = findFirstByCache(MODEL_CACHE, "golbal_url - " + global_url,
                 "select id from blog where global_url = ?", global_url);
         if (blog == null)
             return null;
         else
+        	////获取blog的id属性
             return Get(blog.getInt("id"));
     }
 
+    /////判断是否为第一篇博客文章
     public boolean isTopBlog() {
         return this.getInt("type") == TOP;
     }
