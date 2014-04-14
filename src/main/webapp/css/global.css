@@ -71,6 +71,10 @@ body {
     background-position: left bottom;
 }
 
+.detail {
+    word-break: break-all;
+}
+
 .detail img{
     max-width: 100%;
 }

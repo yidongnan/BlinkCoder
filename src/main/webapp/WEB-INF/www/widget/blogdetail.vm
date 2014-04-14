@@ -38,7 +38,9 @@
     <span class="glyphicon glyphicon-eye-open" title="浏览数"></span> $blog.get("read_count")
 </p>
 <hr>
+<div class="detail">
     $blog.content();
+</div>
 <p class="pay">
     此文对我有价值，小额(无负担)赞助下^_^
     <a href="https://me.alipay.com/yidongnan" class="btn btn-primary"

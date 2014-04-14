@@ -109,7 +109,7 @@ public class Blog extends MyModel<Blog> implements Searchable {
 
     public List<Blog> allBlog() {
         return mk.loadModel(findByCache(MODEL_LIST_CACHE, "all#blog",
-                "select id from blog order by id"));
+                "select id from blog order by id desc"));
     }
 
     public Blog prevBlog(int id) {
