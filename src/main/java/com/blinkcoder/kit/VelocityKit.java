@@ -33,13 +33,14 @@ public class VelocityKit {
             params.append('=');
             params.append(paths[i]);
         }
-        StringBuilder sb = new StringBuilder();
-        if (StringUtils.isNotEmpty(params)) {
-            sb.append("UrlPara     : ").append(params.substring(1)).append("\n");
+        if (JFinal.me().getConstants().getDevMode()) {
+            StringBuilder sb = new StringBuilder();
+            if (StringUtils.isNotEmpty(params)) {
+                sb.append("UrlPara     : ").append(params.substring(1)).append("\n");
+            }
+            sb.append("--------------------------------------------------------------------------------\n");
+            System.out.println(sb);
         }
-        sb.append
-                ("--------------------------------------------------------------------------------\n");
-        System.out.println(sb);
         return params.toString();
     }
 
@@ -60,32 +61,39 @@ public class VelocityKit {
      */
     public static boolean _IsVmExist(String path) {
         if (vm_cache.contains(path)) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(path);
-            System.out.println(sb);
+            if (JFinal.me().getConstants().getDevMode()) {
+                StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                        .append(sdf.format(new Date())).append(" ------------------------------\n")
+                        .append("Velocity Template File : ").append(path);
+                System.out.println(sb);
+            }
             return true;
         }
         File testFile = new File(JFinal.me().getServletContext().getRealPath(path));
         boolean isVM = testFile.exists() && testFile.isFile();
         if (isVM) {
             vm_cache.add(path);
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(path);
-            System.out.println(sb);
+            if (JFinal.me().getConstants().getDevMode()) {
+                StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                        .append(sdf.format(new Date())).append(" ------------------------------\n")
+                        .append("Velocity Template File : ").append(path);
+                System.out.println(sb);
+            }
         }
         return isVM;
     }
 
     public static String GetTemplate(String[] paths, int length) {
+
         StringBuilder vm = new StringBuilder(myConstants.VELOCITY_TEMPLETE_PATH);
 
         if (length == 0) {
-            StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
-                    .append(sdf.format(new Date())).append(" ------------------------------\n");
-            sb.append("Velocity Template File : ").append(vm.toString() + VM_INDEX);
-            System.out.println(sb);
+            if (JFinal.me().getConstants().getDevMode()) {
+                StringBuilder sb = new StringBuilder("\nJFinal Velocity Template report -------- ")
+                        .append(sdf.format(new Date())).append(" ------------------------------\n")
+                        .append("Velocity Template File : ").append(vm.toString()).append(VM_INDEX);
+                System.out.println(sb);
+            }
             return vm.toString() + VM_INDEX + _MakeQueryString(paths, length);
         }
 
