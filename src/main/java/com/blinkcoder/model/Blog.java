@@ -181,11 +181,11 @@ public class Blog extends MyModel<Blog> implements Searchable {
             put("title", blog.get("title"));
             put("content", blog.get("content"));
             List<BlogTag> blogTagList = BlogTag.dao.getBlogTagByBlog(blog.getInt("id"));
-            StringBuilder labelStr = new StringBuilder();
+            StringBuilder tagStr = new StringBuilder();
             for (BlogTag blogTag : blogTagList) {
-                labelStr.append(Tag.dao.Get(blogTag.getInt("label_id")).getStr("name"));
+                tagStr.append(Tag.dao.Get(blogTag.getInt("tag_id")).getStr("name"));
             }
-            put("labels", labelStr);
+            put("tags", tagStr);
         }};
     }
 

@@ -89,7 +89,7 @@ public class SearchKit {
         if (!only_subject) {
             complexQuery.add(SearchHelper.makeQuery("content", key, 1.0f),
                     BooleanClause.Occur.SHOULD);
-            complexQuery.add(SearchHelper.makeQuery("labels", key, 20.0f),
+            complexQuery.add(SearchHelper.makeQuery("tags", key, 20.0f),
                     BooleanClause.Occur.SHOULD);
         }
         query.add(complexQuery, BooleanClause.Occur.MUST);
