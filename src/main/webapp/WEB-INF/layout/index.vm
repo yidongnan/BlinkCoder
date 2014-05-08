@@ -41,8 +41,8 @@
                 #if($g_user)
                     <li class="dropdown ng-scope">
                         <a href="javascript:void(0)" class="dropdown-toggle ng-binding" data-toggle="dropdown"
-                           style="padding: 10px 10px 10px 0">
-                            <img class="img-rounded" style="height: 30px; width: 30px" src="$g_user.picture">
+                           style="padding: 10px 10px 10px 10px">
+                        <img class="img-rounded" style="height: 30px; width: 30px" src="$g_user.picture">
                             $g_user.username
                         </a>
                         <ul class="dropdown-menu">
