@@ -187,6 +187,10 @@
                     <artifactId>httpcore</artifactId>
                     <groupId>org.apache.httpcomponents</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -229,8 +233,17 @@
             <artifactId>IKAnalyzer</artifactId>
             <version>2012FF_u1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/IKAnalyzer2012FF_u1.jar
-            </systemPath>
+            <systemPath>${project.basedir}/lib/IKAnalyzer2012FF_u1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.15.0-rc</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-oauth2</artifactId>
+            <version>v2-rev68-1.18.0-rc</version>
         </dependency>
     </dependencies>
     <build>

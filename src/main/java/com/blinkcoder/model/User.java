@@ -1,7 +1,6 @@
 package com.blinkcoder.model;
 
 import com.blinkcoder.kit.ModelKit;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * User: Michael Chen
@@ -14,19 +13,11 @@ public class User extends MyModel<User> {
     private static final String MODEL_CACHE = "user";
     private static final ModelKit mk = new ModelKit(dao, MODEL_CACHE);
 
-    public static void main(String[] args) {
-        System.out.println(DigestUtils.shaHex("111"));
-    }
+    public static final int ROLE_ADMIN = 100;
+    public static final int ROLE_GENERAL = 1;
 
     public User Get(int id) {
         return mk.getModel(id);
-    }
-
-    @Override
-    public boolean Save() {
-        String password = DigestUtils.shaHex(this.getStr("password"));
-        this.set("password", password);
-        return super.Save();
     }
 
     @Override
@@ -34,9 +25,8 @@ public class User extends MyModel<User> {
 
     }
 
-    public User login(String username, String password) {
-        User user = dao.findFirst("select id from user where username=? and password=?",
-                username, DigestUtils.shaHex(password));
+    public User findByOpenId(String openId) {
+        User user = dao.findFirstByCache(MODEL_CACHE, "openid#" + openId, "select id from user where openid = ?", openId);
         return user == null ? null : Get(user.getInt("id"));
     }
 }

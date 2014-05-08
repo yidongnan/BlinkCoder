@@ -35,7 +35,7 @@ public class UserHandler extends Handler {
                     String loginKey = cookie.getValue();
                     String key = null;
                     try {
-                        key = new String(DesKit.decrypt(Base64.decodeBase64(URLDecoder.decode(loginKey, "UTF-8")),
+                        key = new String(DesKit.decrypt(Base64.decodeBase64(URLDecoder.decode(loginKey, "UTF-8").getBytes()),
                                 myConstants.COOKIE_ENCRYPT_KEY));
                     } catch (Exception e) {
                         key = null;
@@ -43,9 +43,9 @@ public class UserHandler extends Handler {
                     if (StringUtils.isNotEmpty(key) && key.contains("|")) {
                         String[] fieldArray = key.split("\\|");
                         int id = Integer.parseInt(fieldArray[0]);
-                        String password = fieldArray[1];
+                        String openid = fieldArray[1];
                         User user = User.dao.Get(id);
-                        if (user.get("password").equals(password)) {
+                        if (user.get("openid").equals(openid)) {
                             request.setAttribute("g_user", user);
                         }
                     }

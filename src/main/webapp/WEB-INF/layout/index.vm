@@ -32,11 +32,34 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-left">
             #* <li><a href="/about">关于</a>
              </li>*#
                 <li><a href="https://github.com/yidongnan/BlinkCoder">Fork On GitHub</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                #if($g_user)
+                    <li class="dropdown ng-scope">
+                        <a href="javascript:void(0)" class="dropdown-toggle ng-binding" data-toggle="dropdown"
+                           style="padding: 10px 10px 10px 0">
+                            <img class="img-rounded" style="height: 30px; width: 30px" src="$g_user.picture">
+                            $g_user.username
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="$linkKit.action("user/logout")"><i class="glyphicon glyphicon-off"></i>注销</a></li>
+                        </ul>
+                    </li>
+                #else
+                    <li>
+                        <a href="$linkKit.action("user/login")"
+                           style="background: url($linkKit.cloud_res("img/google.png")) no-repeat;background-color:#DF4B31;color:white;padding-left:30px;background-size:30px 30px;margin-top: 10px;height: 30px;line-height: 0;display:block;">
+                            使用 Google 帐号登录
+                        </a>
+                    </li>
+                #end
+
+            </ul>
+
         </div>
         <!-- /.navbar-collapse -->
     </div>

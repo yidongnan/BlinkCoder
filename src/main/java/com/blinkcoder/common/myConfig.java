@@ -67,8 +67,8 @@ public class myConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 
         // 缓存插件
-        me.add(new EhCachePlugin(PathKit.getWebRootPath() + File.separator + "WEB-INF" + File
-                .separator + "classes" + File.separator + "ehcache.xml"));
+        me.add(new EhCachePlugin(PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes" + File.separator +
+                "ehcache.xml"));
         me.add(new QuartzPlugin());
 
         if (isLocal) {
@@ -100,6 +100,8 @@ public class myConfig extends JFinalConfig {
         myConstants.QINIU_RETURNURL = getProperty("qiniu_returnUrl");
         myConstants.STATIC_RESOURCE_PATH = getProperty("static_resource_path");
         myConstants.LUCENE_DIR = getProperty("lucene_dir");
+        myConstants.GOOGLE_CLIENT_ID = getProperty("google_client_id");
+        myConstants.GOOGLE_CLIENT_SECRET_KEY = getProperty("google_client_secret_key");
         myConstants.COOKIE_ENCRYPT_KEY = getProperty("cookie_encrypt_key").getBytes();
     }
 
