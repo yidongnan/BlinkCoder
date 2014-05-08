@@ -160,7 +160,7 @@
                             #if($linkList && $linkList.size() > 0)
                                 #foreach($link in $linkList)
                                     #if($velocityCount % 2 == 1)
-                                        <li><a href="$link.get("url")" title="$link.get("desc")">$link.get("title")</a>
+                                        <li><a href="$link.get("url")" target="_blank" title="$link.get("desc")">$link.get("title")</a>
                                         </li>
                                     #end
                                 #end
@@ -172,7 +172,7 @@
                             #if($linkList && $linkList.size() > 0)
                                 #foreach($link in $linkList)
                                     #if($velocityCount % 2 == 0)
-                                        <li><a href="$link.get("url")" title="$link.get("desc")">$link.get("title")</a>
+                                        <li><a href="$link.get("url")" target="_blank" title="$link.get("desc")">$link.get("title")</a>
                                         </li>
                                     #end
                                 #end
