@@ -45,7 +45,7 @@ public class UserHandler extends Handler {
                         int id = Integer.parseInt(fieldArray[0]);
                         String openid = fieldArray[1];
                         User user = User.dao.Get(id);
-                        if (openid.equals(user.get("openid"))) {
+                        if (openid != null && openid.equals(user.get("openid"))) {
                             request.setAttribute("g_user", user);
                         }
                     }
