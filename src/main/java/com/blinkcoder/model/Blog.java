@@ -147,6 +147,10 @@ public class Blog extends MyModel<Blog> implements Searchable {
         return tags;
     }
 
+    public Page<Comment> blogComment(int page, int pageSize, int blogId) {
+        return Comment.dao.getCommentListByBlog(page, pageSize, blogId);
+    }
+
     public User owner() {
         return User.dao.Get(this.getInt("owner_id"));
     }

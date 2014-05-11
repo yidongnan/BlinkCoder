@@ -37,7 +37,7 @@ body {
     margin-bottom: 0px;
 }
 
-.wumii-footer{
+.wumii-footer {
     display: none;
 }
 
@@ -75,8 +75,12 @@ body {
     word-break: break-all;
 }
 
-.detail img{
+.detail img {
     max-width: 100%;
+}
+
+.pay {
+    text-align: center;
 }
 
 blockquote {

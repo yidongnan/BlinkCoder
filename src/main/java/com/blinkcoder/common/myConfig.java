@@ -48,7 +48,8 @@ public class myConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         me.add("/action/blog", BlogController.class).add("/action/catalog", CatalogController.class)
                 .add("/action/tag", TagController.class).add("/action/link", LinkController.class)
-                .add("/action/user", UserController.class).add("/action/qiniu", QiNiuController.class);
+                .add("/action/user", UserController.class).add("/action/qiniu", QiNiuController.class)
+                .add("action/comment", CommentController.class);
     }
 
     @Override
@@ -74,11 +75,9 @@ public class myConfig extends JFinalConfig {
         if (isLocal) {
             arp.setShowSql(true);
         }
-        arp.addMapping("blog", Blog.class).addMapping("user", User.class)
-                .addMapping("catalog", Catalog.class).addMapping
-                ("blog_tag", BlogTag.class).addMapping("tag",
-                Tag.class).addMapping("link", Link.class).addMapping
-                ("lucene_task", LuceneTask.class);
+        arp.addMapping("blog", Blog.class).addMapping("user", User.class).addMapping("catalog",
+                Catalog.class).addMapping("blog_tag", BlogTag.class).addMapping("tag", Tag.class).addMapping("link",
+                Link.class).addMapping("lucene_task", LuceneTask.class).addMapping("comment", Comment.class);
         me.add(arp);
     }
 

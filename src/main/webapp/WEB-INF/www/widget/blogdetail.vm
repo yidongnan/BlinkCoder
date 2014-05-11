@@ -1,18 +1,55 @@
 #set($globalUrl = ${linkKit.urlPara()})
 #set($blog=$blogTool.getByGlobalUrl($globalUrl))
+#set($page = $linkKit.param("p",1))
+#set($pageSize = 100)
 #if($blog)
     #set($_title = $blog.get("title"))
     #set($_keys = $catalogTool.Get($blog.getInt("catalog")).get("desc") + "," + $catalogTool.Get($blog.getInt("catalog")).get("name"))
 ##    Code Highlight
-<link href="$linkKit.cloud_res("google-code-prettify/prettify.css")" type="text/css"
-      rel="stylesheet">
-<script type="text/javascript"
-        src="$linkKit.cloud_res("google-code-prettify/prettify.js")"></script>
-
+<link href="$linkKit.cloud_res("google-code-prettify/prettify.css")" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$linkKit.cloud_res("google-code-prettify/prettify.js")"></script>
+<script type="text/javascript" src="$linkKit.cloud_res("js/moment.min.js")"></script>
+<script type="text/javascript" src="$linkKit.cloud_res("js/moment-with-langs.min.js")"></script>
 <script type="text/javascript">
     $(function () {
         $('pre').addClass('prettyprint linenums');
         prettyPrint();
+        $('#commentForm').ajaxForm({
+            beforeSubmit: function (args, form, fn) {
+                var tip = form.find("#tip");
+                var content = form.find("#content").val();
+                if (content.length <= 0) {
+                    tip.html("请填写评论内容!");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                    return false;
+                }
+                tip.hide();
+                return true;
+            },
+            success: function (result, b, fn, form) {
+                var tip = form.find("#tip");
+                if (result.msg) {
+                    var newComment = '<div style="padding:0 20px 0 58px;">' +
+                            '<a href="#">' +
+                            '<img src="$g_user.picture" width="28px" height="28px" style="margin: 4px 0 0 -38px;float: left">' +
+                            '</a>' +
+                            '<div>' +
+                            '<a href="#" style="font-weight: bold">$g_user.username</a>' +
+                            '<span style="color: #999;font-size:12px;"> ' + moment(result.msg.create_time, "YYYY-MM-DD HH:mm:SS").fromNow() + '</span>' +
+                            '</div>' + '<div style="font-size: 14px;line-height: 1.5em;margin: .5em 0;word-wrap: break-word;">' + result.msg.content + '</div>' + '</div >' + '<hr/> ';
+                    $("#comments").append(newComment);
+                } else {
+                    tip.html("操作失败！");
+                    tip.removeClass("alert-success");
+                    tip.addClass("alert-danger");
+                    tip.show();
+                }
+            },
+            resetForm: true,
+            dataType: 'json'
+        });
     });
 </script>
 <script type="text/javascript" src="/action/blog/viewBlog?id=$blog.get("id")"></script>
@@ -20,6 +57,7 @@
 <!-- the actual blog post: title/author/date/content -->
 <h2>$blog.get("title")</h2>
 ##<p class="lead">by <a href="index.php">Michael</a></p>
+<a href="${userTool.Get($blog.owner_id).link}?rel=author" style="display: none;">Google</a>
 <hr>
 <p>
     <span class="glyphicon glyphicon-list-alt" title="分类"></span>
@@ -42,9 +80,9 @@
     $blog.content();
 </div>
 <p class="pay">
-    此文对我有价值，小额(无负担)赞助下^_^
-    <a href="https://me.alipay.com/yidongnan" class="btn btn-primary"
-       target="_blank">支付宝打赏</a>
+    此文对我有价值，小额(无负担)赞助下^_^ <br/>
+    支付宝扫扫码 <br/>
+    <img style="width:150px;height: 150px;" src="$linkKit.cloud_res("img/alipay.png")" alt="捐助二维码"/>
 </p>
 <script type="text/javascript" id="wumiiRelatedItems"></script>
 
@@ -68,10 +106,61 @@
     #end
 </div>
 
-##    多说评论
-<div data-thread-key="$blog.get("id")" data-title="$blog.get("title")"
-     data-category="$catalogTool.Get($blog.getInt("catalog")).get("desc")" data-author-key="张艺辰" class="ds-thread"
-     id="ds-thread"></div>
+<div style="margin-top: 20px;">
+    <hr>
+
+    <div id="comments">
+        <!-- the comments -->
+        #set($commentList = $blogTool.blogComment($page,$pageSize,$blog.get("id")))
+        #foreach($comment in $commentList.getList())
+            #set($user = $userTool.Get($comment.user_id))
+            <div style="padding:0 20px 0 58px;">
+                <a href="#">
+                    <img src="$user.picture" width="28px" height="28px" style="margin: 4px 0 0 -38px;float: left">
+                </a>
+
+                <div>
+                    <a href="#" style="font-weight: bold">$user.username</a>
+                    <span style="color: #999;font-size:12px;" title="$comment.create_time">$comment.create_time</span>
+                </div>
+                <div style="font-size: 14px;line-height: 1.5em;margin: .5em 0;word-wrap: break-word;">
+                    $comment.content
+                </div>
+            </div>
+            <hr/>
+        #end
+    </div>
+
+    <!-- the comment box -->
+    <div class="well">
+        #if($g_user)
+            <img src="$g_user.picture" style="float: left;margin-right: 10px;width:30px;height:30px;"/>
+        #end
+        <h4 style="line-height: 10px">评论 :</h4>
+
+        <div style="clear: both"></div>
+        <form role="form" style="margin-top: 15px;" id="commentForm" action="$linkKit.action("comment/pubComment")"
+              method="post">
+            <input type="hidden" name="comment.blog_id" value="$blog.get("id")"/>
+
+            #if($g_user)
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" id="content" name="comment.content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">发布</button>
+            #else
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" id="content" name="comment.content" placeholder="请先登录后在进行评论！"></textarea>
+                </div>
+                <a href="$linkKit.action("user/login")"
+                   style="background: url($linkKit.cloud_res("img/google.png")) no-repeat;background-color:#DF4B31;color:white;padding:5px 10px 5px 30px;background-size:30px 30px;margin-top: 10px;height: 30px;">
+                    使用 Google 帐号登录
+                </a>
+            #end
+            <span class="alert" id="tip" style="display: none"></span>
+        </form>
+    </div>
+</div>
 ##   无觅推荐
 <script type="text/javascript">
     var wumiiPermaLink = "http://www.blinkcoder.com/$blog.get("global_url")"; //请用代码生成文章永久的链接
@@ -86,6 +175,7 @@
     <img src="http://static.wumii.cn/images/pixel.png" alt="无觅关联推荐，快速提升流量"
          style="border:0;padding:0;margin:0;"/>
 </a>
+<script src="$linkKit.cloud_res("js/jquery.form.js")"></script>
 #else
 ##        重定向到404
 #end

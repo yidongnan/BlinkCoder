@@ -52,8 +52,8 @@
                 #else
                     <li>
                         <a href="$linkKit.action("user/login")"
-                           style="background: url($linkKit.cloud_res("img/google.png")) no-repeat;background-color:#DF4B31;color:white;padding-left:30px;background-size:30px 30px;margin-top: 10px;height: 30px;line-height: 0;display:block;">
-                            使用 Google 帐号登录
+                           style="background: url($linkKit.cloud_res("img/google.png")) no-repeat;background-color:#DF4B31;color:white;padding:5px 10px 5px 30px;background-size:30px 30px;margin-top: 10px;height: 30px;width: 182px;">
+                        使用 Google 帐号登录
                         </a>
                     </li>
                 #end
@@ -135,19 +135,32 @@
                     </div>
                 </div>
             </div>
-            <div class="well">
-                <h4>最新评论</h4>
 
-                <div>
-                    <ul class="ds-recent-comments" style="padding-left: 0px;" data-num-items="10" data-show-avatars="1"
-                        data-show-time="1" data-show-admin="1" data-excerpt-length="20"></ul>
-                </div>
-            </div>
             <div class="well">
-                <h4 class="under_line">最近访客</h4>
-
+                <h4 class="under_line">最新评论</h4>
+                #set($commentList = $commentTool.getNewCommentList())
                 <div>
-                    <ul class="ds-recent-visitors" style="padding-left: 0px;" data-num-items="16"></ul>
+                    <ul>
+                        #foreach($comment in $commentList)
+                            #set($user = $userTool.Get($comment.user_id))
+                            <div style="margin: 5px 0">
+                                <a href="#">
+                                    <img src="$user.picture" width="28px" height="28px" style="margin: 4px 0 0 -38px;float: left">
+                                </a>
+
+                                <div>
+                                    <a href="#" style="font-weight: bold">$user.username</a>
+                                    <span style="color: #999;font-size:12px;" title="$comment.create_time">$comment.create_time</span>
+                                </div>
+                                <div style="color: #ccc;font-size:13px;">在 <a
+                                        href="$blogTool.Get($comment.blog_id).global_url">$blogTool.Get($comment.blog_id).title</a> 中评论
+                                </div>
+                                <div style="font-size: 14px;line-height: 1.5em;word-wrap: break-word;">
+                                    $comment.content
+                                </div>
+                            </div>
+                        #end
+                    </ul>
                 </div>
             </div>
             <div class="well">
@@ -233,4 +246,3 @@
         }
     }
 </script>
-#invoke("../www/widget/duoshuo.vm")

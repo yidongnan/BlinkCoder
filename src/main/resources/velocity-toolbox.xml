@@ -47,4 +47,14 @@
         <scope>application</scope>
         <class>com.blinkcoder.model.Link</class>
     </tool>
+    <tool>
+        <key>userTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.User</class>
+    </tool>
+    <tool>
+        <key>commentTool</key>
+        <scope>application</scope>
+        <class>com.blinkcoder.model.Comment</class>
+    </tool>
 </toolbox>
