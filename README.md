@@ -22,4 +22,4 @@ Java技术交流群：294712648 <a target="_blank" href="http://shang.qq.com/wpa
     6.     基于markdown的Bootstrap风格的编辑器
     7.     Lucene构建搜索模块
     8.     使用Nginx做反向代理和处理部分后台静态文件
-    8.     OAuth2
+    9.     OAuth2
